@@ -9,3 +9,5 @@ To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
 ```{r}
 1 + 1
 ```
+
+**Session 3** - Discrete time deterministic models: [Slides](slides/Lecture_03_DiscreteDeterministic.pdf), [Practical](03_DiscreteDeterministic_practical.qmd), [Solutions](03_DiscreteDeterministic_solutions.qmd)

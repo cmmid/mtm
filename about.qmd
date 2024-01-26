@@ -2,8 +2,20 @@
 title: "About"
 ---
 
-About this site
+## Who we are
 
-```{r}
-1 + 1
-```
+Your course organisers are Nicholas Davies and Yang Liu.
+
+Your course administrator is .
+
+Other lectures and demonstrators include .
+
+## Who you are (= scope of the course)
+
+Individuals with some exposure to the theory and use of infectious disease modelling & like to start coding their own models using R **OR**
+
+Individuals who know some R but do not have experience using R to code infectious disease models **OR**
+
+Individuals who will be conducting research using infectious disease models in R **OR**
+
+Individuals who want a deeper understanding of techniques for implementing models.
