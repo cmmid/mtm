@@ -71,7 +71,7 @@ gamma.vec = 1/inf.duration
 ### (d) Describe in words the qualitative relationship
 
 Answer: There is no epidemic until the infectiousness duration is > 2 days 
-(R0>1) after that there is a linear increase in the maximum prevalence until 
+(R0 > 1) after that there is a linear increase in the maximum prevalence until 
 gamma = 6, then there is a diminishing increase in the maximum prevalence.
 
 ## (2) Monte Carlo Sampling
@@ -157,7 +157,7 @@ plot(
 abline(h = 1)
 
 # Let's now use 100 samples to see the difference between a Monte Carlo 
-# sampling and a LHS sampling approach
+# sampling and a LHS sampling approach.
 # Pick some small number of samples
 n <- 100
 
@@ -189,7 +189,7 @@ hist(latin_norm)
 
 # the latin hypercube sample looks much better! Why does this work?
 # first let's look at the norm probability distibution
-x <- seq(-6,6, by =0.1) # random variable X
+x <- seq(-6, 6, by = 0.1) # random variable X
 normdens <- dnorm(x, mean = 0, sd = 1) # prob distribution, f(X)
 normcumul <- pnorm(x, mean = 0, sd = 1) # cumulative distribution, F(X)
 

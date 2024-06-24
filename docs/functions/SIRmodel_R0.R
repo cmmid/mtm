@@ -48,7 +48,7 @@ SIR_model_2 <- function(times, state, parms){
 
 MCplot <- function(data){
   ggplot2::ggplot(data = data) + 
-    geom_boxplot(aes(x = factor(1/gamma), y = max.prev)) + 
+    geom_violin(aes(x = factor(1/gamma), y = max.prev)) + 
     xlab("Infectious duration (days)") + 
     ylab("Maximum prevalence") + 
     title("Monte Carlo Sampling over R0")
