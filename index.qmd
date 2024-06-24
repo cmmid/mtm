@@ -1,5 +1,5 @@
 ---
-title: "mtm"
+title: "Modern Techniques in Modelling"
 ---
 
 This is a Quarto website.
@@ -11,3 +11,5 @@ To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
 ```
 
 **Session 3** - Discrete time deterministic models: [Slides](slides/Lecture_03_DiscreteDeterministic.pdf), [Practical](03_DiscreteDeterministic_practical.qmd), [Solutions](03_DiscreteDeterministic_solutions.qmd)
+
+**Session 6** - Sensitivity analysis & sampling: [Slides](slides/Lecture_06_SensitivitySampling.pdf), Practical, Solutions
