@@ -3,12 +3,14 @@ project:
   output-dir: docs
 
 website:
-  title: "mtm"
+  title: "Modern Techniques in Modelling"
   navbar:
     left:
       - href: index.qmd
         text: Home
       - about.qmd
+      - href: timetable.qmd
+        text: Schedule
 
 format:
   html:
@@ -17,4 +19,3 @@ format:
     toc: true
 
 editor: visual
-

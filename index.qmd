@@ -1,15 +1,17 @@
 ---
-title: "Modern Techniques in Modelling"
+title: "Content overview"
 ---
 
-This is a Quarto website.
+[**Pre-course material**](00_PreCourseMaterial.qmd) - please review before the short course
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+**Session 1** - Introduction: [Slides](slides/Lecture_01_Intro.pdf)
 
-```{r}
-1 + 1
-```
+**Session 2** - Types of models: [Slides](slides/Lecture_02_TypesOfModels.pdf)
 
 **Session 3** - Discrete time deterministic models: [Slides](slides/Lecture_03_DiscreteDeterministic.pdf), [Practical](03_DiscreteDeterministic_practical.qmd), [Solutions](03_DiscreteDeterministic_solutions.qmd)
 
-**Session 6** - Sensitivity analysis & sampling: [Slides](slides/Lecture_06_SensitivitySampling.pdf), Practical, Solutions
+**Session 4** - Ordinary differential equations: [Slides](slides/Lecture_04_ODEs.pdf), [Practical](04_ODEs_practical.qmd), [Solutions](04_ODEs_solutions.qmd)
+
+**Session 5** - Metapopulations with ODEs: [Slides](slides/Lecture_05_ODEsMetapopulation.pdf), [Practical](05_Metapop_practical.qmd), [Solutions](05_Metapop_solutions.qmd)
+
+**Session 6** - Sensitivity analysis & sampling: [Slides](slides/Lecture_06_SensitivitySampling.pdf), [Practical](06_SensitivitySampling_practical.qmd), [Solutions](06_SensitivitySampling_solutions.qmd)

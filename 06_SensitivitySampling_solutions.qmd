@@ -2,6 +2,8 @@
 title: "06. Sensitivity Analysis & Sampling: Practical"
 ---
 
+**Click [here](06_SensitivitySampling_practical.qmd) to return to the practical.**
+
 ## (1) One-way sensitivity analyses
 
 First, let's run an ODE model. Download and open up the [SIRmodel.R](docs/functions/SIRmodel.R)
@@ -70,9 +72,7 @@ gamma.vec = 1/inf.duration
 
 ### (d) Describe in words the qualitative relationship
 
-Answer: There is no epidemic until the infectiousness duration is > 2 days 
-(R0 > 1) after that there is a linear increase in the maximum prevalence until 
-gamma = 6, then there is a diminishing increase in the maximum prevalence.
+Answer: There is no epidemic until the infectiousness duration is \> 2 days (R0 \> 1) after that there is a linear increase in the maximum prevalence until gamma = 6, then there is a diminishing increase in the maximum prevalence.
 
 ## (2) Monte Carlo Sampling
 
@@ -94,16 +94,16 @@ size.df = length(r0.all) * length(gamma.vec)
 # or a matrix
 max.prevalence = data.frame(r0.value = vector(mode = "numeric", 
                                             length = size.df),
-							gamma = vector(mode = "numeric", 
-										   length = size.df),
-							max.prev = vector(mode = "numeric", 
-											  length = size.df))
+                            gamma = vector(mode = "numeric", 
+                                           length = size.df),
+                            max.prev = vector(mode = "numeric", 
+                                              length = size.df))
 index = 0
 
 # create a loop over each of these R0 values in turn
 for (r0.val in r0.all){
 # create a loop over each of these Gamma values in turn
-	for (gamma.val in gamma.vec){
+    for (gamma.val in gamma.vec){
     index = index + 1
     mp = solveODE_2(parameters = c(R0 = r0.val, gamma = gamma.val))
     max.prevalence[index, "r0.value"] = r0.val

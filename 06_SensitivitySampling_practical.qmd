@@ -57,23 +57,24 @@ par(new=FALSE)
 par(mfrow=c(1,1))
 
 plot(<YOUR CODE HERE>, 
-	 <YOUR CODE HERE>, 
-	 type = "b",
-	 xlab = "Infectiousness Duration (days)",
-	 ylab = "Maximum Prevalence",
-	 main = "One-way uncertainty analysis")
+     <YOUR CODE HERE>, 
+     type = "b",
+     xlab = "Infectiousness Duration (days)",
+     ylab = "Maximum Prevalence",
+     main = "One-way uncertainty analysis")
 
 # Now try to increase the resolution of gamma to get a better idea of the 
 # relationship but remember to clear max.prevalence first!
 
 <YOUR CODE HERE>
-
 ```
 
 ### (d) Describe in words the qualitative relationship
+
 Answer:
 
 ## (2) Monte Carlo Sampling
+
 Now suppose that we have a previous epidemiological study that suggested that R0 has a mean value of 5, but uncertainty within the range of \[-1, +1\]. However, we still don't know whether the infectiousness period is 1 day or 10 days. We will now use the functions in [SIRmodel_R0.R](docs/functions/SIRmodel_R0.R) to make a similar plot as above, but this time, incorporate the uncertainty of R0 for each discrete value of gamma. We're going to first use a direct Monte Carlo Sampling method.
 
 ``` r
@@ -99,7 +100,7 @@ index = 0
 # create a loop over each of these R0 values in turn
 for (r0.val in r0.all){
 # create a loop over each of these Gamma values in turn
-	for (gamma.val in gamma.vec){
+    for (gamma.val in gamma.vec){
     index = index + 1
     mp = solveODE_2(parameters = c(R0 = r0.val, gamma = gamma.val))
     max.prevalence[index, "r0.value"] = r0.val
@@ -113,6 +114,7 @@ head(max.prevalence)
 ```
 
 ### (e) How have we saved the output?
+
 Answer:
 
 ``` r
@@ -121,9 +123,11 @@ MCplot(max.prevalence)
 ```
 
 ### (f) What conclusions can you draw from the plot?
+
 Answer:
 
 ## (3) Latin hypercube sampling (LHS) vs Monte Carlo Sampling
+
 ``` r
 # First let's load in the library we'll need for later
 library(lhs)
@@ -219,3 +223,5 @@ points(qnorm(ex_latin, mean = 0, sd = 1), y=rep(0,10), pc = "x")
 # Likewise, to perform LHS on a uni- or mulitvariate non-uniform distribution, 
 # we can transform our LHS samples from a uniform distribution as above.
 ```
+
+**Solutions to this practical can be accessed [here](06_SensitivitySampling_solutions.qmd).**
