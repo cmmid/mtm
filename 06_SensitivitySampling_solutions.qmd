@@ -6,7 +6,7 @@ title: "06. Sensitivity Analysis & Sampling: Practical"
 
 ## (1) One-way sensitivity analyses
 
-First, let's run an ODE model. Download and open up the [SIRmodel.R](docs/functions/SIRmodel.R)
+First, let's run an ODE model. Download and open up the [SIRmodel.R](functions/SIRmodel.R)
 
 ### (a) Which functions are in here?
 
