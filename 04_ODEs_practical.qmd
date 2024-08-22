@@ -4,7 +4,7 @@ title: "04. Ordinary differential equations (ODEs): Practical"
 
 # ODE's in R: Practical
 
-## Solving the SI model using `deSolve` 
+## Solving the SI model using `deSolve`
 
 The code below will solve the SI model with beta = 0.4 over 50 days with initial conditions S(0) = 99, I(0) = 1. Run the following lines including the plot() line to create a plot of the output
 
@@ -57,7 +57,7 @@ legend("topright", legend = c("Susceptible", "Infected"),
 
 #### 1a) Increase the initial number of infected individuals, what happens to the output?
 
-#### 1b) What does the 'by' argument in the 'times' vector represent? 
+#### 1b) What does the 'by' argument in the 'times' vector represent?
 
 #### 1c) Increase the value of the "by" argument. What happens to the output? HINT: plot using type = "b" to plot both lines and points
 
@@ -115,7 +115,7 @@ legend( "topright", legend = c("Susceptible", "Infected", "Recovered"),
 
 ```
 
-#### 2b) Change the value of the transmission rate so that the basic reproduction number is less than one, i.e. R_0 \< 1, what happens to the output? 
+#### 2b) Change the value of the transmission rate so that the basic reproduction number is less than one, i.e. R_0 \< 1, what happens to the output?
 
 Hint: Recall that for an SIR model, the basic reproduction number, R_0 = beta / gamma
 
@@ -200,7 +200,7 @@ legend("topright", legend =  c("Susceptible", "Exposed", "Infected", "Recovered"
 
 ### Optional questions: adding vaccination to the SIR model
 
-#### 4) Extend the SIR model to include a vaccinated class. 
+#### 4) Extend the SIR model to include a vaccinated class.
 
 Here we assume that susceptible individuals are vaccinated at a rate v = 0.05. The vaccine is 100% effective, so once vaccinated, individuals cannot become infected. HINT: you will need to create a new class V, you can assume that the initial number of vaccinated individuals is 0.
 

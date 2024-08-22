@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.47">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Modern Techniques in Modelling - About</title>
+<title>About – Modern Techniques in Modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -83,14 +83,14 @@ ul.task-list li input[type="checkbox"] {
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Home</span></a>
+<span class="menu-text">Overview</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./about.html" aria-current="page"> 
@@ -102,7 +102,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -118,6 +118,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#who-we-are" id="toc-who-we-are" class="nav-link active" data-scroll-target="#who-we-are">Who we are</a></li>
   <li><a href="#who-you-are-scope-of-the-course" id="toc-who-you-are-scope-of-the-course" class="nav-link" data-scroll-target="#who-you-are-scope-of-the-course">Who you are (= scope of the course)</a></li>
+  <li><a href="#other-short-courses-lshtm-you-may-be-interested-in" id="toc-other-short-courses-lshtm-you-may-be-interested-in" class="nav-link" data-scroll-target="#other-short-courses-lshtm-you-may-be-interested-in">Other short courses @ LSHTM you may be interested in</a></li>
   </ul>
 </nav>
     </div>
@@ -147,7 +148,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="who-we-are">Who we are</h2>
 <p>Your course organisers are <a href="https://www.lshtm.ac.uk/aboutus/people/brady.oliver">Oliver Brady</a>, <a href="https://www.lshtm.ac.uk/aboutus/people/davies.nicholas">Nicholas Davies,</a> and <a href="https://www.lshtm.ac.uk/aboutus/people/liu.yang">Yang Liu</a>.</p>
 <p>Your course administrator is .</p>
-<p>Other lectures and demonstrators include .</p>
+<p>Other lectures and demonstrators include <a href="https://www.lshtm.ac.uk/aboutus/people/quilty.billy">Billy Quilty</a>, <a href="https://www.lshtm.ac.uk/aboutus/people/oreilly.kathleen">Kath O’Reilly</a>, <a href="https://www.lshtm.ac.uk/aboutus/people/funk.sebastian">Seb Funk</a>.</p>
 </section>
 <section id="who-you-are-scope-of-the-course" class="level2">
 <h2 class="anchored" data-anchor-id="who-you-are-scope-of-the-course">Who you are (= scope of the course)</h2>
@@ -157,6 +158,11 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Individuals who will be conducting research using infectious disease models in R <strong>OR</strong></p></li>
 <li><p>Individuals who want a deeper understanding of techniques for implementing models.</p></li>
 </ul>
+</section>
+<section id="other-short-courses-lshtm-you-may-be-interested-in" class="level2">
+<h2 class="anchored" data-anchor-id="other-short-courses-lshtm-you-may-be-interested-in">Other short courses @ LSHTM you may be interested in</h2>
+<p><a href="https://www.lshtm.ac.uk/study/courses/short-courses/infectious-diseases-dynamics">Model fitting and inference for infectious disease dynamics</a> (organised by <a href="https://www.lshtm.ac.uk/aboutus/people/funk.sebastian">Seb Funk</a>)</p>
+<p><a href="https://www.lshtm.ac.uk/study/courses/short-courses/infectious-disease-modelling">Introduction to infectious disease modelling and its applications</a> (organised by Emilia Vynnycky and Richard White)</p>
 
 
 </section>
@@ -197,18 +203,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -240,7 +235,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -248,7 +265,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

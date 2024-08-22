@@ -7,7 +7,7 @@ website:
   navbar:
     left:
       - href: index.qmd
-        text: Home
+        text: Overview
       - about.qmd
       - href: timetable.qmd
         text: Schedule

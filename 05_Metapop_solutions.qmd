@@ -81,7 +81,7 @@ legend("topright",
 
 ```
 
-## Question A 
+## Question A
 
 When you simulate the above model, you'll notice that currently the epidemics are nearly identical in the two populations. Update the model parameters so the transmission rate between the two populations is equal to 5% of the transmission rate within each population. What happens to the size and timing of the epidemics?
 
@@ -97,7 +97,7 @@ What happens if the epidemic starts with 10 people infected in both populations?
 
 **Answer:** Epidemics are identical because initial conditions are the same. Although there is some connectivity between populations, it is symmetrical, so same dynamics in both.
 
-## Question C 
+## Question C
 
 ```{r}
 

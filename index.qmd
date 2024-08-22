@@ -15,3 +15,9 @@ title: "Content overview"
 **Session 5** - Metapopulations with ODEs: [Slides](slides/Lecture_05_ODEsMetapopulation.pdf), [Practical](05_Metapop_practical.qmd), [Solutions](05_Metapop_solutions.qmd)
 
 **Session 6** - Sensitivity analysis & sampling: [Slides](slides/Lecture_06_SensitivitySampling.pdf), [Practical](06_SensitivitySampling_practical.qmd), [Solutions](06_SensitivitySampling_solutions.qmd)
+
+**Session 8 -**
+
+**Session 9 -**
+
+**Session 10 -**

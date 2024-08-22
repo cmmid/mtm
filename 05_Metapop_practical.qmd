@@ -79,7 +79,7 @@ legend("topright",
 
 ```
 
-## Question A 
+## Question A
 
 When you simulate the above model, you'll notice that currently the epidemics are nearly identical in the two populations. Update the model parameters so the transmission rate between the two populations is equal to 5% of the transmission rate within each population. What happens to the size and timing of the epidemics?
 
@@ -87,7 +87,7 @@ When you simulate the above model, you'll notice that currently the epidemics ar
 
 What happens if the epidemic starts with 10 people infected in both populations? Why does this happen?
 
-## Question C 
+## Question C
 
 The model is currently set up to record the number of cumulative cases in each population (i.e. C1 and C2). The below code will plot these cumulative numbers of cases. Update the code so you are plotting incidence, i.e. new cases appearing over time, rather than cumulative cases.
 
