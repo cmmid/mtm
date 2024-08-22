@@ -10,4 +10,6 @@ quarto::quarto_render()
 ```
 after updating the .qmd files, then commit and push changes to the git repo.
 
-To make non-Quarto files available, just put them in a subdirectory (such as `slides/` or `functions/`) and link to them from a qmd file. Quarto will detect the link and move it to the appropriate place automatically. Link to it just as e.g. `slides/Lecture_01_Intro.pdf`.
+To make non-Quarto files available, just put them in a subdirectory (such as `slides/` or `functions/`, but NOT `docs/`) and link to them from a qmd file. Quarto will detect the link and move it to the appropriate place automatically. Link to it just as e.g. `slides/Lecture_01_Intro.pdf`.
+
+The actual rendered website is in `docs/`. Do not change anything in there manually.
