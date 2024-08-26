@@ -1,5 +1,5 @@
 ---
-title: "04. Ordinary differential equations (ODEs): Practical"
+title: "04. Ordinary differential equations (ODEs)"
 ---
 
 # ODE's in R: Practical

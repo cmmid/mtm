@@ -5,21 +5,21 @@ toc: true
 
 ## Day 1
 
-| Date       | Time        | Session | Title                                                                     | Lead            |
-|--------------|--------------|--------------|----------------|--------------|
-| 2024/09/09 | 10.00-10.30 | 01      | Intro/ overview                                                           | Yang/ Nick/ Oli |
-| Monday     | 10.30-11.00 | 02      | Different types of models                                                 | Yang/ Nick/ Oli |
-|            | 11.00-11.30 |         | BREAK                                                                     |                 |
-|            | 11.30-12.30 | 03      | Discrete time deterministic model, different equations/ Euler             | Billy Quilty    |
-|            | 12.30-13.30 |         | LUNCH                                                                     |                 |
-|            | 13.30-14.30 | 03      | Discrete time deterministic model, different equations/ Euler (continued) | Billy Quilty    |
-|            | 14.30-15.00 |         | BREAK                                                                     |                 |
-|            | 15.00-16.00 | 04      | ODE models                                                                | Nick Davies     |
+| Date       | Time        | Session | Title                                                                      | Lead            |
+|---------------|---------------|---------------|---------------|---------------|
+| 2024/09/09 | 10.00-10.30 | 01      | Introduction                                                               | Yang/ Nick/ Oli |
+| Monday     | 10.30-11.00 | 02      | Different types of models                                                  | Yang/ Nick/ Oli |
+|            | 11.00-11.30 |         | BREAK                                                                      |                 |
+|            | 11.30-12.30 | 03      | Discrete time deterministic model, difference equations/ Euler             | Billy Quilty    |
+|            | 12.30-13.30 |         | LUNCH                                                                      |                 |
+|            | 13.30-14.30 | 03      | Discrete time deterministic model, difference equations/ Euler (continued) | Billy Quilty    |
+|            | 14.30-15.00 |         | BREAK                                                                      |                 |
+|            | 15.00-16.00 | 04      | ODE models                                                                 | Nick Davies     |
 
 ## Day 2
 
 | Date       | Time        | Session | Title                                      | Lead         |
-|--------------|--------------|--------------|----------------|--------------|
+|---------------|---------------|---------------|---------------|---------------|
 | 2024/09/10 | 10.00-11.30 | 04      | ODE models (continued)                     | Nick Davies  |
 | Tuesday    | 11.30-12.00 |         | BREAK                                      |              |
 |            | 12.00-12.45 | 05      | ODE with deSolve in a metapopulation model | Nick Davies  |
@@ -32,13 +32,13 @@ toc: true
 
 | Date       | Time        | Session | Title                           | Lead          |
 |---------------|---------------|---------------|---------------|---------------|
-| 2024/09/11 | 10.00-11.00 | 08      | Network models                  | Kath O'Reilly |
+| 2024/09/11 | 10.00-11.00 | 08      | Stochastic models discrete time | Nick Davies   |
 | Wednesday  | 11.00-11.30 |         | BREAK                           |               |
-|            | 11.30-12.30 | 08      | Network models                  | Kath O'Reilly |
+|            | 11.30-12.30 | 08      | Stochastic models discrete time | Nick Davies   |
 |            | 12.30-13.30 |         | LUNCH                           |               |
-|            | 13.30-14.30 | 09      | Stochastic models discrete time | Nick Davies   |
+|            | 13.30-14.30 | 09      | Network models                  | Kath O'Reilly |
 |            | 14.30-15.00 |         | BREAK                           |               |
-|            | 15.00-16.00 | 09      | Stochastic models discrete time | Nick Davies   |
+|            | 15.00-16.00 | 09      | Network models                  | Kath O'Reilly |
 
 ## Day4
 

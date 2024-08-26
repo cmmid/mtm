@@ -1,0 +1,158 @@
+---
+title: "08. Stochastic Individual-Based Models"
+---
+
+In this practical, we will implement a stochastic individual-based model of SARS-CoV-2 transmission.
+
+## Practical 1. An individual-based SEIR model of SARS-CoV-2 transmission
+
+Open up the file [01_IBM_SEIR.R]{style="background-color: yellow;"}. This is code with the skeleton of a stochastic individual-based SEIR model with the following model diagram:
+
+![](images/SEIR_diagram.png)
+
+Here, the force of infection is $\beta I/N$, the latent period duration is $1/\delta$, the infectious period is $1/\gamma$ and the waning rate is $\omega$. (Symbol names: $\beta$ = beta, $\delta$ = delta, $\gamma$ = gamma, $\omega$ = omega.)
+
+The rest of this section goes through each part of the script, with questions to check your understanding. Remember, you can consult the [practical solutions]{style="background-color:yellow"} if you are stuck.
+
+```{r, eval = F}
+# Individual-based SARS-CoV-2 transmission model, practical 1
+library(ggplot2)
+
+
+## Model parameters
+beta <- 0.5        # Transmission parameter
+delta <- 1 / 2.5   # Rate of transitioning out of latent state
+gamma <- 1 / 5     # Rate of transitioning out of infectious state
+omega <- 1 / 180   # Rate of waning immunity
+
+dt <- 1            # Time step of simulation (1 day)
+days <- 365        # Duration of simulation (365 days)
+steps <- days / dt # Total number of time steps
+n <- 1000          # Population size
+```
+
+1. What is the unit of time (seconds, days, weeks?) for this model? What have we used as the average duration of the latent period, the average duration of the infectious period, and the average duration of immunity?
+
+```{r, eval = F}
+## Data frame to store simulation results
+results <- data.frame(ts = 1:steps, S = 0, E = 0, I = 0, R = 0)
+```
+
+We will use this data frame to track the dynamics of the system over time, including the number of people in state S, E, I, and R for each time step. After you run this line, inspect the data frame (type "`results`" at the prompt) to make sure you understand its structure.
+
+```{r, eval = F}
+## Initialize simulation
+
+# Set the seed for the pseudorandom number generator, for reproducibility
+set.seed(12345)
+
+# Since this is an individual-based model, we track the properties of all n
+# individuals in the simulation. One kind of property we can track is a state,
+# such as S (susceptible), E (exposed), I (infectious), or R (recovered). We
+# will store each individual's state as a string, either "S", "E", "I", or "R".
+
+state <- rep("S", n)   # Each individual's state: start with all susceptible
+state[1:10] <- "E"     # Start 10 individuals in the "exposed" state
+```
+
+This section begins with a call to `set.seed`, which should be familiar from previous practicals, to ensure we can reproduce the same sequence of random numbers for our simulation. Then the `state` vector is initialized.
+
+2. What is in the `state` vector at the end of this section? Why have we set some individuals to state "E"?
+
+```{r, eval = F}
+## Run simulation
+
+# We'll use the built-in function txtProgressBar to track the simulation's
+# progress. Really helps for planning coffee breaks! It needs to know the
+# minimum and maximum values to expect, and style = 3 tells it to report the
+# percentage complete.
+bar <- txtProgressBar(min = 1, max = steps, style = 3)
+
+# Loop over each time step . . .
+for (ts in 1:steps) {
+    # Calculate the force of infection
+    lambda <- beta * sum(state == "I") / n
+
+    # Loop through each individual . . .
+    for (i in 1:n) {
+        if (state[i] == "S") {
+            # Transition S -> E (infection) at rate lambda
+            if (runif(1) < 1 - exp(-lambda * dt)) {
+                state[i] <- "E"
+            }
+        } else if (state[i] == "E") {
+            #### Fill in the rest: Transition E -> I (latent to infectious) at
+            #### rate delta, transition I -> R (infectious to recovered) at rate
+            #### gamma, and transition R -> S (waning of immunity) at rate omega
+            ...
+        } else if (...) {
+			...
+        }
+    }
+
+    # Save population state for this time step
+    results[ts, "S"] <- sum(state == "S")
+    ##### Fill in the rest for states E, I, and R
+    results[ts, "E"] <- ...
+    ...
+
+    # Update progress bar; close progress bar if we are finished
+    setTxtProgressBar(bar, ts)
+    if (ts == steps) {
+        close(bar)
+    }
+}
+```
+
+This section starts by setting up a progress bar using `txtProgressBar`. The details of how this works are not critical, but you should see the progress bar displayed in the R console when you run the main for loop for the simulation.
+
+Then the simulation’s main `for` loop happens. The contents of this `for` loop happen once for every value of `ts` in 1, 2, 3, ..., `steps`. There are four parts of the `for` loop.
+
+The first part calculates the force of infection, `lambda`.
+
+3. Part of this calculation for `lambda` includes the expression `sum(state == "I")`. What does this expression do?
+
+The second part loops through each individual `i` and executes their state transitions. The S $\rightarrow$ E transition has been filled in for you, but you will need to fill in the E $\rightarrow$ I, I $\rightarrow$ R, and R $\rightarrow$ S transitions yourself.
+
+4. What does the expression `runif(1) < 1 - exp(-lambda * dt)` do?
+
+The third part saves the current state of the population (number of individuals in the S, E, I, and R states) into the `results` data frame. S has been completed, but you will need to fill in the details for E, I, and R.
+
+Finally, the fourth part of the `for` loop updates the progress bar.
+
+```{r, eval = F}
+## Plot simulation results
+ggplot(results) +
+  geom_line(aes(x = ts, y = S, colour = "S")) +
+  geom_line(aes(x = ts, y = E, colour = "E")) +
+  geom_line(aes(x = ts, y = I, colour = "I")) +
+  geom_line(aes(x = ts, y = R, colour = "R"))
+```
+
+The final section of the script plots what is in the `results` data frame using `ggplot`.
+
+5. What does the plot show? How many epidemics are there over the time period simulated?
+
+6. If you re-run all the code from the line `## Initialize simulation` down to the end of the file, the simulation will run again and, since the same value is used for `set.seed`, you should see the same results. But different seeds can produce different results. What happens if you use `set.seed(123456)` instead of `12345`? Try a few other values in `set.seed` to explore the randomness exhibited by the model.
+
+## Practical 2. Adding more complex dynamics to the model
+
+Open up the file 09_StochasticIBM/02_RevIBM.R. This is the working SEIR model from Practical 1, with a few changes as detailed below.
+
+
+```{r, eval = F}
+```
+
+```{r, eval = F}
+```
+
+```{r, eval = F}
+```
+
+```{r, eval = F}
+```
+
+```{r, eval = F}
+```
+
+**Solutions to this practical can be accessed [here](08_StochasticIBM_solutions.qmd).**

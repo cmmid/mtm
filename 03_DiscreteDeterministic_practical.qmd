@@ -1,10 +1,10 @@
 ---
-title: "03. Discrete Time Deterministic Models: Practical"
+title: "03. Discrete Time Deterministic Models"
 ---
 
 ## A. SIR model from lecture
 
-### A.1 Implement the SIR model from the slides and lot the proportion of the population that is infectious.
+### A.1 Implement the SIR model from the slides and plot the proportion of the population that is infectious.
 
 ```{r, eval = F}
 time_sir <- seq(0, 20, by = 1)

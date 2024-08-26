@@ -18,6 +18,6 @@ title: "Content overview"
 
 **Session 8 -**
 
-**Session 9 -**
+**Session 9 - Network modelling: [Slides](slides/Lecture_09_Networks.pdf), [Practical](09_Networks_practical.qmd), [Solutions](09_Networks_solutions.qmd)**
 
 **Session 10 -**

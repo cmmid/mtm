@@ -1,5 +1,5 @@
 ---
-title: "05. Metapopulations with ODEs: Practical"
+title: "05. Metapopulations with ODEs"
 ---
 
 The code below has been written to solve a Susceptible-Infected-Recovered model with two populations. Familiarise yourself with the expanded model before moving onto the activities that follow. Note: the compartments C1 and C2 reflect the cumulative numbers of people infected. This will be used later on.

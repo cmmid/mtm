@@ -1,5 +1,5 @@
 ---
-title: "06. Sensitivity Analysis & Sampling: Practical"
+title: "06. Sensitivity Analysis & Sampling"
 ---
 
 ## (1) One-way sensitivity analyses
