@@ -40,7 +40,7 @@ toc: true
 |            | 14.30-15.00 |         | BREAK                           |               |
 |            | 15.00-16.00 | 09      | Network models                  | Kath O'Reilly |
 
-## Day4
+## Day 4
 
 | Date       | Time        | Session | Title                            | Lead            |
 |---------------|---------------|---------------|---------------|---------------|

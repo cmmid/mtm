@@ -1,5 +1,5 @@
 ---
-title: "06. Sensitivity Analysis & Sampling: Practical"
+title: "06. Sensitivity analysis and sampling: Solutions"
 ---
 
 **Click [here](06_SensitivitySampling_practical.qmd) to return to the practical.**

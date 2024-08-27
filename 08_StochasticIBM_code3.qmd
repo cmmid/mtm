@@ -1,0 +1,143 @@
+---
+title: "08. Stochastic individual-based models (practical 3)"
+---
+
+## Practical 3. Optimizing the model to run faster
+
+For practical 3, start with the following code:
+
+```{r, eval = FALSE, message = FALSE}
+# Individual-based SARS-CoV-2 transmission model, practical 3
+library(ggplot2)
+
+
+## Model parameters
+beta <- 0.5        # Transmission parameter
+iota <- 1e-5       # Importation rate
+wane <- 0.05       # Rate of antibody waning
+
+dt <- 1            # Time step of simulation (1 day)
+days <- 365 * 4    # Duration of simulation (4 years)
+steps <- days / dt # Total number of time steps
+n <- 5000          # Population size
+
+
+## Some helper functions
+# Calculates infectiousness as a function of state and age: zero if state is
+# not "I"; nonzero if state is "I", and slightly decreasing with age
+infectiousness <- function(state, age) {
+    ifelse(state == "I", 1.25 - age / 160, 0)
+}
+
+# Calculates susceptibility of individuals with antibody level(s) ab
+susceptibility <- function(ab) {
+    pnorm(ab, 5, 1)
+}
+
+# Generates n random delays from the latent-period distribution
+# (approximately 2 days, on average)
+latent_delay <- function(n) {
+    rlnorm(n, meanlog = 0.5, sdlog = 0.6)
+}
+
+# Generates n random delays from the infectious-period distribution
+# (approximately 5 days, on average)
+infectious_delay <- function(n) {
+    rlnorm(n, meanlog = 1.5, sdlog = 0.5)
+}
+
+# Generates n random increments to antibody levels following recovery
+ab_increment <- function(n) {
+    rnorm(n, mean = 12, sd = 2)
+}
+
+
+## Data frame to store simulation results
+results <- data.frame(ts = 1:steps, S = 0, E = 0, I = 0, AMeanU = 0, AMeanV = 0)
+
+
+## Initialize simulation
+
+# Set the seed for the pseudorandom number generator, for reproducibility
+set.seed(12345)
+
+# Initialize state variables
+state <- rep("S", n)   # Each individual's state: start with all susceptible
+age <- runif(n, 0, 80) # Each individual's age: random distribution from 0 to 80
+delay <- rep(0, n)     # Delay for latent and infectious periods
+antib <- rep(0, n)     # Antibody concentration for each individual
+vacc <- rep(FALSE, n)  # Vaccinated status
+
+state[1:10] <- "E"     # Start 10 individuals in the "exposed" state
+
+
+## Run simulation
+
+# Initialize progress bar
+bar <- txtProgressBar(min = 1, max = steps, style = 3)
+
+# Loop over each time step . . .
+for (ts in 1:steps) {
+    # Calculate the force of infection
+    lambda <- beta * sum(infectiousness(state, age)) / n + iota
+
+    ##### NOTE - There is no inner loop over individuals anymore!
+
+    # Update non-state variables (for all individuals simultaneously)
+    # Time remaining in latent/infectious periods
+    delay <- delay - dt
+    ##### Fill in: Antibody waning
+    antib <- ...
+    ##### Fill in: Vaccination at time step 300 for over-40s
+    if (ts == 300) {
+        vacc[...] <- ...
+        antib[...] <- ...
+    }
+
+    # Update state variables (for all individuals simultaneously)
+    ##### trE selects all individuals who will transition states from S to E.
+    trE <- (state == "S") & (runif(n) < 1 - exp(-lambda * dt)) &
+      (runif(n) > susceptibility(antib))
+    trI <- ... ##### Fill in similar conditions for trI (E->I) and trS (I->S).
+    trS <- ...
+
+    # Fill in: Do state transitions
+    # transition S -> E
+    state[trE] <- "E"
+    delay[trE] <- latent_delay(sum(trE))
+
+    # transition E -> I
+    ...
+
+
+    # transition I -> S
+    ...
+
+
+    # Save population state for this time step
+    results[ts, "S"] <- sum(state == "S")
+    results[ts, "E"] <- sum(state == "E")
+    results[ts, "I"] <- sum(state == "I")
+    results[ts, "AMeanU"] <- mean(antib[!vacc])
+    results[ts, "AMeanV"] <- mean(antib[vacc])
+
+    # Update progress bar; close progress bar if we are finished
+    setTxtProgressBar(bar, ts)
+    if (ts == steps) {
+        close(bar)
+    }
+}
+
+## Plot simulation results
+ggplot(results) +
+    geom_line(aes(x = ts, y = S, colour = "S")) +
+    geom_line(aes(x = ts, y = E, colour = "E")) +
+    geom_line(aes(x = ts, y = I, colour = "I"))
+
+ggplot(results) +
+    geom_line(aes(x = ts, y = AMeanU, colour = "Unvaccinated")) +
+    geom_line(aes(x = ts, y = AMeanV, colour = "Vaccinated")) +
+    labs(x = "Time step", y = "Mean antibody level")
+```
+
+**Return to the practical [here](08_StochasticIBM_practical.qmd#sec3).**

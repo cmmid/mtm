@@ -16,8 +16,8 @@ title: "Content overview"
 
 **Session 6** - Sensitivity analysis & sampling: [Slides](slides/Lecture_06_SensitivitySampling.pdf), [Practical](06_SensitivitySampling_practical.qmd), [Solutions](06_SensitivitySampling_solutions.qmd)
 
-**Session 8 -**
+**Session 8** - Stochastic individual-based models: [Slides](slides/Lecture_08_StochasticIBM.pdf), [Practical](08_StochasticIBM_practical.qmd), [Solutions](08_StochasticIBM_solutions.qmd)
 
-**Session 9 - Network modelling: [Slides](slides/Lecture_09_Networks.pdf), [Practical](09_Networks_practical.qmd), [Solutions](09_Networks_solutions.qmd)**
+**Session 9** - Network modelling: [Slides](slides/Lecture_09_Networks.pdf), [Practical](09_Networks_practical.qmd), [Solutions](09_Networks_solutions.qmd)
 
-**Session 10 -**
+**Session 10** -

@@ -49,7 +49,7 @@ make_lattice(c(4, 4))
 
 Remember, to read more about a specific function, you can look up the help on that function, e.g.
 
-```{r, output = FALSE}
+```{r, eval = FALSE}
 ?make_lattice
 ```
 

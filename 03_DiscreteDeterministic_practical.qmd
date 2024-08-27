@@ -1,5 +1,5 @@
 ---
-title: "03. Discrete Time Deterministic Models"
+title: "03. Discrete-time deterministic models"
 ---
 
 ## A. SIR model from lecture

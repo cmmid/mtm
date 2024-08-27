@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Modern Techniques in Modelling - 08. Stochastic Individual-Based Models</title>
+<title>Modern Techniques in Modelling - 08. Stochastic individual-based models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -170,7 +170,7 @@ window.Quarto = {
     <ul class="dropdown-menu" aria-labelledby="nav-menu-practicals">    
         <li>
     <a class="dropdown-item" href="./03_DiscreteDeterministic_practical.html">
- <span class="dropdown-text">03. Discrete Time Deterministic Models</span></a>
+ <span class="dropdown-text">03. Discrete-time deterministic models</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./04_ODEs_practical.html">
@@ -182,11 +182,11 @@ window.Quarto = {
   </li>  
         <li>
     <a class="dropdown-item" href="./06_SensitivitySampling_practical.html">
- <span class="dropdown-text">06. Sensitivity Analysis &amp; Sampling</span></a>
+ <span class="dropdown-text">06. Sensitivity analysis and sampling</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./08_StochasticIBM_practical.html">
- <span class="dropdown-text">08. Stochastic Individual-Based Models</span></a>
+ <span class="dropdown-text">08. Stochastic individual-based models</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./09_Networks_practical.html">
@@ -194,7 +194,7 @@ window.Quarto = {
   </li>  
         <li>
     <a class="dropdown-item" href="./10_StochasticContinuous_practical.html">
- <span class="dropdown-text">10. Stochastic Continuous Models</span></a>
+ <span class="dropdown-text">10. Stochastic continuous models</span></a>
   </li>  
     </ul>
   </li>
@@ -219,7 +219,14 @@ window.Quarto = {
    
   <ul>
   <li><a href="#practical-1.-an-individual-based-seir-model-of-sars-cov-2-transmission" id="toc-practical-1.-an-individual-based-seir-model-of-sars-cov-2-transmission" class="nav-link active" data-scroll-target="#practical-1.-an-individual-based-seir-model-of-sars-cov-2-transmission">Practical 1. An individual-based SEIR model of SARS-CoV-2 transmission</a></li>
-  <li><a href="#practical-2.-adding-more-complex-dynamics-to-the-model" id="toc-practical-2.-adding-more-complex-dynamics-to-the-model" class="nav-link" data-scroll-target="#practical-2.-adding-more-complex-dynamics-to-the-model">Practical 2. Adding more complex dynamics to the model</a></li>
+  <li><a href="#sec2" id="toc-sec2" class="nav-link" data-scroll-target="#sec2">Practical 2. Adding more complex dynamics to the model</a>
+  <ul class="collapse">
+  <li><a href="#i.-age" id="toc-i.-age" class="nav-link" data-scroll-target="#i.-age">I. Age</a></li>
+  <li><a href="#ii.-delay-distributions" id="toc-ii.-delay-distributions" class="nav-link" data-scroll-target="#ii.-delay-distributions">II. Delay distributions</a></li>
+  <li><a href="#iii.-modelling-neutralizing-antibody-levels-for-each-individual" id="toc-iii.-modelling-neutralizing-antibody-levels-for-each-individual" class="nav-link" data-scroll-target="#iii.-modelling-neutralizing-antibody-levels-for-each-individual">III. Modelling neutralizing antibody levels for each individual</a></li>
+  <li><a href="#iv.-vaccination" id="toc-iv.-vaccination" class="nav-link" data-scroll-target="#iv.-vaccination">IV. Vaccination</a></li>
+  </ul></li>
+  <li><a href="#sec3" id="toc-sec3" class="nav-link" data-scroll-target="#sec3">Practical 3. Optimizing the model to run faster</a></li>
   </ul>
 </nav>
     </div>
@@ -228,7 +235,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">08. Stochastic Individual-Based Models</h1>
+<h1 class="title">08. Stochastic individual-based models</h1>
 </div>
 
 
@@ -248,10 +255,10 @@ window.Quarto = {
 <p>In this practical, we will implement a stochastic individual-based model of SARS-CoV-2 transmission.</p>
 <section id="practical-1.-an-individual-based-seir-model-of-sars-cov-2-transmission" class="level2">
 <h2 class="anchored" data-anchor-id="practical-1.-an-individual-based-seir-model-of-sars-cov-2-transmission">Practical 1. An individual-based SEIR model of SARS-CoV-2 transmission</h2>
-<p>Open up the file <span style="background-color: yellow;">01_IBM_SEIR.R</span>. This is code with the skeleton of a stochastic individual-based SEIR model with the following model diagram:</p>
+<p>In the first practical for this session, we’ll code a stochastic individual-based SEIR model with the following model diagram:</p>
 <p><img src="images/SEIR_diagram.png" class="img-fluid"></p>
-<p>Here, the force of infection is <span class="math inline">\(\beta I/N\)</span>, the latent period duration is <span class="math inline">\(1/\delta\)</span>, the infectious period is <span class="math inline">\(1/\gamma\)</span> and the waning rate is <span class="math inline">\(\omega\)</span>. (Symbol names: <span class="math inline">\(\beta\)</span> = beta, <span class="math inline">\(\delta\)</span> = delta, <span class="math inline">\(\gamma\)</span> = gamma, <span class="math inline">\(\omega\)</span> = omega.)</p>
-<p>The rest of this section goes through each part of the script, with questions to check your understanding. Remember, you can consult the <span style="background-color:yellow">practical solutions</span> if you are stuck.</p>
+<p>Here, the force of infection is <span class="math inline">\(\lambda = \beta I/N\)</span>, the latent period duration is <span class="math inline">\(1/\delta\)</span>, the infectious period is <span class="math inline">\(1/\gamma\)</span> and the waning rate is <span class="math inline">\(\omega\)</span>. (Symbol names: <span class="math inline">\(\beta\)</span> = beta, <span class="math inline">\(\delta\)</span> = delta, <span class="math inline">\(\gamma\)</span> = gamma, <span class="math inline">\(\lambda\)</span> = lambda, <span class="math inline">\(\omega\)</span> = omega.)</p>
+<p>The rest of this section goes through each part of the script, with questions to check your understanding. Remember, you can consult the <a href="./08_StochasticIBM_solutions.html">practical solutions</a> if you are stuck.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Individual-based SARS-CoV-2 transmission model, practical 1</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -353,10 +360,10 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Plot simulation results</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results) <span class="sc">+</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> ts, <span class="at">y =</span> S, <span class="at">colour =</span> <span class="st">"S"</span>)) <span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> ts, <span class="at">y =</span> E, <span class="at">colour =</span> <span class="st">"E"</span>)) <span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> ts, <span class="at">y =</span> I, <span class="at">colour =</span> <span class="st">"I"</span>)) <span class="sc">+</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> ts, <span class="at">y =</span> R, <span class="at">colour =</span> <span class="st">"R"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> ts, <span class="at">y =</span> S, <span class="at">colour =</span> <span class="st">"S"</span>)) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> ts, <span class="at">y =</span> E, <span class="at">colour =</span> <span class="st">"E"</span>)) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> ts, <span class="at">y =</span> I, <span class="at">colour =</span> <span class="st">"I"</span>)) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> ts, <span class="at">y =</span> R, <span class="at">colour =</span> <span class="st">"R"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The final section of the script plots what is in the <code>results</code> data frame using <code>ggplot</code>.</p>
 <ol start="5" type="1">
@@ -364,10 +371,170 @@ window.Quarto = {
 <li><p>If you re-run all the code from the line <code>## Initialize simulation</code> down to the end of the file, the simulation will run again and, since the same value is used for <code>set.seed</code>, you should see the same results. But different seeds can produce different results. What happens if you use <code>set.seed(123456)</code> instead of <code>12345</code>? Try a few other values in <code>set.seed</code> to explore the randomness exhibited by the model.</p></li>
 </ol>
 </section>
-<section id="practical-2.-adding-more-complex-dynamics-to-the-model" class="level2">
-<h2 class="anchored" data-anchor-id="practical-2.-adding-more-complex-dynamics-to-the-model">Practical 2. Adding more complex dynamics to the model</h2>
-<p>Open up the file 09_StochasticIBM/02_RevIBM.R. This is the working SEIR model from Practical 1, with a few changes as detailed below.</p>
-<p><strong>Solutions to this practical can be accessed <a href="08_StochasticIBM_solutions.qmd">here</a>.</strong></p>
+<section id="sec2" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec2">Practical 2. Adding more complex dynamics to the model</h2>
+<p>Start practical 2 with <a href="./08_StochasticIBM_code2.html">this code</a>. This is the working SEIR model from Practical 1, with a few changes as detailed below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Model parameters</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>There is now an additional parameter in this section, <code>iota</code>, representing a low rate of “importation” of infections into the population of <span class="math inline">\(1 \times 10^{-5}\)</span> infections per person per day. This value now gets added to the force of infection, <code>lambda</code>, in the main loop. This represents the reality that few populations of people are truly “cut off” from the rest of the world, so there is usually some risk of importing infection from outside the population of interest. It also avoids stochastic extinction (i.e.&nbsp;when transmission ceases because of low numbers of infected people in a stochastic model).</p></li>
+<li><p>The duration of the simulation, <code>days</code>, is now 2 years instead of 1 year.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Some helper functions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>This new section contains 5 new functions which will be used during this practical. <code>infectiousness</code> and <code>susceptibility</code> do calculations on their parameters, while <code>latent_delay</code>, <code>infectious_delay</code>, and <code>ab_increment</code> generate random numbers for the simulation to use. The purpose of these functions should become clear as you work on the practical.</li>
+</ul>
+<p>The rest of the script is the same as before (except where <code>iota</code> is added to the force of infection, <code>lambda</code>, in the loop). If you run the rest of the file, you should see the same simulation as before, though this time the simulation runs for two years instead of one year.</p>
+<p>Now we will try adding more complex dynamics to the simulation, step by step.</p>
+<p>If at any point during your testing, the simulation is taking too long to run, you can try reducing the population size <code>n</code> (though this will increase the randomness of the results), increasing the time step <code>dt</code> (though this will reduce accuracy of the simulation), or decreasing the duration of the simulation <code>days</code>.</p>
+<section id="i.-age" class="level3">
+<h3 class="anchored" data-anchor-id="i.-age">I. Age</h3>
+<p>To add age to the model, first we need to add the line</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">runif</span>(n, <span class="dv">0</span>, <span class="dv">80</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>to the code, in the <code># Initialize state variables</code> section. (Recall that the <code>runif</code> function generates <code>r</code>andom numbers from the <code>unif</code>orm distribution.)</p>
+<ol start="7" type="1">
+<li>Inspect the results of this call to <code>runif.</code> What does this line of code do?</li>
+</ol>
+<p>Adding an age for each individual doesn’t do anything on its own, but we can make it have an impact on other aspects of the simulation. The helper function <code>infectiousness</code> returns a positive number depending on the values of <code>state</code> and <code>age</code> passed into the function.</p>
+<ol start="8" type="1">
+<li><p>Try running this function from the command prompt with a few example values, such as:<br>
+</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">infectiousness</span>(<span class="st">"S"</span>, <span class="dv">12</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">infectiousness</span>(<span class="st">"I"</span>, <span class="dv">12</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">infectiousness</span>(<span class="fu">c</span>(<span class="st">"I"</span>, <span class="st">"I"</span>, <span class="st">"E"</span>), <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">75</span>, <span class="dv">50</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>What is this function doing?</p></li>
+<li><p>Go to the lines at the top of the main <code>for</code> loop:<br>
+</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the force of infection</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> beta <span class="sc">*</span> <span class="fu">sum</span>(state <span class="sc">==</span> <span class="st">"I"</span>) <span class="sc">/</span> n <span class="sc">+</span> iota</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The expression <code>state == "I"</code> effectively gives an infectiousness of 1 (the numerical equivalent of <code>TRUE</code>) for any individual with state “I”, and an infectiousness of 0 (the numerical equivalent of <code>FALSE</code>) for any individual of any other state. How would you alter this line to use the <code>infectiousness</code> function instead of the expression <code>state == "I"</code>? Make that change and see how it affects the simulation.</p></li>
+<li><p><em>(optional)</em> Add aging to the model, by adding a line to the section in the main <code>for</code> loop headed <code># Update individual i's non-state variables</code>. Does aging have an impact on dynamics over this time scale?</p></li>
+</ol>
+</section>
+<section id="ii.-delay-distributions" class="level3">
+<h3 class="anchored" data-anchor-id="ii.-delay-distributions">II. Delay distributions</h3>
+<p>The helper functions <code>latent_delay(n)</code> and <code>infectious_delay(n)</code> have been set up to generate <code>n</code> random durations (in days) for the latent period and infectious period, respectively. Try running these a few times from the prompt. We will use these to implement these specific delay distributions in the model, instead of the exponentially-distributed delays that the model currently uses.</p>
+<p>First we need to add the line</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>to the <code># Initialize state variables</code> section.</p>
+<p>Then, you will need to add some code to the <code># Update individual i's non-state variables</code> section of the main <code>for</code> loop to decrease each individual <code>i</code>’s delay by <code>dt</code> each time step, which is what counts down the time remaining in the E and I states.</p>
+<p>Now we need to modify how the transitions themselves work. For the latent period, first focus on the part of the main loop headed by <code># Transition S -&gt; E (infection) at rate lambda</code>. Here, we first check if individual <code>i</code> has been infected, and if they have, we currently set their state to Exposed with <code>state[i] &lt;- "E"</code>.</p>
+<p>You will need to add a line here which also sets their delay to a random number returned by <code>latent_delay(1)</code>, which draws one random number from the latent-period duration distribution. Note that inside this function, we draw a random number from a log-normal distribution with parameters <code>meanlog = 0.5</code> and <code>sdlog = 0.6</code>. You could obtain values such as these from the literature or by trying to measure the distributions from empirical data.</p>
+<p>Next, in the part of the main loop headed by <code># Transition E -&gt; I (latent to infectious) at rate delta</code>, change the <code>if</code> statement so that it checks whether <code>delay[i]</code> is less than zero. Run your code to check whether that has worked.</p>
+<p>For the infectious period, follow similar steps. You can reuse the same variable <code>delay</code> for the infectious period, or use a different variable.</p>
+<p>Note that you can now remove the model parameters <code>delta</code> and <code>gamma</code> from your code, since they are no longer being used, and update the comments in the main loop accordingly.</p>
+</section>
+<section id="iii.-modelling-neutralizing-antibody-levels-for-each-individual" class="level3">
+<h3 class="anchored" data-anchor-id="iii.-modelling-neutralizing-antibody-levels-for-each-individual">III. Modelling neutralizing antibody levels for each individual</h3>
+<p>Currently, the simulation models immunity as an “on/off” state: either the individual is susceptible to infection (state S) or they are completely immune to infection (state R). As an alternative, we could give each individual an “antibody level” which increases every time they fight off an infection, wanes over time, and whose value determines how likely they are to get reinfected.</p>
+<p>We’ll do this in two steps.</p>
+<p><strong>Step 1.</strong> First, we’ll add the antibody dynamics without affecting the rest of the simulation. Add a new parameter</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>wane <span class="ot">&lt;-</span> <span class="fl">0.05</span>  <span class="co"># Rate of antibody waning</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>to the <code>## Model parameters</code> section, and a new variable</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>antib <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, n)  <span class="co"># Antibody concentration for each individual</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>to the <code># Initialize state variables</code> section. We want each individual’s <code>antib[i]</code> to gradually wane over time, so add the line</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>antib[i] <span class="ot">&lt;-</span> antib[i] <span class="sc">-</span> wane <span class="sc">*</span> dt  <span class="co"># Antibody waning</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>to the section where individual <code>i</code>’s non-state variables are updated. We also want each individual’s <code>antib[i]</code> to jump up every time they recover from an infection, so add the line</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>antib[i] <span class="ot">&lt;-</span> antib[i] <span class="sc">+</span> <span class="fu">ab_increment</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>to the transition from I to R. The <code>ab_increment(1)</code> function gives a random increase to an individual’s antibodies when they fight off an infection.</p>
+<p>Finally, we will want to plot mean antibody levels over time to see this in action. First, add an extra column <strong>AMean</strong> to the <code>results</code> data frame:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Data frame to store simulation results</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ts =</span> <span class="dv">1</span><span class="sc">:</span>steps, <span class="at">S =</span> <span class="dv">0</span>, <span class="at">E =</span> <span class="dv">0</span>, </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">I =</span> <span class="dv">0</span>, <span class="at">R =</span> <span class="dv">0</span>, <span class="at">AMean =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And add some code to the part of the main loop where the population state is saved:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>results[ts, <span class="st">"AMean"</span>] <span class="ot">&lt;-</span> <span class="fu">mean</span>(antib)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now run the simulation. We can generate an extra plot at the end of the simulation to see what is happening to antibody levels over time:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results) <span class="sc">+</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> ts, <span class="at">y =</span> AMean)) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Time step"</span>, <span class="at">y =</span> <span class="st">"Mean antibody level"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="11" type="1">
+<li>What do you observe?</li>
+</ol>
+<p><strong>Step 2.</strong> Now, we are going to make each individual’s antibody level actually do the work of determining whether they are susceptible to infection.</p>
+<p>The function <code>susceptibility(antib)</code> has been set up to give the susceptibility of an individual with antibody level <code>antib</code>, where their susceptibility is defined as the probability that they get infected given an exposure to the virus. Try a few values of <code>antib</code> at the command prompt:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">susceptibility</span>(<span class="dv">0</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">susceptibility</span>(<span class="dv">4</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">susceptibility</span>(<span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, alter the code that determines whether an individual goes from Susceptible to Exposed by adding a check for how susceptible to infection they are:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transition S -&gt; E (infection) at rate lambda</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(<span class="sc">-</span>lambda <span class="sc">*</span> dt) <span class="sc">&amp;</span> <span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> <span class="fu">susceptibility</span>(antib[i])) {</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># . . .</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This new addition is what is going to determine whether an individual is immune or susceptible to infection, so we don’t want to use the R (recovered) state to represent immunity anymore. Instead, we are going to have individuals go straight back to the S (susceptible) state when the infectious period ends. Make this change and remove the R state from the code completely. Now run the simulation.</p>
+<ol start="12" type="1">
+<li>Summarize the changes you have made to the simulation and the impact on the simulation results.</li>
+</ol>
+</section>
+<section id="iv.-vaccination" class="level3">
+<h3 class="anchored" data-anchor-id="iv.-vaccination">IV. Vaccination</h3>
+<p>As an optional exercise, try adding vaccination to the code. Assume that at time step 300, all individuals who are aged 40 and above get vaccinated, which increases their antibody levels by twice as much as natural infection (so you could add <code>2 * ab_increment(1)</code> to each individual’s antibody levels).</p>
+<ol start="13" type="1">
+<li>What is the impact on the simulation results?</li>
+</ol>
+<p>As a further optional exercise, try adding a variable <code>vacc</code> for each individual which is <code>FALSE</code> for anyone who has not been vaccinated and <code>TRUE</code> for anyone who has been vaccinated. Add two extra columns to the <code>results</code> data frame, <strong>AMeanU</strong> and <strong>AMeanV</strong>, and use these to keep track of mean antibody levels in ever-vaccinated versus never-vaccinated individuals.</p>
+<ol start="14" type="1">
+<li>Plot these observations after running the simulation. You could use code similar to the below. What do you observe?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(results) <span class="sc">+</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> ts, <span class="at">y =</span> AMeanU, <span class="at">colour =</span> <span class="st">"Unvaccinated"</span>)) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> ts, <span class="at">y =</span> AMeanV, <span class="at">colour =</span> <span class="st">"Vaccinated"</span>)) <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Time step"</span>, <span class="at">y =</span> <span class="st">"Mean antibody level"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="sec3" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="sec3">Practical 3. Optimizing the model to run faster</h2>
+<p>In R, code that loops over each individual in an individual-based model can be quite slow to run. This code can be optimized significantly by <strong>vectorizing</strong> it—that is, by applying events “all at once” to the entire vector of individuals’ properties rather than one by one, to each individual in turn.</p>
+<p>Compare this code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (state[i] <span class="sc">==</span> <span class="st">"S"</span>) {</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(<span class="sc">-</span>lambda <span class="sc">*</span> dt)) {</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>          state[i] <span class="ot">&lt;-</span> <span class="st">"E"</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>With this code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>trE <span class="ot">&lt;-</span> (state <span class="sc">==</span> <span class="st">"S"</span>) <span class="sc">&amp;</span> (<span class="fu">runif</span>(n) <span class="sc">&lt;</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">exp</span>(<span class="sc">-</span>lambda <span class="sc">*</span> dt))</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>state[trE] <span class="ot">&lt;-</span> <span class="st">"E"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>While the first code snippet loops through each individual in turn and applies the S <span class="math inline">\(\rightarrow\)</span> E transition separately to each individual, the second code snippet has the same effect, but achieves this effect without a <code>for</code> loop.</p>
+<p>Breaking down that second code snippet, first it creates a Boolean (<code>TRUE</code>/<code>FALSE</code>) vector <code>trE</code> (“transition to E”) which is the same length as the number of individuals being simulated. This vector has the value <code>TRUE</code> for all individuals who are currently in state “S” and who are calculated to be exposed to the virus, and <code>FALSE</code> for all other individuals. Notice that instead of <code>runif(1)</code>, which returns a single random number, we are now using <code>runif(n)</code>, which returns n random uniform numbers between 0 and 1.</p>
+<p>The second line of the code snippet makes the S <span class="math inline">\(\rightarrow\)</span> E transition happen, by setting the state of all selected individuals from the previous line to “E”.</p>
+<p><a href="./08_StochasticIBM_code3.html">This code</a> gives a general outline for vectorizing the simulation from Practical 2. Once vectorized, the simulation runs about 10x faster.</p>
+<p>Fundamentally, R as a language is not designed for speed. Reimplementing the model in e.g.&nbsp;C++ using Rcpp would likely increase the speed of the code by another 10-20x.</p>
+<p><strong>Solutions to this practical can be accessed <a href="./08_StochasticIBM_solutions.html">here</a>.</strong></p>
 
 
 </section>

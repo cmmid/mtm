@@ -1,18 +1,18 @@
 ---
-title: "08. Stochastic Individual-Based Models"
+title: "08. Stochastic individual-based models"
 ---
 
 In this practical, we will implement a stochastic individual-based model of SARS-CoV-2 transmission.
 
 ## Practical 1. An individual-based SEIR model of SARS-CoV-2 transmission
 
-Open up the file [01_IBM_SEIR.R]{style="background-color: yellow;"}. This is code with the skeleton of a stochastic individual-based SEIR model with the following model diagram:
+In the first practical for this session, we'll code a stochastic individual-based SEIR model with the following model diagram:
 
 ![](images/SEIR_diagram.png)
 
-Here, the force of infection is $\beta I/N$, the latent period duration is $1/\delta$, the infectious period is $1/\gamma$ and the waning rate is $\omega$. (Symbol names: $\beta$ = beta, $\delta$ = delta, $\gamma$ = gamma, $\omega$ = omega.)
+Here, the force of infection is $\lambda = \beta I/N$, the latent period duration is $1/\delta$, the infectious period is $1/\gamma$ and the waning rate is $\omega$. (Symbol names: $\beta$ = beta, $\delta$ = delta, $\gamma$ = gamma, $\lambda$ = lambda, $\omega$ = omega.)
 
-The rest of this section goes through each part of the script, with questions to check your understanding. Remember, you can consult the [practical solutions]{style="background-color:yellow"} if you are stuck.
+The rest of this section goes through each part of the script, with questions to check your understanding. Remember, you can consult the [practical solutions](08_StochasticIBM_solutions.qmd) if you are stuck.
 
 ```{r, eval = F}
 # Individual-based SARS-CoV-2 transmission model, practical 1
@@ -31,7 +31,7 @@ steps <- days / dt # Total number of time steps
 n <- 1000          # Population size
 ```
 
-1. What is the unit of time (seconds, days, weeks?) for this model? What have we used as the average duration of the latent period, the average duration of the infectious period, and the average duration of immunity?
+1.  What is the unit of time (seconds, days, weeks?) for this model? What have we used as the average duration of the latent period, the average duration of the infectious period, and the average duration of immunity?
 
 ```{r, eval = F}
 ## Data frame to store simulation results
@@ -57,7 +57,7 @@ state[1:10] <- "E"     # Start 10 individuals in the "exposed" state
 
 This section begins with a call to `set.seed`, which should be familiar from previous practicals, to ensure we can reproduce the same sequence of random numbers for our simulation. Then the `state` vector is initialized.
 
-2. What is in the `state` vector at the end of this section? Why have we set some individuals to state "E"?
+2.  What is in the `state` vector at the end of this section? Why have we set some individuals to state "E"?
 
 ```{r, eval = F}
 ## Run simulation
@@ -106,15 +106,15 @@ for (ts in 1:steps) {
 
 This section starts by setting up a progress bar using `txtProgressBar`. The details of how this works are not critical, but you should see the progress bar displayed in the R console when you run the main for loop for the simulation.
 
-Then the simulation’s main `for` loop happens. The contents of this `for` loop happen once for every value of `ts` in 1, 2, 3, ..., `steps`. There are four parts of the `for` loop.
+Then the simulation's main `for` loop happens. The contents of this `for` loop happen once for every value of `ts` in 1, 2, 3, ..., `steps`. There are four parts of the `for` loop.
 
 The first part calculates the force of infection, `lambda`.
 
-3. Part of this calculation for `lambda` includes the expression `sum(state == "I")`. What does this expression do?
+3.  Part of this calculation for `lambda` includes the expression `sum(state == "I")`. What does this expression do?
 
 The second part loops through each individual `i` and executes their state transitions. The S $\rightarrow$ E transition has been filled in for you, but you will need to fill in the E $\rightarrow$ I, I $\rightarrow$ R, and R $\rightarrow$ S transitions yourself.
 
-4. What does the expression `runif(1) < 1 - exp(-lambda * dt)` do?
+4.  What does the expression `runif(1) < 1 - exp(-lambda * dt)` do?
 
 The third part saves the current state of the population (number of individuals in the S, E, I, and R states) into the `results` data frame. S has been completed, but you will need to fill in the details for E, I, and R.
 
@@ -123,36 +123,227 @@ Finally, the fourth part of the `for` loop updates the progress bar.
 ```{r, eval = F}
 ## Plot simulation results
 ggplot(results) +
-  geom_line(aes(x = ts, y = S, colour = "S")) +
-  geom_line(aes(x = ts, y = E, colour = "E")) +
-  geom_line(aes(x = ts, y = I, colour = "I")) +
-  geom_line(aes(x = ts, y = R, colour = "R"))
+    geom_line(aes(x = ts, y = S, colour = "S")) +
+    geom_line(aes(x = ts, y = E, colour = "E")) +
+    geom_line(aes(x = ts, y = I, colour = "I")) +
+    geom_line(aes(x = ts, y = R, colour = "R"))
 ```
 
 The final section of the script plots what is in the `results` data frame using `ggplot`.
 
-5. What does the plot show? How many epidemics are there over the time period simulated?
+5.  What does the plot show? How many epidemics are there over the time period simulated?
 
-6. If you re-run all the code from the line `## Initialize simulation` down to the end of the file, the simulation will run again and, since the same value is used for `set.seed`, you should see the same results. But different seeds can produce different results. What happens if you use `set.seed(123456)` instead of `12345`? Try a few other values in `set.seed` to explore the randomness exhibited by the model.
+6.  If you re-run all the code from the line `## Initialize simulation` down to the end of the file, the simulation will run again and, since the same value is used for `set.seed`, you should see the same results. But different seeds can produce different results. What happens if you use `set.seed(123456)` instead of `12345`? Try a few other values in `set.seed` to explore the randomness exhibited by the model.
 
-## Practical 2. Adding more complex dynamics to the model
+## Practical 2. Adding more complex dynamics to the model {#sec2 .unnumbered}
 
-Open up the file 09_StochasticIBM/02_RevIBM.R. This is the working SEIR model from Practical 1, with a few changes as detailed below.
-
-
-```{r, eval = F}
-```
+Start practical 2 with [this code](08_StochasticIBM_code2.qmd). This is the working SEIR model from Practical 1, with a few changes as detailed below.
 
 ```{r, eval = F}
+## Model parameters
 ```
 
-```{r, eval = F}
-```
+-   There is now an additional parameter in this section, `iota`, representing a low rate of "importation" of infections into the population of $1 \times 10^{-5}$ infections per person per day. This value now gets added to the force of infection, `lambda`, in the main loop. This represents the reality that few populations of people are truly "cut off" from the rest of the world, so there is usually some risk of importing infection from outside the population of interest. It also avoids stochastic extinction (i.e. when transmission ceases because of low numbers of infected people in a stochastic model).
+
+-   The duration of the simulation, `days`, is now 2 years instead of 1 year.
 
 ```{r, eval = F}
+## Some helper functions
 ```
 
+-   This new section contains 5 new functions which will be used during this practical. `infectiousness` and `susceptibility` do calculations on their parameters, while `latent_delay`, `infectious_delay`, and `ab_increment` generate random numbers for the simulation to use. The purpose of these functions should become clear as you work on the practical.
+
+The rest of the script is the same as before (except where `iota` is added to the force of infection, `lambda`, in the loop). If you run the rest of the file, you should see the same simulation as before, though this time the simulation runs for two years instead of one year.
+
+Now we will try adding more complex dynamics to the simulation, step by step.
+
+If at any point during your testing, the simulation is taking too long to run, you can try reducing the population size `n` (though this will increase the randomness of the results), increasing the time step `dt` (though this will reduce accuracy of the simulation), or decreasing the duration of the simulation `days`.
+
+### I. Age
+
+To add age to the model, first we need to add the line
+
 ```{r, eval = F}
+age <- runif(n, 0, 80)
 ```
+
+to the code, in the `# Initialize state variables` section. (Recall that the `runif` function generates `r`andom numbers from the `unif`orm distribution.)
+
+7.  Inspect the results of this call to `runif.` What does this line of code do?
+
+Adding an age for each individual doesn't do anything on its own, but we can make it have an impact on other aspects of the simulation. The helper function `infectiousness` returns a positive number depending on the values of `state` and `age` passed into the function.
+
+8.  Try running this function from the command prompt with a few example values, such as:\
+
+    ```{r, eval = F}
+    infectiousness("S", 12)
+    infectiousness("I", 12)
+    infectiousness(c("I", "I", "E"), c(30, 75, 50))
+    ```
+
+    What is this function doing?
+
+9.  Go to the lines at the top of the main `for` loop:\
+
+    ```{r, eval = F}
+    # Calculate the force of infection
+    lambda <- beta * sum(state == "I") / n + iota
+    ```
+
+    The expression `state == "I"` effectively gives an infectiousness of 1 (the numerical equivalent of `TRUE`) for any individual with state "I", and an infectiousness of 0 (the numerical equivalent of `FALSE`) for any individual of any other state. How would you alter this line to use the `infectiousness` function instead of the expression `state == "I"`? Make that change and see how it affects the simulation.
+
+10. *(optional)* Add aging to the model, by adding a line to the section in the main `for` loop headed `# Update individual i's non-state variables`. Does aging have an impact on dynamics over this time scale?
+
+### II. Delay distributions
+
+The helper functions `latent_delay(n)` and `infectious_delay(n)` have been set up to generate `n` random durations (in days) for the latent period and infectious period, respectively. Try running these a few times from the prompt. We will use these to implement these specific delay distributions in the model, instead of the exponentially-distributed delays that the model currently uses. 
+
+First we need to add the line 
+
+```{r, eval = F}
+delay <- rep(0, n)
+```
+
+to the `# Initialize state variables` section.
+
+Then, you will need to add some code to the `# Update individual i's non-state variables` section of the main `for` loop to decrease each individual `i`'s delay by `dt` each time step, which is what counts down the time remaining in the E and I states.
+
+Now we need to modify how the transitions themselves work. For the latent period, first focus on the part of the main loop headed by `# Transition S -> E (infection) at rate lambda`.  Here, we first check if individual `i` has been infected, and if they have, we currently set their state to Exposed with `state[i] <- "E"`. 
+
+You will need to add a line here which also sets their delay to a random number returned by `latent_delay(1)`, which draws one random number from the latent-period duration distribution. Note that inside this function, we draw a random number from a log-normal distribution with parameters `meanlog = 0.5` and `sdlog = 0.6`. You could obtain values such as these from the literature or by trying to measure the distributions from empirical data.
+
+Next, in the part of the main loop headed by `# Transition E -> I (latent to infectious) at rate delta`, change the `if` statement so that it checks whether `delay[i]` is less than zero. Run your code to check whether that has worked.
+
+For the infectious period, follow similar steps. You can reuse the same variable `delay` for the infectious period, or use a different variable.
+
+Note that you can now remove the model parameters `delta` and `gamma` from your code, since they are no longer being used, and update the comments in the main loop accordingly.
+
+### III. Modelling neutralizing antibody levels for each individual
+
+Currently, the simulation models immunity as an "on/off" state: either the individual is susceptible to infection (state S) or they are completely immune to infection (state R). As an alternative, we could give each individual an "antibody level" which increases every time they fight off an infection, wanes over time, and whose value determines how likely they are to get reinfected.
+
+We'll do this in two steps. 
+
+**Step 1.** First, we'll add the antibody dynamics without affecting the rest of the simulation. Add a new parameter 
+
+```{r, eval = F}
+wane <- 0.05  # Rate of antibody waning
+```
+
+to the `## Model parameters` section, and a new variable 
+
+```{r, eval = F}
+antib <- rep(0, n)  # Antibody concentration for each individual
+```
+
+to the `# Initialize state variables` section. We want each individual's `antib[i]` to gradually wane over time, so add the line 
+
+```{r, eval = F}
+antib[i] <- antib[i] - wane * dt  # Antibody waning
+```
+
+to the section where individual `i`'s non-state variables are updated. We also want each individual's `antib[i]` to jump up every time they recover from an infection, so add the line 
+
+```{r, eval = F}
+antib[i] <- antib[i] + ab_increment(1)
+```
+
+to the transition from I to R. The `ab_increment(1)` function gives a random increase to an individual's antibodies when they fight off an infection.
+
+Finally, we will want to plot mean antibody levels over time to see this in action. First, add an extra column **AMean** to the `results` data frame:
+
+```{r, eval = F}
+## Data frame to store simulation results
+results <- data.frame(ts = 1:steps, S = 0, E = 0, 
+                      I = 0, R = 0, AMean = 0)
+```
+
+And add some code to the part of the main loop where the population state is saved:
+
+```{r, eval = F}
+results[ts, "AMean"] <- mean(antib)
+```
+
+Now run the simulation. We can generate an extra plot at the end of the simulation to see what is happening to antibody levels over time:
+
+```{r, eval = F}
+ggplot(results) + 
+    geom_line(aes(x = ts, y = AMean)) +
+    labs(x = "Time step", y = "Mean antibody level")
+```
+
+11.  What do you observe?
+
+**Step 2.** Now, we are going to make each individual's antibody level actually do the work of determining whether they are susceptible to infection.
+
+The function `susceptibility(antib)` has been set up to give the susceptibility of an individual with antibody level `antib`, where their susceptibility is defined as the probability that they get infected given an exposure to the virus. Try a few values of `antib` at the command prompt:
+
+```{r, eval = F}
+susceptibility(0)
+susceptibility(4)
+susceptibility(8)
+```
+
+Now, alter the code that determines whether an individual goes from Susceptible to Exposed by adding a check for how susceptible to infection they are:
+
+```{r, eval = F}
+# Transition S -> E (infection) at rate lambda
+if (runif(1) < 1 - exp(-lambda * dt) & runif(1) < susceptibility(antib[i])) {
+    # . . .
+```
+
+This new addition is what is going to determine whether an individual is immune or susceptible to infection, so we don't want to use the R (recovered) state to represent immunity anymore. Instead, we are going to have individuals go straight back to the S (susceptible) state when the infectious period ends. Make this change and remove the R state from the code completely. Now run the simulation.
+
+12.  Summarize the changes you have made to the simulation and the impact on the simulation results.
+
+### IV. Vaccination
+
+As an optional exercise, try adding vaccination to the code. Assume that at time step 300, all individuals who are aged 40 and above get vaccinated, which increases their antibody levels by twice as much as natural infection (so you could add `2 * ab_increment(1)` to each individual’s antibody levels). 
+
+13.  What is the impact on the simulation results?
+
+As a further optional exercise, try adding a variable `vacc` for each individual which is `FALSE` for anyone who has not been vaccinated and `TRUE` for anyone who has been vaccinated. Add two extra columns to the `results` data frame, **AMeanU** and **AMeanV**, and use these to keep track of mean antibody levels in ever-vaccinated versus never-vaccinated individuals. 
+
+14.  Plot these observations after running the simulation. You could use code similar to the below. What do you observe?
+
+```{r, eval = F}
+ggplot(results) + 
+    geom_line(aes(x = ts, y = AMeanU, colour = "Unvaccinated")) +
+    geom_line(aes(x = ts, y = AMeanV, colour = "Vaccinated")) +
+    labs(x = "Time step", y = "Mean antibody level")
+```
+
+## Practical 3. Optimizing the model to run faster {#sec3 .unnumbered}
+
+In R, code that loops over each individual in an individual-based model can be quite slow to run. This code can be optimized significantly by **vectorizing** it—that is, by applying events "all at once" to the entire vector of individuals' properties rather than one by one, to each individual in turn.
+
+Compare this code:
+
+```{r, eval = F}
+for (i in 1:n) {
+    if (state[i] == "S") {
+      if (runif(1) < 1 - exp(-lambda * dt)) {
+          state[i] <- "E"
+      }
+    }
+}
+```
+
+With this code:
+
+```{r, eval = F}
+trE <- (state == "S") & (runif(n) < 1 - exp(-lambda * dt))
+state[trE] <- "E"
+```
+
+While the first code snippet loops through each individual in turn and applies the S $\rightarrow$ E transition separately to each individual, the second code snippet has the same effect, but achieves this effect without a `for` loop.
+
+Breaking down that second code snippet, first it creates a Boolean (`TRUE`/`FALSE`) vector `trE` ("transition to E") which is the same length as the number of individuals being simulated. This vector has the value `TRUE` for all individuals who are currently in state "S" and who are calculated to be exposed to the virus, and `FALSE` for all other individuals. Notice that instead of `runif(1)`, which returns a single random number, we are now using `runif(n)`, which returns n random uniform numbers between 0 and 1.
+
+The second line of the code snippet makes the S $\rightarrow$ E transition happen, by setting the state of all selected individuals from the previous line to "E".
+
+[This code](08_StochasticIBM_code3.qmd) gives a general outline for vectorizing the simulation from Practical 2. Once vectorized, the simulation runs about 10x faster.
+
+Fundamentally, R as a language is not designed for speed. Reimplementing the model in e.g. C++ using Rcpp would likely increase the speed of the code by another 10-20x.
 
 **Solutions to this practical can be accessed [here](08_StochasticIBM_solutions.qmd).**
