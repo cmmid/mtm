@@ -2,11 +2,17 @@
 title: "Pre-course material"
 ---
 
-We will be making use of R programming using RStudio in this course. There will be lots of variation in how much R experience each student will have, so we have compiled some pre-course material to allow everyone to get up to the minimal level required to fully participate and enjoy the course. 
+We will be making use of [R](https://www.r-project.org/) programming using [RStudio](https://www.rstudio.com/) in this course. Please ensure you have the latest version of this software. There will be lots of variation in how much R experience each student will have, so we have compiled some pre-course material to allow everyone to get up to the minimal level required to fully participate and enjoy the course. 
 
 Each practical P01 - P05 below comes with a prerecorded lecture and an associated practical (except P03). Before you get started, please make sure you download R and Rstudio (local version - free) [here](https://posit.co/download/rstudio-desktop/).
 
--   P01 - Introduction to R: [Slides](slides/Lecture_P01_IntroToR.pdf), Practical, Recording - [part 1](https://www.youtube.com/watch?v=Q1MtvNyTAaA&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=1), [part 2](https://www.youtube.com/watch?v=exGVoIcavb8&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=2), [part 3](https://www.youtube.com/watch?v=ITQ6DghaBnk&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=3)
+-   P01 - Introduction to R: [Slides](slides/Lecture_P01_IntroToR.pdf),
+
+    -   Practical - [part 1](00_01_1_IntroToR_practical.qmd), part 2, part 3
+
+    -   Solutions - part 1, part 2, part 3
+
+    -   Recording - [part 1](https://www.youtube.com/watch?v=Q1MtvNyTAaA&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=1), [part 2](https://www.youtube.com/watch?v=exGVoIcavb8&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=2), [part 3](https://www.youtube.com/watch?v=ITQ6DghaBnk&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=3)
 
 -   P02 - Programming skills, more R fun(ctionality): [Slides](slides/Lecture_P02_ProgrammingSkills.pdf), Practical, [Recording](https://www.youtube.com/watch?v=91WBWzkPgf4&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=4)
 
@@ -25,6 +31,8 @@ You are welcome to listen to any of the recorded lectures and complete any of th
 -   If you have never used 'tidy data' or ggplot then complete P04.
 
 -   If you are new to Git and Github, please listen to lecture P05. \
+
+**Required Software**
 
 **Optional Further Reading and Exercises**\
 If you would like additional practice with R, we recommend the following online resources:

@@ -2,8 +2,6 @@
 title: "Content overview"
 ---
 
-[**Pre-course material**](00_PreCourseMaterial.qmd) - please review before the short course
-
 **Session 1** - Introduction: [Slides](slides/Lecture_01_Intro.pdf)
 
 **Session 2** - Types of models: [Slides](slides/Lecture_02_TypesOfModels.pdf)
@@ -20,4 +18,4 @@ title: "Content overview"
 
 **Session 9** - Network modelling: [Slides](slides/Lecture_09_Networks.pdf), [Practical](09_Networks_practical.qmd), [Solutions](09_Networks_solutions.qmd)
 
-**Session 10** -
+**Session 10** - Stochastic continuous models: Slides, Practical, Solutions
