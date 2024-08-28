@@ -8,7 +8,7 @@ Each practical P01 - P05 below comes with a prerecorded lecture and an associate
 
 -   P01 - Introduction to R: [Slides](slides/Lecture_P01_IntroToR.pdf),
 
-    -   Practical - [part 1](00_01_1_IntroToR_practical.qmd), part 2, part 3
+    -   Practical - [part 1](00_01_1.qmd), part 2, part 3
 
     -   Solutions - part 1, part 2, part 3
 

@@ -60,8 +60,7 @@ object1 + object2
 
 what happened at each of these commands? is it what you expected?
 
-Answer:
-
+Answer:  
 F. You can view the history of commands that were run.
 check the history of commands in the history tab (upper right)
 
