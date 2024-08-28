@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Pre-course material – Modern Techniques in Modelling</title>
+<title>P01. Introduction to R, part 1 – Modern Techniques in Modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -93,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./00_PreCourseMaterial.html" aria-current="page"> 
+    <a class="nav-link" href="./00_PreCourseMaterial.html"> 
 <span class="menu-text">Pre-course</span></a>
   </li>  
   <li class="nav-item">
@@ -158,7 +192,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Pre-course material</h1>
+<h1 class="title">P01. Introduction to R, part 1</h1>
 </div>
 
 
@@ -175,37 +209,112 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>We will be making use of <a href="https://www.r-project.org/">R</a> programming using <a href="https://www.rstudio.com/">RStudio</a> in this course. Please ensure you have the latest version of this software. There will be lots of variation in how much R experience each student will have, so we have compiled some pre-course material to allow everyone to get up to the minimal level required to fully participate and enjoy the course.&nbsp;</p>
-<p>Each practical P01 - P05 below comes with a prerecorded lecture and an associated practical (except P03). Before you get started, please make sure you download R and Rstudio (local version - free) <a href="https://posit.co/download/rstudio-desktop/">here</a>.</p>
-<ul>
-<li><p>P01 - Introduction to R: <a href="slides/Lecture_P01_IntroToR.pdf">Slides</a>,</p>
-<ul>
-<li><p>Practical - <a href="./00_01_1_IntroToR_practical.html">part 1</a>, part 2, part 3</p></li>
-<li><p>Solutions - <a href="./00_01_1_IntroToR_solutions.html">part 1</a>, part 2, part 3</p></li>
-<li><p>Recording - <a href="https://www.youtube.com/watch?v=Q1MtvNyTAaA&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=1">part 1</a>, <a href="https://www.youtube.com/watch?v=exGVoIcavb8&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=2">part 2</a>, <a href="https://www.youtube.com/watch?v=ITQ6DghaBnk&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=3">part 3</a></p></li>
-</ul></li>
-<li><p>P02 - Programming skills, more R fun(ctionality): <a href="slides/Lecture_P02_ProgrammingSkills.pdf">Slides</a>, Practical, <a href="https://www.youtube.com/watch?v=91WBWzkPgf4&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=4">Recording</a></p></li>
-<li><p>P03 - Best (computational) practices: <a href="slides/Lecture_P03_BestPractices.pdf">Slides</a>, Practical</p></li>
-<li><p>P04 - Plotting model output with <code>ggplot2</code>: <a href="slides/Lecture_P04_IntroToGGplot.pdf">Slides</a>, Practical, <a href="https://www.youtube.com/watch?v=J6kL4QyBH2Q&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=5">Recording</a></p></li>
-<li><p>P05 - Introduction to Git using Github: <a href="Lecture_P05_IntroToGit.pdf">Slides</a>, Practical, <a href="https://www.youtube.com/watch?v=J6kL4QyBH2Q&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=6">Recording</a></p></li>
-</ul>
-<p>You are welcome to listen to any of the recorded lectures and complete any of the associated practicals regardless of your experience. However, we’ve made a list of some recommendations below to guide what is expected:&nbsp;</p>
-<ul>
-<li><p>If you are new to R, please listen to lectures P01 / P02 / P03 / P04 and complete the associated practicals.</p></li>
-<li><p>For those of you who have used R previously but feel a bit rusty, you may find P02 / P03 / P04 helpful to get you back up to speed. If you try P02 and feel you need some more explanation, go back to P01 and start there.&nbsp;</p></li>
-<li><p>If you have never used ‘tidy data’ or ggplot then complete P04.</p></li>
-<li><p>If you are new to Git and Github, please listen to lecture P05.&nbsp;<br>
-</p></li>
-</ul>
-<p><strong>Required Software</strong></p>
-<p><strong>Optional Further Reading and Exercises</strong><br>
-If you would like additional practice with R, we recommend the following online resources:</p>
-<ul>
-<li><p><a href="http://tryr.codeschool.com/" class="uri">http://tryr.codeschool.com/</a></p></li>
-<li><p><a href="https://monashdatafluency.github.io/r-intro-2/" class="uri">https://monashdatafluency.github.io/r-intro-2/</a></p></li>
-<li><p><a href="https://www.r-bloggers.com/how-to-learn-r-2/" class="uri">https://www.r-bloggers.com/how-to-learn-r-2/</a></p></li>
-<li><p><a href="https://www.edx.org/course/introduction-to-r-for-data-science-2" class="uri">https://www.edx.org/course/introduction-to-r-for-data-science-2</a></p></li>
-</ul>
+<p><strong>A. Create simple objects of different types in the workspace</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>item1 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>item2 <span class="ot">&lt;-</span> <span class="st">"a"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>item3 <span class="ot">&lt;-</span> <span class="fl">3.78901</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>B. Objects with more than 1 entry are called vectors</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create some vectors using c() (short for concatenate)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># all items of a vector must be the same class</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>object1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>object2 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>object3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.3</span>, <span class="sc">-</span><span class="fl">4.5</span>, <span class="fl">6.99</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># you can create vectors using other named items or objects</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>object4 <span class="ot">&lt;-</span> <span class="fu">c</span>(item1, item2, item3)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># take a look</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>object1</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>object2</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>object3</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>object4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>C. Look for your objects in the environment tab (upper right)</strong></p>
+<p><strong>D. What class of objects is each object?</strong></p>
+<p>Answer:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use class() to find this</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(object1)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(object2)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(object3)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(object4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Is object 4 the class you expected?</p>
+<p>Answer:</p>
+<p><strong>E. You can manipulate objects and make operations on them</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>object2 <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>object3<span class="sc">*</span>object3</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>object2<span class="sc">/</span>object3</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>object1 <span class="sc">+</span> object2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>what happened at each of these commands? is it what you expected?</p>
+<p>Answer:<br>
+<strong>F. You can view the history of commands that were run.</strong></p>
+<p>check the history of commands in the history tab (upper right)</p>
+<p><strong>G. Make some other objects</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">animal=</span><span class="fu">c</span>(<span class="st">"bear"</span>, <span class="st">"cat"</span>, <span class="st">"horse"</span>, <span class="st">"cat"</span>, <span class="st">"pig"</span>),</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">weight=</span><span class="fu">c</span>(<span class="dv">200</span>, <span class="dv">5</span>, <span class="dv">600</span>, <span class="dv">8</span>, <span class="dv">100</span>))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>mat1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="at">nrow=</span><span class="dv">10</span>, <span class="at">ncol=</span><span class="dv">5</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># view these objects</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>df1</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>mat1</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(df1)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(mat1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In R, what is the difference between a data.frame and a matrix? hint: google it.</p>
+<p>Answer:</p>
+<p><strong>H. Calculate the mean weight of the animals in df1. (i.e.&nbsp;mean of column 3 of df1)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># you can either refer to a column by name or by index</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># check what the names are</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df1)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># reference a column by name</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>df1<span class="sc">$</span>weight</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># check how to use the function "mean"</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ? allows you to view the help file of any inbuilt function</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>?mean</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the mean</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df1<span class="sc">$</span>weight)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df1[, <span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Answer:</p>
+<p><strong>I. does mat1 have column names at this point?</strong></p>
+<p>Answer:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set column names for mat1</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mat1) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>, <span class="st">"E"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>mat1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>J. What is the value of the element row 5, column C in mat1? what is the value of row 8, column E?</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect the element by referencing the row, then column, either by name or number</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>mat1[<span class="dv">5</span>, <span class="st">"C"</span>]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>mat1[<span class="dv">5</span>, <span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Answer:</p>
+<p><strong>K. Discard all of mat1 except the 1st and 4th column.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># subset mat1 to keep only the 1st and 4th column by number or name</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mat1[ , <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>)]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>mat1[ , <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"D"</span>)]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new object of the smaller matrix.</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># assign the subsetted version as a new object, mat2</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>mat2 <span class="ot">&lt;-</span> mat1[ , <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"D"</span>)]</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>mat2 <span class="ot">&lt;-</span> mat1[ , <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The solutions to this practical can be accessed <a href="./00_01_1_IntroToR_solutions.html">here</a>.</p>
 
 
 
