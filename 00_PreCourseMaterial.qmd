@@ -4,7 +4,7 @@ title: "Pre-course material"
 
 We will be making use of [R](https://www.r-project.org/) programming using [RStudio](https://www.rstudio.com/) in this course. Please ensure you have the latest version of this software. There will be lots of variation in how much R experience each student will have, so we have compiled some pre-course material to allow everyone to get up to the minimal level required to fully participate and enjoy the course. 
 
-Each practical P01 - P05 below comes with a prerecorded lecture and an associated practical (except P03). Before you get started, please make sure you download R and Rstudio (local version - free) [here](https://posit.co/download/rstudio-desktop/).
+Each practical P01 - P04 below comes with a prerecorded lecture and an associated practical. Before you get started, please make sure you download R and Rstudio (local version - free) [here](https://posit.co/download/rstudio-desktop/).
 
 -   P01 - Introduction to R: [Slides](slides/Lecture_P01_IntroToR.pdf),
 
@@ -16,23 +16,19 @@ Each practical P01 - P05 below comes with a prerecorded lecture and an associate
 
 -   P02 - Programming skills, more R fun(ctionality): [Slides](slides/Lecture_P02_ProgrammingSkills.pdf), [Practical](00_02_programming_practical.qmd), [Solutions](00_02_programming_solutions.qmd), [Recording](https://www.youtube.com/watch?v=91WBWzkPgf4&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=4)
 
--   P03 - Best (computational) practices: [Slides](slides/Lecture_P03_BestPractices.pdf), Practical, Solutions
+-   P03 - Plotting model output with `ggplot2`: [Slides](slides/Lecture_P04_IntroToGGplot.pdf), [Practical](00_04_ggplot_practical.qmd), [Solutions](00_04_ggplot_solutions.qmd), [Recording](https://www.youtube.com/watch?v=J6kL4QyBH2Q&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=5)
 
--   P04 - Plotting model output with `ggplot2`: [Slides](slides/Lecture_P04_IntroToGGplot.pdf), [Practical](00_04_ggplot_practical.qmd), [Solutions](00_04_ggplot_solutions.qmd), [Recording](https://www.youtube.com/watch?v=J6kL4QyBH2Q&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=5)
-
--   P05 - Introduction to Git using Github: [Slides](Lecture_P05_IntroToGit.pdf), Practical, Solutions, [Recording](https://www.youtube.com/watch?v=J6kL4QyBH2Q&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=6)
+-   P04 - Introduction to Git using Github: [Slides](Lecture_P05_IntroToGit.pdf), [Practical](00_05_git.qmd), [Recording](https://www.youtube.com/watch?v=J6kL4QyBH2Q&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=6)
 
 You are welcome to listen to any of the recorded lectures and complete any of the associated practicals regardless of your experience. However, we've made a list of some recommendations below to guide what is expected: 
 
--   If you are new to R, please listen to lectures P01 / P02 / P03 / P04 and complete the associated practicals.
+-   If you are new to R, please listen to lectures P01 / P02 / P03 and complete the associated practicals.
 
--   For those of you who have used R previously but feel a bit rusty, you may find P02 / P03 / P04 helpful to get you back up to speed. If you try P02 and feel you need some more explanation, go back to P01 and start there. 
+-   For those of you who have used R previously but feel a bit rusty, you may find P02 / P03 helpful to get you back up to speed. If you try P02 and feel you need some more explanation, go back to P01 and start there. 
 
--   If you have never used 'tidy data' or ggplot then complete P04.
+-   If you have never used 'tidy data' or ggplot then complete P03.
 
--   If you are new to Git and Github, please listen to lecture P05. \
-
-**Required Software**
+-   If you are new to Git and Github, please listen to lecture P04. \
 
 **Optional Further Reading and Exercises**\
 If you would like additional practice with R, we recommend the following online resources:

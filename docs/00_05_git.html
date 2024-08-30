@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Pre-course material – Modern Techniques in Modelling</title>
+<title>P04. Git and Github – Modern Techniques in Modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,7 +93,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./00_PreCourseMaterial.html" aria-current="page"> 
+    <a class="nav-link" href="./00_PreCourseMaterial.html"> 
 <span class="menu-text">Pre-course</span></a>
   </li>  
   <li class="nav-item">
@@ -150,15 +150,26 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#before-you-start" id="toc-before-you-start" class="nav-link active" data-scroll-target="#before-you-start">Before you start</a></li>
+  <li><a href="#working-on-your-own" id="toc-working-on-your-own" class="nav-link" data-scroll-target="#working-on-your-own">Working on your own</a></li>
+  <li><a href="#now-what" id="toc-now-what" class="nav-link" data-scroll-target="#now-what">Now what?</a></li>
+  <li><a href="#what-if-the-repository-exists-on-github-but-you-want-to-work-on-a-different-computer" id="toc-what-if-the-repository-exists-on-github-but-you-want-to-work-on-a-different-computer" class="nav-link" data-scroll-target="#what-if-the-repository-exists-on-github-but-you-want-to-work-on-a-different-computer">What if the repository exists on Github but you want to work on a different computer?</a></li>
+  <li><a href="#extension-what-does-git-ignore-do" id="toc-extension-what-does-git-ignore-do" class="nav-link" data-scroll-target="#extension-what-does-git-ignore-do">Extension: What does Git Ignore do?</a></li>
+  <li><a href="#extension-pair-exercise" id="toc-extension-pair-exercise" class="nav-link" data-scroll-target="#extension-pair-exercise">Extension: Pair exercise</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Pre-course material</h1>
+<h1 class="title">P04. Git and Github</h1>
 </div>
 
 
@@ -175,37 +186,87 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>We will be making use of <a href="https://www.r-project.org/">R</a> programming using <a href="https://www.rstudio.com/">RStudio</a> in this course. Please ensure you have the latest version of this software. There will be lots of variation in how much R experience each student will have, so we have compiled some pre-course material to allow everyone to get up to the minimal level required to fully participate and enjoy the course.&nbsp;</p>
-<p>Each practical P01 - P04 below comes with a prerecorded lecture and an associated practical. Before you get started, please make sure you download R and Rstudio (local version - free) <a href="https://posit.co/download/rstudio-desktop/">here</a>.</p>
-<ul>
-<li><p>P01 - Introduction to R: <a href="slides/Lecture_P01_IntroToR.pdf">Slides</a>,</p>
-<ul>
-<li><p>Practical - <a href="./00_01_1_IntroToR_practical.html">part 1</a>, <a href="./00_01_2_IntroToR_practical.html">part 2</a>, <a href="./00_01_3_IntroToR_practical.html">part 3</a></p></li>
-<li><p>Solutions - <a href="./00_01_1_IntroToR_solutions.html">part 1</a>, <a href="./00_01_2_IntroToR_solutions.html">part 2</a>, <a href="00_01_3_IntroToR_solutions.R">part 3</a></p></li>
-<li><p>Recording - <a href="https://www.youtube.com/watch?v=Q1MtvNyTAaA&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=1">part 1</a>, <a href="https://www.youtube.com/watch?v=exGVoIcavb8&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=2">part 2</a>, <a href="https://www.youtube.com/watch?v=ITQ6DghaBnk&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=3">part 3</a></p></li>
-</ul></li>
-<li><p>P02 - Programming skills, more R fun(ctionality): <a href="slides/Lecture_P02_ProgrammingSkills.pdf">Slides</a>, <a href="./00_02_programming_practical.html">Practical</a>, <a href="./00_02_programming_solutions.html">Solutions</a>, <a href="https://www.youtube.com/watch?v=91WBWzkPgf4&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=4">Recording</a></p></li>
-<li><p>P03 - Plotting model output with <code>ggplot2</code>: <a href="slides/Lecture_P04_IntroToGGplot.pdf">Slides</a>, <a href="./00_04_ggplot_practical.html">Practical</a>, <a href="./00_04_ggplot_solutions.html">Solutions</a>, <a href="https://www.youtube.com/watch?v=J6kL4QyBH2Q&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=5">Recording</a></p></li>
-<li><p>P04 - Introduction to Git using Github: <a href="Lecture_P05_IntroToGit.pdf">Slides</a>, <a href="./00_05_git.html">Practical</a>, <a href="https://www.youtube.com/watch?v=J6kL4QyBH2Q&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=6">Recording</a></p></li>
-</ul>
-<p>You are welcome to listen to any of the recorded lectures and complete any of the associated practicals regardless of your experience. However, we’ve made a list of some recommendations below to guide what is expected:&nbsp;</p>
-<ul>
-<li><p>If you are new to R, please listen to lectures P01 / P02 / P03 and complete the associated practicals.</p></li>
-<li><p>For those of you who have used R previously but feel a bit rusty, you may find P02 / P03 helpful to get you back up to speed. If you try P02 and feel you need some more explanation, go back to P01 and start there.&nbsp;</p></li>
-<li><p>If you have never used ‘tidy data’ or ggplot then complete P03.</p></li>
-<li><p>If you are new to Git and Github, please listen to lecture P04.&nbsp;<br>
-</p></li>
-</ul>
-<p><strong>Optional Further Reading and Exercises</strong><br>
-If you would like additional practice with R, we recommend the following online resources:</p>
-<ul>
-<li><p><a href="http://tryr.codeschool.com/" class="uri">http://tryr.codeschool.com/</a></p></li>
-<li><p><a href="https://monashdatafluency.github.io/r-intro-2/" class="uri">https://monashdatafluency.github.io/r-intro-2/</a></p></li>
-<li><p><a href="https://www.r-bloggers.com/how-to-learn-r-2/" class="uri">https://www.r-bloggers.com/how-to-learn-r-2/</a></p></li>
-<li><p><a href="https://www.edx.org/course/introduction-to-r-for-data-science-2" class="uri">https://www.edx.org/course/introduction-to-r-for-data-science-2</a></p></li>
-</ul>
+<section id="before-you-start" class="level2">
+<h2 class="anchored" data-anchor-id="before-you-start">Before you start</h2>
+<p>1. Check if git is installed</p>
+<p>Go to a Command Prompt window and type:</p>
+<pre><code>    git --version</code></pre>
+<p>If not, then go to: <a href="https://git-scm.com/download" class="uri">https://git-scm.com/download</a> and run the download. Accept all default options.</p>
+<p>2. Create a github account: github.com/join</p>
+<p>3. Download GitHub Desktop: <a href="https://desktop.github.com/" class="uri">https://desktop.github.com/</a></p>
+<p>Open it, and sign in using your GitHub account</p>
+</section>
+<section id="working-on-your-own" class="level2">
+<h2 class="anchored" data-anchor-id="working-on-your-own">Working on your own</h2>
+<p>1. Open GitHub Desktop</p>
+<p>2. There should be 4 options underneath “Let’s get started!”</p>
+<p>3. Click “Create a New Repository on your Hard Drive”</p>
+<p>4. Fill in the details about your new repository</p>
+<p>5. Create Repository</p>
+<p>6. Once you’ve created it, it asks if you would like to publish to GitHub. Say yes!</p>
+<p>7. What happened now? Hint: check on GitHub.com in your account</p>
+<p>8. The app asks if you want to view the Files in the repository</p>
+<p>9. Say yes. Is there anything there?</p>
+<p>10. Go back to RStudio, and create a new R script. Write something, then save the script into the repository.</p>
+<p>11. What has happened in the GitHub Desktop app?</p>
+<p>12. Now we are going to commit this change. In the app make sure the file is selected in the check box. Write a commit message (make it useful, but not too long). Press commit.</p>
+<p>13. What has happened? Has the file appeared on GitHub.com?</p>
+<p>14. The blue button asks if you want to push to the origin. Say yes.</p>
+<p>15. What has happened now? Has the file appeared on GitHub.com? Can you see the commit message?</p>
+<p>16. Go back to RStudio. Make some changes to the script. Save it.</p>
+<p>17. Check in the GitHub app. What has happened?</p>
+<p>18. Add a commit message, commit, and push.</p>
+<p>19. Go back to RStudio, make another script and save it in the same folder.</p>
+<p>20. Commit and push.</p>
+</section>
+<section id="now-what" class="level2">
+<h2 class="anchored" data-anchor-id="now-what">Now what?</h2>
+<p>1. Find the repository folder.</p>
+<p>2. DELETE IT!</p>
+<p>3. Go back to the GitHub app. What does it say?</p>
+<p>4. Press “Clone again”.</p>
+<p>5. What has happened?</p>
+</section>
+<section id="what-if-the-repository-exists-on-github-but-you-want-to-work-on-a-different-computer" class="level2">
+<h2 class="anchored" data-anchor-id="what-if-the-repository-exists-on-github-but-you-want-to-work-on-a-different-computer">What if the repository exists on Github but you want to work on a different computer?</h2>
+<p>1. Delete the repository folder again.</p>
+<p>2. In the app, this time click “remove”.</p>
+<p>—&gt; OH NO! (or is it…)</p>
+<p>3. Back at the main menu, click “Clone a Repository from the Internet”</p>
+<p>4. Select the URL tab, and put in the URL of the repository on GitHub, click Clone.</p>
+<p>5. Check for the folder on your computer.</p>
+<p>It’s back! (or it should be)</p>
+<p>If you were working on this analysis on 2 (or more) computers, git can help you stay up to date.</p>
+<p>But, the difference is you need the “Pull” button as well.</p>
+<p>What does this do?</p>
+<p>Key points:</p>
+<p>- Whenever you save a file in the repository (the special folder) the App will track it.</p>
+<p>- If you want to keep those changes, commit and push them to GitHub.com.</p>
+<p>- Write a useful commit message for each one, to help you remember what they do.</p>
+<p>- Make each commit quite small (~2-5 per day, if you’re doing analysis all day)</p>
+<p>- More than 1 person can do this at the same time and it will help you keep track of all the changes.</p>
+</section>
+<section id="extension-what-does-git-ignore-do" class="level2">
+<h2 class="anchored" data-anchor-id="extension-what-does-git-ignore-do">Extension: What does Git Ignore do?</h2>
+</section>
+<section id="extension-pair-exercise" class="level2">
+<h2 class="anchored" data-anchor-id="extension-pair-exercise">Extension: Pair exercise</h2>
+<p>1. Invite your partner to your repository</p>
+<p>2. Modify the file in this repository and then save, commit and push it.</p>
+<p>3. Now the partner should check if they have the changes. No!</p>
+<p>4. They need to “Pull” changes from Github.com. Find the right button, and click it.</p>
+<p>5. Do the same, but for the other partner.</p>
+<p>6. Next, both edit the same file, commit the changes, and both push at the same time.</p>
+<p>7. What has happened?</p>
+<p>You’ve got a merge conflict!</p>
+<p>8. Follow the instructions to choose the lines you want to keep in the file</p>
+<p>9. Then commit and merge! And push the commit.</p>
+<p>10. Check on github.com how this looks in the commit log.</p>
+<p>11. Both pull and check what the file looks like now.</p>
+<p>Well done!</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

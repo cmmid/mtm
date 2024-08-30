@@ -4,6 +4,8 @@ title: "P01. Introduction to R, part 3: solutions"
 
 **A. Read in the same data as before**
 
+This file can be downloaded from [here](functions/TB_stats.txt).
+
 ```{r eval = F}
 myTBdata <- read.table("TB_stats.txt", header=TRUE)
 ```
