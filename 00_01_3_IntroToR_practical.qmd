@@ -185,3 +185,5 @@ The plot now has 2 data sets in different colours, so it needs a legend check th
 ```{r eval = F}
 # Add your code here
 ```
+
+The solutions can be accessed [here](00_01_3_IntroToR_solutions.qmd).

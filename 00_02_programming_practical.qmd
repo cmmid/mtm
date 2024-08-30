@@ -259,3 +259,5 @@ Can you rewrite the for loop calculation above in a different way?
 ```{r eval = F}
 sol.all.roots <- YOUR CODE HERE
 ```
+
+Solutions can be accessed [here](00_02_programming_solutions.qmd).

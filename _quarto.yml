@@ -6,14 +6,15 @@ website:
   title: "Modern Techniques in Modelling"
   navbar:
     left:
+      - text: Overview
+        href: index.qmd
       - text: About
         href: about.qmd
       - text: Pre-course
         href: 00_PreCourseMaterial.qmd
       - text: Timetable
         href: timetable.qmd
-      - text: Overview
-        href: index.qmd
+
       - text: Practicals
         menu:
           - 03_DiscreteDeterministic_practical.qmd

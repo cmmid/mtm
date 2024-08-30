@@ -179,3 +179,5 @@ How do you fix this issue? Hint: check the 'class' of the problem column. Try ru
 ```{r}
 ##### YOUR CODE GOES HERE #####
 ```
+
+The solutions can be accessed [here](00_01_2_IntroToR_solutions.qmd).

@@ -4,9 +4,9 @@ title: "About"
 
 ## Who we are
 
-Your course organisers are [Oliver Brady](https://www.lshtm.ac.uk/aboutus/people/brady.oliver), [Nicholas Davies,](https://www.lshtm.ac.uk/aboutus/people/davies.nicholas) and [Yang Liu](https://www.lshtm.ac.uk/aboutus/people/liu.yang).
+Your course organisers are [Oliver Brady](https://www.lshtm.ac.uk/aboutus/people/brady.oliver), [Nicholas Davies](https://www.lshtm.ac.uk/aboutus/people/davies.nicholas), and [Yang Liu](https://www.lshtm.ac.uk/aboutus/people/liu.yang).
 
-Your course administrator is .
+Your course administrator is Francesco Grisolia.
 
 Other lectures and demonstrators include [Billy Quilty](https://www.lshtm.ac.uk/aboutus/people/quilty.billy), [Kath O'Reilly](https://www.lshtm.ac.uk/aboutus/people/oreilly.kathleen), [Seb Funk](https://www.lshtm.ac.uk/aboutus/people/funk.sebastian).
 
