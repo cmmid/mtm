@@ -18,7 +18,7 @@ Each practical P01 - P05 below comes with a prerecorded lecture and an associate
 
 -   P03 - Best (computational) practices: [Slides](slides/Lecture_P03_BestPractices.pdf), Practical, Solutions
 
--   P04 - Plotting model output with `ggplot2`: [Slides](slides/Lecture_P04_IntroToGGplot.pdf), Practical, Solutions, [Recording](https://www.youtube.com/watch?v=J6kL4QyBH2Q&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=5)
+-   P04 - Plotting model output with `ggplot2`: [Slides](slides/Lecture_P04_IntroToGGplot.pdf), [Practical](00_04_ggplot_practical.qmd), [Solutions](00_04_ggplot_solutions.qmd), [Recording](https://www.youtube.com/watch?v=J6kL4QyBH2Q&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=5)
 
 -   P05 - Introduction to Git using Github: [Slides](Lecture_P05_IntroToGit.pdf), Practical, Solutions, [Recording](https://www.youtube.com/watch?v=J6kL4QyBH2Q&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=6)
 
