@@ -1,0 +1,6 @@
+Clinic	Catchment_1000s Doctors
+1	1.2	10
+2	5	12
+3	0.4	3
+4	1.1	5		
+5	ten	6		

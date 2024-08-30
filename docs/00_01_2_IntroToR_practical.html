@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Pre-course material – Modern Techniques in Modelling</title>
+<title>P01. Introduction to R, part 2 – Modern Techniques in Modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -93,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./00_PreCourseMaterial.html" aria-current="page"> 
+    <a class="nav-link" href="./00_PreCourseMaterial.html"> 
 <span class="menu-text">Pre-course</span></a>
   </li>  
   <li class="nav-item">
@@ -158,7 +192,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Pre-course material</h1>
+<h1 class="title">P01. Introduction to R, part 2</h1>
 </div>
 
 
@@ -175,37 +209,116 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>We will be making use of <a href="https://www.r-project.org/">R</a> programming using <a href="https://www.rstudio.com/">RStudio</a> in this course. Please ensure you have the latest version of this software. There will be lots of variation in how much R experience each student will have, so we have compiled some pre-course material to allow everyone to get up to the minimal level required to fully participate and enjoy the course.&nbsp;</p>
-<p>Each practical P01 - P05 below comes with a prerecorded lecture and an associated practical (except P03). Before you get started, please make sure you download R and Rstudio (local version - free) <a href="https://posit.co/download/rstudio-desktop/">here</a>.</p>
-<ul>
-<li><p>P01 - Introduction to R: <a href="slides/Lecture_P01_IntroToR.pdf">Slides</a>,</p>
-<ul>
-<li><p>Practical - <a href="./00_01_1_IntroToR_practical.html">part 1</a>, <a href="./00_01_2_IntroToR_practical.html">part 2</a>, <a href="./00_01_3_IntroToR_practical.html">part 3</a></p></li>
-<li><p>Solutions - <a href="./00_01_1_IntroToR_solutions.html">part 1</a>, <a href="./00_01_2_IntroToR_solutions.html">part 2</a>, part 3</p></li>
-<li><p>Recording - <a href="https://www.youtube.com/watch?v=Q1MtvNyTAaA&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=1">part 1</a>, <a href="https://www.youtube.com/watch?v=exGVoIcavb8&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=2">part 2</a>, <a href="https://www.youtube.com/watch?v=ITQ6DghaBnk&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=3">part 3</a></p></li>
-</ul></li>
-<li><p>P02 - Programming skills, more R fun(ctionality): <a href="slides/Lecture_P02_ProgrammingSkills.pdf">Slides</a>, Practical, <a href="https://www.youtube.com/watch?v=91WBWzkPgf4&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=4">Recording</a></p></li>
-<li><p>P03 - Best (computational) practices: <a href="slides/Lecture_P03_BestPractices.pdf">Slides</a>, Practical</p></li>
-<li><p>P04 - Plotting model output with <code>ggplot2</code>: <a href="slides/Lecture_P04_IntroToGGplot.pdf">Slides</a>, Practical, <a href="https://www.youtube.com/watch?v=J6kL4QyBH2Q&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=5">Recording</a></p></li>
-<li><p>P05 - Introduction to Git using Github: <a href="Lecture_P05_IntroToGit.pdf">Slides</a>, Practical, <a href="https://www.youtube.com/watch?v=J6kL4QyBH2Q&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=6">Recording</a></p></li>
-</ul>
-<p>You are welcome to listen to any of the recorded lectures and complete any of the associated practicals regardless of your experience. However, we’ve made a list of some recommendations below to guide what is expected:&nbsp;</p>
-<ul>
-<li><p>If you are new to R, please listen to lectures P01 / P02 / P03 / P04 and complete the associated practicals.</p></li>
-<li><p>For those of you who have used R previously but feel a bit rusty, you may find P02 / P03 / P04 helpful to get you back up to speed. If you try P02 and feel you need some more explanation, go back to P01 and start there.&nbsp;</p></li>
-<li><p>If you have never used ‘tidy data’ or ggplot then complete P04.</p></li>
-<li><p>If you are new to Git and Github, please listen to lecture P05.&nbsp;<br>
-</p></li>
-</ul>
-<p><strong>Required Software</strong></p>
-<p><strong>Optional Further Reading and Exercises</strong><br>
-If you would like additional practice with R, we recommend the following online resources:</p>
-<ul>
-<li><p><a href="http://tryr.codeschool.com/" class="uri">http://tryr.codeschool.com/</a></p></li>
-<li><p><a href="https://monashdatafluency.github.io/r-intro-2/" class="uri">https://monashdatafluency.github.io/r-intro-2/</a></p></li>
-<li><p><a href="https://www.r-bloggers.com/how-to-learn-r-2/" class="uri">https://www.r-bloggers.com/how-to-learn-r-2/</a></p></li>
-<li><p><a href="https://www.edx.org/course/introduction-to-r-for-data-science-2" class="uri">https://www.edx.org/course/introduction-to-r-for-data-science-2</a></p></li>
-</ul>
+<p><strong>A. read in a data file</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>myTBdata <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"TB_stats.txt"</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In order to run this, your computer need to know where “TB_stats.txt” is. You could download it <a href="functions/TB_stats.txt">here</a>.</p>
+<p>What does the “header=TRUE” option mean?</p>
+<p>Answer:</p>
+<p><strong>B. Have a look at the first few lines</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now let's investigate the data file</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(myTBdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>How many rows can you see? What is the first row?</p>
+<p>Answer:</p>
+<p><strong>C. What are the names of the columns?</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(myTBdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Is this what you expected?</p>
+<p>Answer:</p>
+<p>D. How many rows and columns are there in your data ?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(myTBdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>What is the first number telling you? And the second?</p>
+<p>Answer:</p>
+<p><strong>E. How are your data stored?</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(myTBdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>What new piece of information have you learned from the ‘attributes()’ function?</p>
+<p>Answer:</p>
+<p><strong>F. Now take a look at some summary statistics for your data</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(myTBdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s extract some information from our data</p>
+<p><strong>G. First, Calculate the total number of deaths across all countries.</strong></p>
+<p>The following two methods should give you the same answer</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>total_TB_mortality1 <span class="ot">&lt;-</span> <span class="fu">sum</span>(myTBdata[,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]) <span class="co"># method 1</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>total_TB_mortality2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(myTBdata<span class="sc">$</span>HIV_pos_TB_mortality <span class="sc">+</span> myTBdata<span class="sc">$</span>HIV_neg_TB_mortality) <span class="co"># method 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Do you think one method is better than the other?</p>
+<p>Answer:</p>
+<p><strong>H. Now let’s check that both methods give the same answer.</strong></p>
+<p>We’ll use two ways to check this. First, let’s output both answers</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>total_TB_mortality1</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>total_TB_mortality2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, let’s ask R to check whether they are both equal</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>total_TB_mortality1<span class="sc">==</span>total_TB_mortality2 </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># logical expression which gives TRUE if equal and FALSE if not</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Why might you prefer to use the second check (using the logical expression) than the first?</p>
+<p>Answer:</p>
+<p><strong>I. How different is the TB mortality rate in HIV positive persons in Lesotho compared to Zimbabwe?</strong></p>
+<p>First, let’s add “mortality rate” as another column in our data frame</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>myTBdata<span class="sc">$</span>Mortality_Per1000 <span class="ot">&lt;-</span> <span class="dv">1000</span> <span class="sc">*</span> (myTBdata<span class="sc">$</span>HIV_pos_TB_mortality <span class="sc">+</span> myTBdata<span class="sc">$</span>HIV_neg_TB_mortality)<span class="sc">/</span>myTBdata<span class="sc">$</span>Population</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now subset the dataset to extract the TB mortality rate for both Lesotho and Zimbabwe</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Lesotho_mortalityrate <span class="ot">&lt;-</span> myTBdata[myTBdata<span class="sc">$</span>Country<span class="sc">==</span><span class="st">"Lesotho"</span>, <span class="st">"Mortality_Per1000"</span>]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>Zimbabwe_mortalityrate <span class="ot">&lt;-</span> myTBdata[myTBdata<span class="sc">$</span>Country<span class="sc">==</span><span class="st">"Zimbabwe"</span>, <span class="st">"Mortality_Per1000"</span>]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>Relative_Mortality_Rate <span class="ot">&lt;-</span> Lesotho_mortalityrate <span class="sc">/</span> Zimbabwe_mortalityrate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>How many times higher is the mortality rate for TB in Lesotho as it is in Zimbabwe?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"The relative mortality rate is"</span>, <span class="fu">round</span>(Relative_Mortality_Rate, <span class="dv">2</span>), <span class="at">sep=</span><span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>J. Finally in this section, let’s look at what can go wrong when reading in data files.</strong></p>
+<p>In order to complete this section, you would need to download <a href="functions/readfileexample_1.txt">readfileexample_1.txt</a>, <a href="functions/readfileexample_2.txt">readfileexample_2.txt</a>, and <a href="functions/readfileexample_3.txt">readfileexample_3.txt</a>.</p>
+<p>(a) There is not an equal number of columns in each of the rows.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>readFile_a <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"readfileexample_1.txt"</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>How do you fix this error? Hint: set missing values in the data file to be ‘Not Assigned’ by adding them as NA in the original file. Try running this line again with the updated file.</p>
+<p>(b) The wrong delimiter is used</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>readFile_b <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"readfileexample_2.txt"</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Is an error given? Check out ‘readFile_b’ - is it correct?</p>
+<p>Answer:</p>
+<p>How do you fix this? Ask R for help (?read.table) Which option do you need to specify?</p>
+<p>Answer:</p>
+<p>Is there another way of fixing this problem?</p>
+<p>Answer:</p>
+<p>(c) The names are read in as data rows rather than names</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>readFile_c <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"readfileexample_2.txt"</span>, <span class="at">header=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Is an error given? Check out ‘readFile_c’ - is it correct?</p>
+<p>Answer:</p>
+<p>Type a new line of code to correct this problem (hint: copy-paste from above and change one of the options)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="do">##### YOUR CODE GOES HERE #####</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>(d) One of more of the columns contain different classes</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>readFile_d <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"readfileexample_3.txt"</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Is an error given? Check out ‘readFile_d’ - is it correct?</p>
+<p>Answer:</p>
+<p>How do you fix this issue? Hint: check the ‘class’ of the problem column. Try running this line again with an updated file.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="do">##### YOUR CODE GOES HERE #####</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 

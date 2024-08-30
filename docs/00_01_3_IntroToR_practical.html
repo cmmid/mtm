@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Pre-course material – Modern Techniques in Modelling</title>
+<title>P01. Introduction to R, part 3 – Modern Techniques in Modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -93,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./00_PreCourseMaterial.html" aria-current="page"> 
+    <a class="nav-link" href="./00_PreCourseMaterial.html"> 
 <span class="menu-text">Pre-course</span></a>
   </li>  
   <li class="nav-item">
@@ -158,7 +192,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Pre-course material</h1>
+<h1 class="title">P01. Introduction to R, part 3</h1>
 </div>
 
 
@@ -175,37 +209,135 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>We will be making use of <a href="https://www.r-project.org/">R</a> programming using <a href="https://www.rstudio.com/">RStudio</a> in this course. Please ensure you have the latest version of this software. There will be lots of variation in how much R experience each student will have, so we have compiled some pre-course material to allow everyone to get up to the minimal level required to fully participate and enjoy the course.&nbsp;</p>
-<p>Each practical P01 - P05 below comes with a prerecorded lecture and an associated practical (except P03). Before you get started, please make sure you download R and Rstudio (local version - free) <a href="https://posit.co/download/rstudio-desktop/">here</a>.</p>
+<p><strong>A. Read in the same data as before</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>myTBdata <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"TB_stats.txt"</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>B. Plot the mortality in HIV negative against HIV positive</strong> check the plot function help file</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>?plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>plot</code> is a generic function, and depending on what type of data you pass the function R will use different sub-functions (you dont need to worry about how it handles this!).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make the plot</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>myTBdata<span class="sc">$</span>HIV_neg_TB_mortality, <span class="at">y=</span>myTBdata<span class="sc">$</span>HIV_pos_TB_mortality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>C. Add meaningful axes labels</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>myTBdata<span class="sc">$</span>HIV_neg_TB_mortality, </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">y=</span>myTBdata<span class="sc">$</span>HIV_pos_TB_mortality,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Mortality in HIV negative people"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Mortality in HIV positive people"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>D. Add a meaningful title</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>myTBdata<span class="sc">$</span>HIV_neg_TB_mortality, </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">y=</span>myTBdata<span class="sc">$</span>HIV_pos_TB_mortality,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Mortality in HIV negative people"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Mortality in HIV positive people"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Comparison of mortality in HIV negative and positive"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>E. Change the colour of the points to red</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>myTBdata<span class="sc">$</span>HIV_neg_TB_mortality, </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">y=</span>myTBdata<span class="sc">$</span>HIV_pos_TB_mortality,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Mortality in HIV negative people"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Mortality in HIV positive people"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Comparison of mortality in HIV negative and positive"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>F. It’s hard to see the numbers because some are small and some very large</strong> Using a log scale is useful for that.You can either log the values and re-plot, or use the log option in plot()</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x=</span>myTBdata<span class="sc">$</span>HIV_neg_TB_mortality, </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">y=</span>myTBdata<span class="sc">$</span>HIV_pos_TB_mortality,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Mortality in HIV negative people"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Mortality in HIV positive people"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Comparison of mortality in HIV negative and positive"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="st">"red"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">log=</span><span class="st">"xy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>G. Now let’s make a different kind of plot</strong> Show the distribution of Total_TB_mortality in a histogram and then change the x axis label. Note, same options as before.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(myTBdata<span class="sc">$</span>Total_TB_mortality)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(myTBdata<span class="sc">$</span>Total_TB_mortality,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Number"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now add a meaningful title to the plot</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>H. Check what other aspects of the histogram you can change</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>?hist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then change the color to “blue” in the last plot</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(myTBdata<span class="sc">$</span>Total_TB_mortality,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Number"</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Total TB mortality"</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>I. Now let’s plot a histogram of mortality per 1000</strong></p>
+<p><strong>Hint:</strong> calculate it as in the previous practical</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And add a title, and x axis label</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>change the color to something different hint: to find more colours, run “colors()” or google “Colors in R”</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>J. Now let’s show both histograms at the same time</strong> you need to make a call to “par”, short for parameters, setting the plot parameter “mfrow” (Multi-Figure ROW-wise) gives 1 row, and 2 columns of plot</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(myTBdata<span class="sc">$</span>Total_TB_mortality,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Number"</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Total TB mortality"</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">col=</span><span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>cut and paste your plot code from I. here and run it. Then resize the plot window and see what happens</p>
+<p><strong>K. Export the figure and save it as a PNG with a useful name</strong></p>
+<p><strong>Hint:</strong> use the Export button in the plot window</p>
+<p><strong>L. R has functions for every kind of plot</strong> for example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>?barplot</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>?boxplot</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>?contour</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and stackoverflow.com has a lot of comments and help on every kind of plot</p>
+<p><strong>Advanced plotting exercises</strong><br>
+Make a plot where:</p>
 <ul>
-<li><p>P01 - Introduction to R: <a href="slides/Lecture_P01_IntroToR.pdf">Slides</a>,</p>
-<ul>
-<li><p>Practical - <a href="./00_01_1_IntroToR_practical.html">part 1</a>, <a href="./00_01_2_IntroToR_practical.html">part 2</a>, <a href="./00_01_3_IntroToR_practical.html">part 3</a></p></li>
-<li><p>Solutions - <a href="./00_01_1_IntroToR_solutions.html">part 1</a>, <a href="./00_01_2_IntroToR_solutions.html">part 2</a>, part 3</p></li>
-<li><p>Recording - <a href="https://www.youtube.com/watch?v=Q1MtvNyTAaA&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=1">part 1</a>, <a href="https://www.youtube.com/watch?v=exGVoIcavb8&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=2">part 2</a>, <a href="https://www.youtube.com/watch?v=ITQ6DghaBnk&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=3">part 3</a></p></li>
-</ul></li>
-<li><p>P02 - Programming skills, more R fun(ctionality): <a href="slides/Lecture_P02_ProgrammingSkills.pdf">Slides</a>, Practical, <a href="https://www.youtube.com/watch?v=91WBWzkPgf4&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=4">Recording</a></p></li>
-<li><p>P03 - Best (computational) practices: <a href="slides/Lecture_P03_BestPractices.pdf">Slides</a>, Practical</p></li>
-<li><p>P04 - Plotting model output with <code>ggplot2</code>: <a href="slides/Lecture_P04_IntroToGGplot.pdf">Slides</a>, Practical, <a href="https://www.youtube.com/watch?v=J6kL4QyBH2Q&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=5">Recording</a></p></li>
-<li><p>P05 - Introduction to Git using Github: <a href="Lecture_P05_IntroToGit.pdf">Slides</a>, Practical, <a href="https://www.youtube.com/watch?v=J6kL4QyBH2Q&amp;list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&amp;index=6">Recording</a></p></li>
+<li><p>x=Total_TB_mortality and y=HIV_pos_TB_mortality</p></li>
+<li><p>both aces are on the on the log scale</p></li>
+<li><p>colour the points</p></li>
+<li><p>add axis labels and a title</p></li>
 </ul>
-<p>You are welcome to listen to any of the recorded lectures and complete any of the associated practicals regardless of your experience. However, we’ve made a list of some recommendations below to guide what is expected:&nbsp;</p>
-<ul>
-<li><p>If you are new to R, please listen to lectures P01 / P02 / P03 / P04 and complete the associated practicals.</p></li>
-<li><p>For those of you who have used R previously but feel a bit rusty, you may find P02 / P03 / P04 helpful to get you back up to speed. If you try P02 and feel you need some more explanation, go back to P01 and start there.&nbsp;</p></li>
-<li><p>If you have never used ‘tidy data’ or ggplot then complete P04.</p></li>
-<li><p>If you are new to Git and Github, please listen to lecture P05.&nbsp;<br>
-</p></li>
-</ul>
-<p><strong>Required Software</strong></p>
-<p><strong>Optional Further Reading and Exercises</strong><br>
-If you would like additional practice with R, we recommend the following online resources:</p>
-<ul>
-<li><p><a href="http://tryr.codeschool.com/" class="uri">http://tryr.codeschool.com/</a></p></li>
-<li><p><a href="https://monashdatafluency.github.io/r-intro-2/" class="uri">https://monashdatafluency.github.io/r-intro-2/</a></p></li>
-<li><p><a href="https://www.r-bloggers.com/how-to-learn-r-2/" class="uri">https://www.r-bloggers.com/how-to-learn-r-2/</a></p></li>
-<li><p><a href="https://www.edx.org/course/introduction-to-r-for-data-science-2" class="uri">https://www.edx.org/course/introduction-to-r-for-data-science-2</a></p></li>
-</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>add HIV_neg_TB_mortality on the same y axis, in a different colour.</p>
+<p><strong>Hint:</strong> use points(). see <code>?points</code> for information</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>do you need to change the y axis label? i.e.&nbsp;does it still make sense now that it shows negative and positive mortality?</p>
+<p>Answer:</p>
+<p>Some of the points no longer fit on the graph. Why is this? You need to alter the y limit (ylim), which is an option of plot. What value will you choose?</p>
+<p><strong>Hint:</strong> the maximum value that the data go to change the ylim of the plot.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The plot now has 2 data sets in different colours, so it needs a legend check the help of legend (there’s a lot of options!)</p>
+<p><strong>Hint:</strong> use x=“topright” instead of setting the x and y values for location.</p>
+<p><strong>Hint:</strong> use the option “fill” to change the colours</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 
