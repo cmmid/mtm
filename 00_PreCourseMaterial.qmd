@@ -14,13 +14,13 @@ Each practical P01 - P05 below comes with a prerecorded lecture and an associate
 
     -   Recording - [part 1](https://www.youtube.com/watch?v=Q1MtvNyTAaA&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=1), [part 2](https://www.youtube.com/watch?v=exGVoIcavb8&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=2), [part 3](https://www.youtube.com/watch?v=ITQ6DghaBnk&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=3)
 
--   P02 - Programming skills, more R fun(ctionality): [Slides](slides/Lecture_P02_ProgrammingSkills.pdf), Practical, [Recording](https://www.youtube.com/watch?v=91WBWzkPgf4&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=4)
+-   P02 - Programming skills, more R fun(ctionality): [Slides](slides/Lecture_P02_ProgrammingSkills.pdf), [Practical](00_02_programming_practical.qmd), [Solutions](00_02_programming_solutions.qmd), [Recording](https://www.youtube.com/watch?v=91WBWzkPgf4&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=4)
 
--   P03 - Best (computational) practices: [Slides](slides/Lecture_P03_BestPractices.pdf), Practical
+-   P03 - Best (computational) practices: [Slides](slides/Lecture_P03_BestPractices.pdf), Practical, Solutions
 
--   P04 - Plotting model output with `ggplot2`: [Slides](slides/Lecture_P04_IntroToGGplot.pdf), Practical, [Recording](https://www.youtube.com/watch?v=J6kL4QyBH2Q&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=5)
+-   P04 - Plotting model output with `ggplot2`: [Slides](slides/Lecture_P04_IntroToGGplot.pdf), Practical, Solutions, [Recording](https://www.youtube.com/watch?v=J6kL4QyBH2Q&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=5)
 
--   P05 - Introduction to Git using Github: [Slides](Lecture_P05_IntroToGit.pdf), Practical, [Recording](https://www.youtube.com/watch?v=J6kL4QyBH2Q&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=6)
+-   P05 - Introduction to Git using Github: [Slides](Lecture_P05_IntroToGit.pdf), Practical, Solutions, [Recording](https://www.youtube.com/watch?v=J6kL4QyBH2Q&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=6)
 
 You are welcome to listen to any of the recorded lectures and complete any of the associated practicals regardless of your experience. However, we've made a list of some recommendations below to guide what is expected: 
 
