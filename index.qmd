@@ -1,6 +1,14 @@
 ---
-title: "Content overview"
+title: "Modern Techniques in Modelling"
 ---
+
+## Course overview
+
+Mathematical models are increasingly used to understand the transmission of infectious diseases in populations and to evaluate the potential impact of control programmes in reducing morbidity and mortality. With this short course, we aim to bridge the gap between theoretical training in infectious disease modelling, and the specialist technical skills needed for research in this area.
+
+Participants will use R to code stochastic and deterministic epidemic models from scratch. Pre-course refresher material on R is available [here](00_PreCourseMaterial.qmd).
+
+The course sessions are:
 
 **Session 1** - Introduction: [Slides](slides/Lecture_01_Intro.pdf)
 
@@ -14,8 +22,38 @@ title: "Content overview"
 
 **Session 6** - Sensitivity analysis & sampling: [Slides](slides/Lecture_06_SensitivitySampling.pdf), [Practical](06_SensitivitySampling_practical.qmd), [Solutions](06_SensitivitySampling_solutions.qmd)
 
+**Session 7** - Modelling problem: [Slides](slides/Lecture_07_ModellingProblem.pdf), [Problems](problems.qmd)
+
 **Session 8** - Stochastic individual-based models: [Slides](slides/Lecture_08_StochasticIBM.pdf), [Practical](08_StochasticIBM_practical.qmd), [Solutions](08_StochasticIBM_solutions.qmd)
 
 **Session 9** - Network modelling: [Slides](slides/Lecture_09_Networks.pdf), [Practical](09_Networks_practical.qmd), [Solutions](09_Networks_solutions.qmd)
 
 **Session 10** - Stochastic continuous models: [Slides](slides/Lecture_10_StochasticContinuous.pdf), [Practical](10_StochasticContinuous_practical.qmd), [Solutions](10_StochasticContinuous_solutions.qmd)
+
+Wrap-up slides are available [here](slides/Lecture_11_WrappingUp.pdf).
+
+## Who we are
+
+Your course organisers are [Oliver Brady](https://www.lshtm.ac.uk/aboutus/people/brady.oliver), [Nicholas Davies](https://www.lshtm.ac.uk/aboutus/people/davies.nicholas), and [Yang Liu](https://www.lshtm.ac.uk/aboutus/people/liu.yang).
+
+Your course administrator is Francesco Grisolia.
+
+Other lectures and demonstrators include [Billy Quilty](https://www.lshtm.ac.uk/aboutus/people/quilty.billy), [Kath O'Reilly](https://www.lshtm.ac.uk/aboutus/people/oreilly.kathleen), and [Seb Funk](https://www.lshtm.ac.uk/aboutus/people/funk.sebastian).
+
+## Who you are
+
+This course is for:
+
+-   Individuals with some exposure to the theory and use of infectious disease modelling & like to start coding their own models using R **OR**
+
+-   Individuals who know some R but do not have experience using R to code infectious disease models **OR**
+
+-   Individuals who will be conducting research using infectious disease models in R **OR**
+
+-   Individuals who want a deeper understanding of techniques for implementing models.
+
+## Other short courses at LSHTM you may be interested in
+
+[Introduction to infectious disease modelling and its applications](https://www.lshtm.ac.uk/study/courses/short-courses/infectious-disease-modelling), organised by Emilia Vynnycky and Richard White: This two-week introductory course covers a lot of modelling philosophy and techniques, and serves as an informal "prerequisite" to MTM. The main difference in approach is that this introductory course uses mainly Berkeley Madonna and Microsoft Excel for implementing models, whereas MTM uses R. The introductory course also features a series of guest lectures from prominent UK modellers and social activities in London.
+
+[Model fitting and inference for infectious disease dynamics](https://www.lshtm.ac.uk/study/courses/short-courses/infectious-diseases-dynamics), organised by [Seb Funk](https://www.lshtm.ac.uk/aboutus/people/funk.sebastian): This one-week course covers how to fit your infectious disease models to data using Bayesian inference, particularly Markov Chain Monte Carlo. It is an excellent complement to MTM and the two courses can be taken in any order.

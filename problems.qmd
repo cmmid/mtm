@@ -1,0 +1,34 @@
+---
+title: "Modelling problems"
+---
+
+## Aim
+
+When you are faced with a research question, and think that modelling might be useful, you have to translate the problem into a model.
+
+As a modeler, you will have to choose the type of model you want to use, build the model and choose the parameters.
+
+In this course, we have 3 sessions (Tuesday and Thursday) to enable you to think constructively about the type of model you might need for a research problem that we provide you with.
+
+We are aiming for a "sketch" of a model or a few ideas of what a model would look like (e.g. compartment diagram). You are not required to code anything.
+
+## Instructions
+
+Tuesday's session (30 mins):
+
+1.  Identify which group you are in and which modelling problem you should tackle (table **TBC**)
+2.  Open your group's Modelling Problem (see below!)
+3.  Take some time to look at the problem and ask any questions you need to (20 mins)
+4.  Now you've had a chance to think about the problem yourself, you can say "Hi" to your group colleagues
+
+Thursday's session: You'll be working with colleagues in your group to sketch a model that answers your particular question. After this group work, there will be a session to discuss the problem you had to solve, and your ideas for a solution with the other groups. You and your group can write down your ideas on draw.io (link **TBC**).
+
+## The problems
+
+-   [Avian influenza](problems/AvianInfluenza.pdf)
+
+-   [COVID-19](problems/COVID19.pdf)
+
+-   [Dengue](problems/Dengue.pdf)
+
+-   [Seasonal influenza](problems/SeasonalInfluenza.pdf)
