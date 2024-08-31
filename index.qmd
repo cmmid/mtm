@@ -20,4 +20,4 @@ title: "Content overview"
 
 **Session 9** - Network modelling: [Slides](slides/Lecture_09_Networks.pdf), [Practical](09_Networks_practical.qmd), [Solutions](09_Networks_solutions.qmd)
 
-**Session 10** -
+**Session 10** - Stochastic continuous models: [Slides](slides/Lecture_10_StochasticContinuous.pdf), [Practical](10_StochasticContinuous_practical.qmd), [Solutions](10_StochasticContinuous_solutions.qmd)

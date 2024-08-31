@@ -1,21 +1,12 @@
 ---
-title: "10. Stochastic continuous models"
+title: "10. Stochastic continuous time models (solutions)"
 ---
-
-In this practical, we will implement a continuous-time, stochastic compartmental model of influenza transmission using the Gillespie algorithm.
 
 ## Practical 1. Stochastic simulation with the Gillespie algorithm
 
-In this practical session, we will simulate the SIR model using the Gillespie algorithm.
-
-### Setting up the model algorithm
-
-The first bit of code below is a function that simulates an SIR model using the Gillespie algorithm.
-
-```{r, output = FALSE}
+```{r, eval = FALSE, message = FALSE}
 library(ggplot2) ## for plotting
 library(tidyverse) ## for manipulation of results
-
 
 ## Function SIR_gillespie.
 ## This takes three arguments:
@@ -62,7 +53,7 @@ SIR_gillespie <- function(init_state, parms, tf) {
           ## infection
           S <- S - 1
           I <- I + 1
-        } else if (type < cumulative_rates["recovery"]) {
+        } else if (type < cumulative_rates["recovery"]){
           ## recovery
           I <- I - 1
           R <- R + 1
@@ -79,33 +70,27 @@ SIR_gillespie <- function(init_state, parms, tf) {
   ## return results data frame
   return(results_df)
 }
-```
 
-Take 10 minutes to familiarise yourself with the `SIR_gillespie()` function and make sure you understand its inner workings.
-
-Now, run the `SIR_gillespie()` function using the commands below.
-
-```{r, output = FALSE}
 init.values <- c(S=249, I=1, R=0) ## initial state
 parms <- c(beta=1, gamma=0.5) ## parameter vector
 tmax <- 20 ## end time
 
 ## run Gillespie simulation
 r <- SIR_gillespie(init_state=init.values, parms=parms, tf=tmax)
-```
 
-The data frame `r` now contains the results of the simulation.
+## Plot the result
+ggplot(r) +
+	geom_line(aes(time, I, colour = "I"))
 
-1.  Inspect the contents of the data frame and write some code to plot the results; you can use `plot` or `ggplot` for this. Run the simulation and plot the results multiple times to convince yourself the output is different every time.
+## Re-run this from the line `r <- SIR_gillespie(...)` a few times to 
+## convince yourself the output is different every time.
 
-### Summarising multiple stochastic runs
-
-Next, we'll run multiple simulations at once.
-
-```{r, output = FALSE}
 ## Run multiple simulation runs and plot a few of them
 nsim <- 100 ## number of trial simulations
 
+## We store the simulations in a data frame, traj, which
+## contains the results from multiple simulation runs and an additional column
+## that represents the simulation index
 traj <- tibble(i=1:nsim) %>%
   rowwise() %>%
   mutate(trajectory=list(as.data.frame(
@@ -115,19 +100,31 @@ traj <- tibble(i=1:nsim) %>%
 ## convert to long data frame
 mlr <- traj %>%
   gather(compartment, value, 3:ncol(.))
-```
 
-The code above runs the simulation 100 times and stores the resulting model trajectories in a data frame, `traj`, which contains the results from multiple simulation runs and an additional column that represents the simulation index.
+## Next, plot the multiple simulation runs
+ggplot(mlr,
+       aes(x=time, y=value, group=i, color=compartment)) +
+  geom_line() +
+  facet_wrap(~compartment)
 
-2.  Write some code to plot the multiple simulation runs on the same plot.
+## Plot the distribution of overall outbreak sizes.
 
-You'll notice that some outbreaks die out very quickly, while some others grow to affect large parts of the population.
+## create data frame of outbreak sizes
+outbreak_sizes <- mlr %>%
+  filter(compartment=="R") %>%
+  group_by(i) %>%
+  filter(time==max(time)) %>%
+  select(i, size=value)
 
-3.  Plot the distribution of overall outbreak sizes. What proportion of outbreaks dies out quickly?
+## plot it as a histogram
+ggplot(outbreak_sizes, aes(x=size)) +
+  geom_histogram()
 
-Next, we calculate the mean and standard deviation of each state across the multiple runs. To do that, we need the value of the different states at pre-defined time steps, whereas SIR_gillespie only returns the times at which certain events happened. In order to, for example, extract the values of the trajectory at integer time points, we can use the following:
+## determine number of large outbreaks (defined as larger than 50)
+outbreak_sizes %>%
+  filter(size > 50) %>%
+  nrow
 
-```{r, output = FALSE}
 ## Extract the values of the trajectory at integer time points
 timeTraj <- mlr %>%
   group_by(i, compartment) %>%
@@ -136,11 +133,7 @@ timeTraj <- mlr %>%
               value=approx(x=time, y=value, xout=seq(0, tmax, by=0.1),
                            method="constant")$y))) %>%
   unnest(traj)
-```
 
-Now, we calculate a summary trajectory containing the mean and standard deviation (sd) of the number of infectious people at every time step:
-
-```{r, output = TRUE}
 ## Calculate summary trajectory with mean & sd of infectious people over time
 sumTraj <- timeTraj %>%
   filter(compartment=="I") %>%
@@ -152,13 +145,7 @@ sumTraj <- timeTraj %>%
 ggplot(sumTraj, aes(x=time, y=mean, ymin=pmax(0, mean-sd), ymax=mean+sd)) +
   geom_line() +
   geom_ribbon(alpha=0.3)
-```
 
-Your plot should look something like the above.
-
-As a second summary, we can also consider only trajectories that have not gone extinct, that is, where $I>0$:
-
-```{r, output = TRUE}
 ## Only consider trajectories that have not gone extinct:
 sumTrajAll <- sumTraj %>%
   mutate(trajectories="all")
@@ -178,19 +165,34 @@ ggplot(iTraj, aes(x=time, y=mean, ymin=pmax(0, mean-sd), ymax=mean+sd,
   geom_line() +
   geom_ribbon(alpha=0.3) +
   scale_color_brewer(palette="Set1")
-```
 
-4.  **Exercise**: We have plotted the mean $\pm$ standard deviation; is this a reasonable summary statistic? What else could one plot? Implement your own plot of trajectory plus uncertainty.
+## We now compare the two averages to the deterministic trajectory
 
-### Comparing the stochastic model to the equivalent deterministic ODE model
+## Model function (from ODE practical)
+library(deSolve)
+SIR_model <- function(times, state, parms){
+  ## Define variables
+  S <- state["S"]
+  I <- state["I"]
+  R <- state["R"]
+  N <- S + I + R
+                                        # Extract parameters
+  beta <- parms["beta"]
+  gamma <- parms["gamma"]
+                                        # Define differential equations
+  dS <- - (beta * S * I) / N
+  dI <- (beta * S * I) / N - gamma * I
+  dR <- gamma * I
+  res <- list(c(dS, dI, dR ))
+  return(res)
+}
 
-We will now compare the stochastic model runs and their averages to the equivalent deterministic ODE model trajectory.
+ode_output_raw <-
+  ode(y = init.values, times = seq(0, tmax), func = SIR_model, parms = parms,
+      method = "rk4")
+## Convert to data frame for easy extraction of columns
+ode_output <- as.data.frame(ode_output_raw)
 
-5.  Using code from the ODE practical, load the **deSolve** package, define the model function (e.g. `SIR_model` from the ODE practical), run the model with the same parameters as the Gillespie model, and store the output in a data frame called `ode_output` (remember, you need to convert the matrix returned by **deSolve**'s `ode()` to a data frame using `as.data.frame()`).
-
-You can then plot both the stochastic and deterministic model runs using the following code:
-
-```{r, eval = FALSE}
 ## Combine into one big data frame
 allTraj <- ode_output %>%
   gather(compartment, value, 2:ncol(.)) %>% ## convert to long format
@@ -206,32 +208,18 @@ ggplot(allTraj, aes(x=time, y=mean, colour=trajectories)) +
   scale_color_brewer(palette="Set1")
 ```
 
-6.  Compare the deterministic trajectory to some of the individual stochastic trajectories and to their mean. Does the deterministic trajectory capture "typical" behaviour of the stochastic trajectories?
-7.  Repeat the experiment with different values of the parameters. When does deterministic vs stochastic make more or less of a difference?
-8.  Rewrite the model code to be an SEIR model. How do the results differ?
-
 ## Practical 2. The `adaptivetau` package
 
-In this practical session, we will use the "adaptivetau" package to run simulations. Start in a new file by loading the required packages:
-
-```{r, output = FALSE, message = FALSE}
+```{r, eval = FALSE, output = FALSE}
 library(ggplot2) ## for plotting
 library(adaptivetau) ## for stochastic simulations
 library(tidyverse) ## for manipulation of results
-```
 
-For adaptivetau, we first need to define the "transitions", or events that can happen in the model. In the SIR model, these are:
-
-```{r, output = FALSE}
 ## Define transitions
 transitions <- list(
   c(S = -1, I = +1),
   c(I = -1, R = +1))
-```
 
-We then need to specify a rate function:
-
-```{r, output = FALSE}
 ## Specify rate function, giving rate for each transition
 SIRrateF <- function(state, parms, time) {
   beta <- parms[["beta"]]
@@ -248,11 +236,7 @@ SIRrateF <- function(state, parms, time) {
 
   return(rates)
 }
-```
 
-We then define our initial conditions and parameters:
-
-```{r, output = FALSE}
 ## Initial values
 init.values <- c(S = 249, ## number of susceptibles
                  I = 10, ## number infectious
@@ -261,49 +245,28 @@ init.values <- c(S = 249, ## number of susceptibles
 ## Parameters
 parms <- c(beta = 2, ## infection rate
            gamma = 1) ## recovery rate
-```
-
-Now we will use the `ssa.adaptivetau()` function to run the model and plot the results.
-
-```{r, echo = FALSE}
-set.seed(123)
-```
-
-```{r, output = TRUE}
 
 ## Run a trial simulation for 60 time steps
 tmax <- 60 ## number of time steps to simulate
+
 r <- ssa.adaptivetau(init.values, transitions, SIRrateF, parms, tf = tmax)
 
 ## Plot results
 r_df <- as.data.frame(r)
 plot(r_df$time, r_df$I, type = "l")
-```
-
-Run the above multiple times -- as before, the results should change every time.
-
-We will now again run multiple simulations and store them in a data frame, `traj`, which
-contains multiple simulation runs and an additional column `i` that represents the simulation id:
-
-
-```{r, output = TRUE}
 
 ## Run the simulation multiple times
 nsim <- 100 ## number of trial simulations
 
-traj <- tibble(i=1:nsim) %>%
+system.time(traj <- tibble(i=1:nsim) %>%
   rowwise() %>%
   mutate(trajectory=list(as.data.frame(
            ssa.adaptivetau(init.values, transitions, SIRrateF, parms, tf=tmax)))) %>%
-  unnest(trajectory)
+  unnest(trajectory))
 
 ## Plot the resulting trajectories
 ggplot(traj) +
 	geom_line(aes(x = time, y = I, group = i, colour = i))
 ```
 
-1. **Exercise**: Compare the run time of the command above to running 100 simulations using our Gillespie algorithm from Practical 1. How much is the speed gain?
-
-2. **Exercise**: Re-write the code above to simulate from the SEITL model introduced in the slides for this session. Analyse the outputs using the same routines you used with the SIR model.
-
-**Solutions to this practical can be accessed [here](10_StochasticContinuous_solutions.qmd).**
+**Return to the practical [here](10_StochasticContinuous_practical.qmd).**

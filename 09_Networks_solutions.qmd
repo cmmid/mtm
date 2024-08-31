@@ -136,8 +136,6 @@ for (t in 1:t_max)
 
 ```
 
-
-
 ## Practical 2. A network model of mpox transmission
 
 ```{r, eval = FALSE, output = FALSE}

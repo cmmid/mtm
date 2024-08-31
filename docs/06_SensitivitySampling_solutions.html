@@ -230,7 +230,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Click <a href="./06_SensitivitySampling_practical.html">here</a> to return to the practical.</strong></p>
 <section id="one-way-sensitivity-analyses" class="level2">
 <h2 class="anchored" data-anchor-id="one-way-sensitivity-analyses">(1) One-way sensitivity analyses</h2>
-<p>First, let’s run an ODE model. Download and open up the <a href="functions/SIRmodel.R">SIRmodel.R</a></p>
+<p>First, let’s run an ODE model. Download and open up the <a href="code/SIRmodel.R">SIRmodel.R</a></p>
 <section id="a-which-functions-are-in-here" class="level3">
 <h3 class="anchored" data-anchor-id="a-which-functions-are-in-here">(a) Which functions are in here?</h3>
 <p>Answer: <code>solveODE()</code> and <code>SIR_model()</code></p>
@@ -297,7 +297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="monte-carlo-sampling" class="level2">
 <h2 class="anchored" data-anchor-id="monte-carlo-sampling">(2) Monte Carlo Sampling</h2>
-<p>Now suppose that we have a previous epidemiological study that suggested that R0 has a mean value of 5, but uncertainty within the range of [-1, +1]. However, we still don’t know whether the infectiousness period is 1 day or 10 days. We will now use the functions in <a href="docs/functions/SIRmodel_R0.R">SIRmodel_R0.R</a> to make a similar plot as above, but this time, incorporate the uncertainty of R0 for each discrete value of gamma. We’re going to first use a direct Monte Carlo Sampling method.</p>
+<p>Now suppose that we have a previous epidemiological study that suggested that R0 has a mean value of 5, but uncertainty within the range of [-1, +1]. However, we still don’t know whether the infectiousness period is 1 day or 10 days. We will now use the functions in <a href="code/SIRmodel_R0.R">SIRmodel_R0.R</a> to make a similar plot as above, but this time, incorporate the uncertainty of R0 for each discrete value of gamma. We’re going to first use a direct Monte Carlo Sampling method.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in our set of functions in SIRmodel_R0.R</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"SIRmodel_R0.R"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
