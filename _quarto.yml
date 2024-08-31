@@ -8,10 +8,13 @@ website:
     left:
       - text: Overview
         href: index.qmd
-      - text: Timetable
-        href: timetable.qmd
+      - text: About
+        href: about.qmd
       - text: Pre-course
         href: 00_PreCourseMaterial.qmd
+      - text: Timetable
+        href: timetable.qmd
+
       - text: Practicals
         menu:
           - 03_DiscreteDeterministic_practical.qmd
@@ -21,8 +24,7 @@ website:
           - 08_StochasticIBM_practical.qmd
           - 09_Networks_practical.qmd
           - 10_StochasticContinuous_practical.qmd
-      - text: About
-        href: about.qmd
+
 
 format:
   html:
