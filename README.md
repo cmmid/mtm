@@ -1,6 +1,6 @@
 # Modern Techniques in Modelling Github Repo
 
-This repo contains the material to create the MTM course page, at: <https://nicholasdavies.github.io/mtm>
+This repo contains the material to create the MTM course page, at: <https://cmmid.github.io/mtm>
 
 All the raw material is in the top level folder and is written in Quarto.
 
