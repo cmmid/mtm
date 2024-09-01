@@ -67,6 +67,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -157,7 +186,13 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#aim" id="toc-aim" class="nav-link active" data-scroll-target="#aim">Aim</a></li>
   <li><a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a></li>
-  <li><a href="#the-problems" id="toc-the-problems" class="nav-link" data-scroll-target="#the-problems">The problems</a></li>
+  <li><a href="#the-problems" id="toc-the-problems" class="nav-link" data-scroll-target="#the-problems">The problems</a>
+  <ul class="collapse">
+  <li><a href="#avian-influenza" id="toc-avian-influenza" class="nav-link" data-scroll-target="#avian-influenza">1. Avian influenza</a></li>
+  <li><a href="#sars-cov-2" id="toc-sars-cov-2" class="nav-link" data-scroll-target="#sars-cov-2">2. SARS-CoV-2</a></li>
+  <li><a href="#dengue" id="toc-dengue" class="nav-link" data-scroll-target="#dengue">3. Dengue</a></li>
+  <li><a href="#seasonal-influenza" id="toc-seasonal-influenza" class="nav-link" data-scroll-target="#seasonal-influenza">4. Seasonal influenza</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -195,7 +230,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Tuesday’s session (30 mins):</p>
 <ol type="1">
 <li>Identify which group you are in and which modelling problem you should tackle (table <strong>TBC</strong>)</li>
-<li>Open your group’s Modelling Problem (see below!)</li>
+<li>Consult your group’s Modelling Problem (see below!)</li>
 <li>Take some time to look at the problem and ask any questions you need to (20 mins)</li>
 <li>Now you’ve had a chance to think about the problem yourself, you can say “Hi” to your group colleagues</li>
 </ol>
@@ -203,14 +238,40 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="the-problems" class="level2">
 <h2 class="anchored" data-anchor-id="the-problems">The problems</h2>
+<p>You will be assigned to one of the following four modelling problems.</p>
+<p>Your group’s assignment is to design a model that could help you complete your task. For instance, you may wish to include the following:</p>
 <ul>
-<li><p><a href="problems/AvianInfluenza.pdf">Avian influenza</a></p></li>
-<li><p><a href="problems/COVID19.pdf">COVID-19</a></p></li>
-<li><p><a href="problems/Dengue.pdf">Dengue</a></p></li>
-<li><p><a href="problems/SeasonalInfluenza.pdf">Seasonal influenza</a></p></li>
+<li>A compartment diagram of the disease including demographic states that you wish your model to track (showing arrows between your compartments denoting flows)</li>
+<li>Any further information on the model set-up (e.g.&nbsp;whether you wish to use a stochastic model and if so what type)</li>
+<li>A short list of information or parameters that you need to run your model</li>
+<li>Any values of these parameters needed (you may find googling helpful here - remember to state your source)</li>
+<li>A short list of where any uncertainty is in your assumptions, model structure or parameter values.</li>
 </ul>
+<section id="avian-influenza" class="level3">
+<h3 class="anchored" data-anchor-id="avian-influenza">1. Avian influenza</h3>
+<p>A strain of avian influenza is spreading among poultry farms. The virus has a near-100% fatality risk in birds, and has an <span class="math inline">\(R_0\)</span> typically between 1.8 and 2.4 (among birds in a farm setting). Whether <span class="math inline">\(R_0\)</span> is at the low end or the high end of this range seems to depend upon the farm, but the reasons for this variation are not fully understood. When birds are housed outdoors, there is around a 5% risk each year of any given farm having at least one case, but it has been observed that this risk goes up to around 20% if a neighbouring farm has had a substantial outbreak (with more than half of the flock affected). If birds are housed indoors, the risk of introduction is reduced 4-8 fold, because there is reduced contact with wild birds which may spread the virus. You have been asked to model different strategies for reducing the impact of avian influenza on poultry and poultry farms, based around establishing criteria for when birds should be housed inside and when a flock should be culled.</p>
+</section>
+<section id="sars-cov-2" class="level3">
+<h3 class="anchored" data-anchor-id="sars-cov-2">2. SARS-CoV-2</h3>
+<p>Government ministers have asked you to assess the relative efficacy of two alternative quarantine strategies for reducing SARS-CoV-2 transmission. The baseline strategy requires contacts of a suspected COVID-19 case to quarantine for 10 days. The alternative “test-to-release” strategy allows individuals to leave quarantine early if they test negative partway through the quarantine period. Which will be more effective? You have been asked to consider:</p>
+<ul>
+<li>potentially differing rates of compliance with the two strategies</li>
+<li>how many days after the start of the quarantine period the “test-to-release” should be taken</li>
+<li>imperfect sensitivity and specificity of the test</li>
+</ul>
+</section>
+<section id="dengue" class="level3">
+<h3 class="anchored" data-anchor-id="dengue">3. Dengue</h3>
+<p>Dengue virus transmits between humans via mosquito vectors. While some infections are asymptomatic, others lead to dengue fever, of which a proportion go on to develop very severe dengue haemorrhagic fever (DHF), which can result in death. There are four subtypes of the dengue virus. Recovering from one subtype generates complete immunity to that subtype (i.e.&nbsp;prevents re-infection) and some immunity to other subtypes (usually termed imperfect cross-immunity). It is also known that second or third dengue infections have a higher chance of DHF due to something called ‘antibody-dependent enhancement’. The degree of cross-immunity and increased severity of subsequent infections are highly uncertain, which makes it difficult to understand the impact of intervention strategies.</p>
+<p>You are the modeller in a large clinical trial team that is evaluating the use of a dengue vaccine candidate in country Y. Your role is to use a model that will help elucidate the results of the clinical trial which measures the incidence of dengue infection and DHF. However, first, you need to build a model that captures the dynamics of dengue prior to vaccine introduction.</p>
+</section>
+<section id="seasonal-influenza" class="level3">
+<h3 class="anchored" data-anchor-id="seasonal-influenza">4. Seasonal influenza</h3>
+<p>Country X currently funds an annual influenza vaccination programme (between October and February) that targets school students 6-18 years old. Typically, this school-based programme achieves 40% vaccine coverage among this age group. However, there is no funded programme for working-age adults, who pay for a seasonal flu vaccine themselves (out-of-pocket), and thus the annual coverage levels are typically around 10% in this age group. The government would like to reduce flu-related deaths and hospitalisations each year and is considering whether to try to increase vaccine use and needs to understand the impact of different strategies.</p>
+<p>You have been tasked to predict the impact of two potential strategies on flu-related hospitalisations and deaths. The first strategy aims to increase the vaccine coverage among school students using public health campaigns to provide information on flu and vaccines to parents and schools; colleagues in the Immunisation Division believe this campaign would increase the vaccine coverage to 75% given results from a recent pilot study. The second strategy would be to increase vaccine coverage among working-age adults by providing a cash incentive; the effect of this strategy is less certain, but survey results suggest this strategy may increase coverage among working-age adults to around 30%.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

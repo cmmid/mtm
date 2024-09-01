@@ -4,7 +4,7 @@ title: "P03. Introduction to `ggplot`: solutions"
 
 ## Part 1: single outbreak
 
-Consider an SIR model. A CSV file has been provided for each of the three populations in the model: S  - susceptible, I  - infectious, R  - recovered. The model used to simulate the disease is
+Consider an SIR model. A CSV file has been provided for each of the three populations in the model: S - susceptible, I - infectious, R - recovered. The model used to simulate the disease is
 
 ```{r}
 f_sir <- function(time, state, parameters) {
@@ -66,7 +66,7 @@ should return three columns: \| time \| state (key) \| proportion (value) \|
 
 ### Plotting reshaped data
 
-#### b) With your long data frame, make a plot that shows how the proportion of the population in each state changes over time. 
+#### b) With your long data frame, make a plot that shows how the proportion of the population in each state changes over time.
 
 Use the line geometry and color each line by state. You might find the following link useful <https://ggplot2.tidyverse.org/reference/index.html>
 
@@ -77,7 +77,7 @@ ggplot(data = all_dat_long,
     geom_line(aes(color = state)) 
 ```
 
-#### c) Modify the levels of the state variable to be in S,I,R order rather than in alphabetical order. 
+#### c) Modify the levels of the state variable to be in S,I,R order rather than in alphabetical order.
 
 Copy and paste the code from the previous plot and re-run it to see how the ordering of the states has changed
 
@@ -151,7 +151,7 @@ all_dat_100_long
 
 should return four columns: \| sim \| time \| state (key) \| proportion (value) \|
 
-#### b) Plot all 100 simulations from the SIR model 
+#### b) Plot all 100 simulations from the SIR model
 
 Hint: you will need to use the group aesthetic with your line and may choose to set the lines to be semi-transparent. Use faceting (small multiples) to show each state in its own subplot; faceting will be easier in all plots from this point on than colouring by state.
 
@@ -179,7 +179,7 @@ should return four columns: \| sim \| time \| state (key) \| proportion (value) 
 
 should also let you know there are 303 groups
 
-#### d) Use the summarise function to calculate the median and 95% interval for each state at each time point. 
+#### d) Use the summarise function to calculate the median and 95% interval for each state at each time point.
 
 You will need to calculate all three summary statistics separately, and will do so within the same `summarise()`
 
@@ -191,7 +191,7 @@ all_dat_100_long_summarised <-
               q0.975 = quantile(proportion, probs = 0.975))
 ```
 
-#### e) Use `geom_ribbon` to plot the 95% interval and geom_line to plot the median for each state. 
+#### e) Use `geom_ribbon` to plot the 95% interval and geom_line to plot the median for each state.
 
 For its aesthetics, geom_ribbon requires a ymin and ymax and can be coloured and filled and made semi-transparent. Ensure you label the axes appropriately.
 
