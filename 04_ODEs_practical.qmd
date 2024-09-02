@@ -2,7 +2,7 @@
 title: "04. Ordinary differential equations (ODEs)"
 ---
 
-# ODE's in R: Practical
+# ODEs in R: Practical
 
 ## Solving the SI model using `deSolve`
 

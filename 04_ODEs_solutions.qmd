@@ -2,7 +2,7 @@
 title: "04. Ordinary differential equations (ODEs): Solutions"
 ---
 
-# ODE's in R: Practical
+# ODEs in R: Practical
 
 **Click [here](04_ODEs_practical.qmd) to return to the practical.**
 
