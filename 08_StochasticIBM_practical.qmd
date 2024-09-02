@@ -196,9 +196,9 @@ Adding an age for each individual doesn't do anything on its own, but we can mak
 
 ### II. Delay distributions
 
-The helper functions `latent_delay(n)` and `infectious_delay(n)` have been set up to generate `n` random durations (in days) for the latent period and infectious period, respectively. Try running these a few times from the prompt. We will use these to implement these specific delay distributions in the model, instead of the exponentially-distributed delays that the model currently uses. 
+The helper functions `latent_delay(n)` and `infectious_delay(n)` have been set up to generate `n` random durations (in days) for the latent period and infectious period, respectively. Try running these a few times from the prompt. We will use these to implement these specific delay distributions in the model, instead of the exponentially-distributed delays that the model currently uses.
 
-First we need to add the line 
+First we need to add the line
 
 ```{r, eval = F}
 delay <- rep(0, n)
@@ -208,7 +208,7 @@ to the `# Initialize state variables` section.
 
 Then, you will need to add some code to the `# Update individual i's non-state variables` section of the main `for` loop to decrease each individual `i`'s delay by `dt` each time step, which is what counts down the time remaining in the E and I states.
 
-Now we need to modify how the transitions themselves work. For the latent period, first focus on the part of the main loop headed by `# Transition S -> E (infection) at rate lambda`.  Here, we first check if individual `i` has been infected, and if they have, we currently set their state to Exposed with `state[i] <- "E"`. 
+Now we need to modify how the transitions themselves work. For the latent period, first focus on the part of the main loop headed by `# Transition S -> E (infection) at rate lambda`. Here, we first check if individual `i` has been infected, and if they have, we currently set their state to Exposed with `state[i] <- "E"`.
 
 You will need to add a line here which also sets their delay to a random number returned by `latent_delay(1)`, which draws one random number from the latent-period duration distribution. Note that inside this function, we draw a random number from a log-normal distribution with parameters `meanlog = 0.5` and `sdlog = 0.6`. You could obtain values such as these from the literature or by trying to measure the distributions from empirical data.
 
@@ -222,27 +222,27 @@ Note that you can now remove the model parameters `delta` and `gamma` from your 
 
 Currently, the simulation models immunity as an "on/off" state: either the individual is susceptible to infection (state S) or they are completely immune to infection (state R). As an alternative, we could give each individual an "antibody level" which increases every time they fight off an infection, wanes over time, and whose value determines how likely they are to get reinfected.
 
-We'll do this in two steps. 
+We'll do this in two steps.
 
-**Step 1.** First, we'll add the antibody dynamics without affecting the rest of the simulation. Add a new parameter 
+**Step 1.** First, we'll add the antibody dynamics without affecting the rest of the simulation. Add a new parameter
 
 ```{r, eval = F}
 wane <- 0.05  # Rate of antibody waning
 ```
 
-to the `## Model parameters` section, and a new variable 
+to the `## Model parameters` section, and a new variable
 
 ```{r, eval = F}
 antib <- rep(0, n)  # Antibody concentration for each individual
 ```
 
-to the `# Initialize state variables` section. We want each individual's `antib[i]` to gradually wane over time, so add the line 
+to the `# Initialize state variables` section. We want each individual's `antib[i]` to gradually wane over time, so add the line
 
 ```{r, eval = F}
 antib[i] <- antib[i] - wane * dt  # Antibody waning
 ```
 
-to the section where individual `i`'s non-state variables are updated. We also want each individual's `antib[i]` to jump up every time they recover from an infection, so add the line 
+to the section where individual `i`'s non-state variables are updated. We also want each individual's `antib[i]` to jump up every time they recover from an infection, so add the line
 
 ```{r, eval = F}
 antib[i] <- antib[i] + ab_increment(1)
@@ -272,7 +272,7 @@ ggplot(results) +
     labs(x = "Time step", y = "Mean antibody level")
 ```
 
-11.  What do you observe?
+11. What do you observe?
 
 **Step 2.** Now, we are going to make each individual's antibody level actually do the work of determining whether they are susceptible to infection.
 
@@ -294,17 +294,17 @@ if (runif(1) < 1 - exp(-lambda * dt) & runif(1) < susceptibility(antib[i])) {
 
 This new addition is what is going to determine whether an individual is immune or susceptible to infection, so we don't want to use the R (recovered) state to represent immunity anymore. Instead, we are going to have individuals go straight back to the S (susceptible) state when the infectious period ends. Make this change and remove the R state from the code completely. Now run the simulation.
 
-12.  Summarize the changes you have made to the simulation and the impact on the simulation results.
+12. Summarize the changes you have made to the simulation and the impact on the simulation results.
 
 ### IV. Vaccination
 
-As an optional exercise, try adding vaccination to the code. Assume that at time step 300, all individuals who are aged 40 and above get vaccinated, which increases their antibody levels by twice as much as natural infection (so you could add `2 * ab_increment(1)` to each individual’s antibody levels). 
+As an optional exercise, try adding vaccination to the code. Assume that at time step 300, all individuals who are aged 40 and above get vaccinated, which increases their antibody levels by twice as much as natural infection (so you could add `2 * ab_increment(1)` to each individual’s antibody levels).
 
-13.  What is the impact on the simulation results?
+13. What is the impact on the simulation results?
 
-As a further optional exercise, try adding a variable `vacc` for each individual which is `FALSE` for anyone who has not been vaccinated and `TRUE` for anyone who has been vaccinated. Add two extra columns to the `results` data frame, **AMeanU** and **AMeanV**, and use these to keep track of mean antibody levels in ever-vaccinated versus never-vaccinated individuals. 
+As a further optional exercise, try adding a variable `vacc` for each individual which is `FALSE` for anyone who has not been vaccinated and `TRUE` for anyone who has been vaccinated. Add two extra columns to the `results` data frame, **AMeanU** and **AMeanV**, and use these to keep track of mean antibody levels in ever-vaccinated versus never-vaccinated individuals.
 
-14.  Plot these observations after running the simulation. You could use code similar to the below. What do you observe?
+14. Plot these observations after running the simulation. You could use code similar to the below. What do you observe?
 
 ```{r, eval = F}
 ggplot(results) + 
