@@ -2,9 +2,11 @@
 title: "Modern Techniques in Modelling"
 ---
 
-## Course overview
+![](images/lshtm_cmmid.png){fig-align="center"}
 
 Mathematical models are increasingly used to understand the transmission of infectious diseases in populations and to evaluate the potential impact of control programmes in reducing morbidity and mortality. With this short course, we aim to bridge the gap between theoretical training in infectious disease modelling, and the specialist technical skills needed for research in this area.
+
+## Course structure
 
 Participants will use R to code stochastic and deterministic epidemic models from scratch. Pre-course refresher material on R is available [here](00_PreCourseMaterial.qmd).
 
@@ -56,4 +58,4 @@ This course is for:
 
 [Introduction to infectious disease modelling and its applications](https://www.lshtm.ac.uk/study/courses/short-courses/infectious-disease-modelling), organised by Emilia Vynnycky and Richard White: This two-week introductory course covers a lot of modelling philosophy and techniques, and serves as an informal "prerequisite" to MTM. The main difference in approach is that this introductory course uses mainly Berkeley Madonna and Microsoft Excel for implementing models, whereas MTM uses R. The introductory course also features a series of guest lectures from prominent UK modellers and social activities in London.
 
-[Model fitting and inference for infectious disease dynamics](https://www.lshtm.ac.uk/study/courses/short-courses/infectious-diseases-dynamics), organised by [Seb Funk](https://www.lshtm.ac.uk/aboutus/people/funk.sebastian): This one-week course covers how to fit your infectious disease models to data using Bayesian inference, particularly Markov Chain Monte Carlo. It is an excellent complement to MTM and the two courses can be taken in any order.
+[Model fitting and inference for infectious disease dynamics](https://www.lshtm.ac.uk/study/courses/short-courses/infectious-diseases-dynamics), organised by Seb Funk: This one-week course covers how to fit your infectious disease models to data using Bayesian inference, particularly Markov Chain Monte Carlo. It is an excellent complement to MTM and the two courses can be taken in any order.
