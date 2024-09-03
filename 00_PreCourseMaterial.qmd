@@ -30,7 +30,7 @@ You are welcome to listen to any of the recorded lectures and complete any of th
 
 -   If you are new to Git and Github, please listen to lecture P04. 
 
-上述视频录像均上传于Youtube。中国大陆地区的学员如无法打开可以通过[腾讯微云](https://share.weiyun.com/iHEKRo5d)进行下载。下载密码请联络[Dr. Yang Liu](mailto: yang.liu@lshtm.ac.uk)获取。
+上述视频录像均上传于Youtube。中国大陆地区的学员如无法打开可以通过[腾讯微云](https://share.weiyun.com/iHEKRo5d)进行下载。下载密码请联络[Dr. Yang Liu](mailto:%20yang.liu@lshtm.ac.uk)获取。
 
 **Optional Further Reading and Exercises**\
 If you would like additional practice with R, we recommend the following online resources:
