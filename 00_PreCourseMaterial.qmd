@@ -18,7 +18,7 @@ Each practical P01 - P04 below comes with a prerecorded lecture and an associate
 
 -   P03 - Plotting model output with `ggplot2`: [Slides](slides/Lecture_P04_IntroToGGplot.pdf), [Practical](00_04_ggplot_practical.qmd), [Solutions](00_04_ggplot_solutions.qmd), [Recording](https://www.youtube.com/watch?v=J6kL4QyBH2Q&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=5)
 
--   P04 - Introduction to Git using Github: [Slides](Lecture_P05_IntroToGit.pdf), [Practical](00_05_git.qmd), [Recording](https://www.youtube.com/watch?v=J6kL4QyBH2Q&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=6)
+-   P04 - Introduction to Git using Github: [Slides](slides/Lecture_P05_IntroToGit.pdf), [Practical](00_05_git.qmd), [Recording](https://www.youtube.com/watch?v=J6kL4QyBH2Q&list=PLu1O_bOojtM5DH41DQfybtxCyX8hNq8zk&index=6)
 
 You are welcome to listen to any of the recorded lectures and complete any of the associated practicals regardless of your experience. However, we've made a list of some recommendations below to guide what is expected: 
 
