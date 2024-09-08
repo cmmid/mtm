@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.47">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>04. Ordinary differential equations (ODEs) – Modern Techniques in Modelling</title>
+<title>Modern Techniques in Modelling - 04. Ordinary differential equations (ODEs)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -101,6 +67,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -117,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -135,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Timetable</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-practicals" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-practicals" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Practicals</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-practicals">    
@@ -175,7 +170,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
+          <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -189,21 +184,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#odes-in-r-practical" id="toc-odes-in-r-practical" class="nav-link active" data-scroll-target="#odes-in-r-practical">ODEs in R: Practical</a>
+  <li><a href="#practical-1-solving-odes-using-desolve" id="toc-practical-1-solving-odes-using-desolve" class="nav-link active" data-scroll-target="#practical-1-solving-odes-using-desolve">Practical 1: Solving ODEs using <code>deSolve</code></a>
   <ul class="collapse">
-  <li><a href="#solving-the-si-model-using-desolve" id="toc-solving-the-si-model-using-desolve" class="nav-link" data-scroll-target="#solving-the-si-model-using-desolve">Solving the SI model using <code>deSolve</code></a>
-  <ul class="collapse">
-  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1">Question 1:</a></li>
-  </ul></li>
-  <li><a href="#solving-the-sir-model-using-desolve" id="toc-solving-the-sir-model-using-desolve" class="nav-link" data-scroll-target="#solving-the-sir-model-using-desolve">Solving the SIR model using <code>deSolve</code></a>
-  <ul class="collapse">
-  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2">Question 2:</a></li>
-  </ul></li>
-  <li><a href="#solving-the-seir-model-using-desolve" id="toc-solving-the-seir-model-using-desolve" class="nav-link" data-scroll-target="#solving-the-seir-model-using-desolve">Solving the SEIR model using <code>deSolve</code></a>
-  <ul class="collapse">
-  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3:</a></li>
-  <li><a href="#optional-questions-adding-vaccination-to-the-sir-model" id="toc-optional-questions-adding-vaccination-to-the-sir-model" class="nav-link" data-scroll-target="#optional-questions-adding-vaccination-to-the-sir-model">Optional questions: adding vaccination to the SIR model</a></li>
-  </ul></li>
+  <li><a href="#susceptible-infectious-model" id="toc-susceptible-infectious-model" class="nav-link" data-scroll-target="#susceptible-infectious-model">Susceptible-Infectious model</a></li>
+  <li><a href="#susceptible-infectious-recovered-model" id="toc-susceptible-infectious-recovered-model" class="nav-link" data-scroll-target="#susceptible-infectious-recovered-model">Susceptible-Infectious-Recovered model</a></li>
+  <li><a href="#susceptible-exposed-infectious-recovered-model" id="toc-susceptible-exposed-infectious-recovered-model" class="nav-link" data-scroll-target="#susceptible-exposed-infectious-recovered-model">Susceptible-Exposed-Infectious-Recovered model</a></li>
+  <li><a href="#optional-add-vaccination-to-the-seir-model" id="toc-optional-add-vaccination-to-the-seir-model" class="nav-link" data-scroll-target="#optional-add-vaccination-to-the-seir-model">Optional: Add vaccination to the SEIR model</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -230,54 +216,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="odes-in-r-practical" class="level1">
-<h1>ODEs in R: Practical</h1>
-<section id="solving-the-si-model-using-desolve" class="level2">
-<h2 class="anchored" data-anchor-id="solving-the-si-model-using-desolve">Solving the SI model using <code>deSolve</code></h2>
-<p>The code below will solve the SI model with beta = 0.4 over 50 days with initial conditions S(0) = 99, I(0) = 1. Run the following lines including the&nbsp;plot() line to create a plot of the output</p>
+<p>In this practical, we will use the R package <code>deSolve</code> to solve ODE models of infectious disease transmission.</p>
+<section id="practical-1-solving-odes-using-desolve" class="level2">
+<h2 class="anchored" data-anchor-id="practical-1-solving-odes-using-desolve">Practical 1: Solving ODEs using <code>deSolve</code></h2>
+<p>We will begin by exploring how to use <code>deSolve</code> to solve SI, SIR, and SEIR models.</p>
+<section id="susceptible-infectious-model" class="level3">
+<h3 class="anchored" data-anchor-id="susceptible-infectious-model">Susceptible-Infectious model</h3>
+<p>We’ll start by implementing the Susceptible-Infectious (SI) model from the lecture slides as a series of ordinary differential equations, and solve this model using <code>deSolve</code>. The model has the following diagram:</p>
+<p><img src="images/SI_diagram.png" class="img-fluid"></p>
+<p>Here, the force of infection is <span class="math inline">\(\beta I/N\)</span> (<span class="math inline">\(\beta\)</span> = beta), and once infected, individuals can infect others for life.</p>
+<p>See if you can code up an SI model using the material from the lecture slides. Use <span class="math inline">\(\beta = 0.4\)</span> as the transmission rate, and solve the model over 0 to 50 days with initial conditions <span class="math inline">\(S(0) = 99, I(0) = 1\)</span>. Then plot the output to visualise your results.</p>
+<p>The material from the lecture slides on the ODE SI model is summarized here: <a href="./04_ODEs_SI_code.html">ODE SI code</a>.</p>
+<p>Your model’s output should look something like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(deSolve) <span class="co"># Load in the deSolve package. If the package is not installed, install using the install.packages() function</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Define model function</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>SI_model <span class="ot">&lt;-</span> <span class="cf">function</span>(times, state, parms){</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Define variables</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  S <span class="ot">&lt;-</span> state[<span class="st">"S"</span>]</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  I <span class="ot">&lt;-</span> state[<span class="st">"I"</span>]</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  N <span class="ot">&lt;-</span> S <span class="sc">+</span> I</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract parameters</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  beta <span class="ot">&lt;-</span> parms[<span class="st">"beta"</span>]</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define differential equations</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  dS <span class="ot">&lt;-</span> <span class="sc">-</span> (beta <span class="sc">*</span> S <span class="sc">*</span> I) <span class="sc">/</span> N</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  dI <span class="ot">&lt;-</span> (beta <span class="sc">*</span> S <span class="sc">*</span> I) <span class="sc">/</span> N</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(dS, dI))</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Define parameter values</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">beta =</span> <span class="fl">0.4</span>)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Define time to solve equations</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>times <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">50</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Define initial conditions</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>I_0 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>S_0 <span class="ot">&lt;-</span> N <span class="sc">-</span> I_0</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>state <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="at">S =</span> S_0, <span class="at">I =</span> I_0)</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Solve equations</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>output_raw <span class="ot">&lt;-</span> <span class="fu">ode</span>(<span class="at">y =</span> state, <span class="at">times =</span> times, <span class="at">func =</span> SI_model, <span class="at">parms =</span> parameters,</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method =</span> <span class="st">"rk4"</span>)</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to data frame for easy extraction of columns</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(output_raw)</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot output</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>( <span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>( output<span class="sc">$</span>time, output<span class="sc">$</span>S, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, N),</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"Time"</span>, <span class="at">ylab =</span> <span class="st">"Number"</span>)</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>( output<span class="sc">$</span>time, output<span class="sc">$</span>I, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">type =</span> <span class="st">"l"</span>)</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Susceptible"</span>, <span class="st">"Infected"</span>),</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">bty =</span> <span class="st">"n"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -286,162 +237,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<section id="question-1" class="level3">
-<h3 class="anchored" data-anchor-id="question-1">Question 1:</h3>
-<section id="a-increase-the-initial-number-of-infected-individuals-what-happens-to-the-output" class="level4">
-<h4 class="anchored" data-anchor-id="a-increase-the-initial-number-of-infected-individuals-what-happens-to-the-output">1a) Increase the initial number of infected individuals, what happens to the output?</h4>
+<ol type="1">
+<li>After you have coded the model, answer the following questions:
+<ol type="a">
+<li>Increase the initial number of infectious individuals. What happens to the output?</li>
+<li>What does the <code>by</code> argument in the <code>times</code> vector represent?</li>
+<li>Increase the value of the <code>by</code> argument. What happens to the output? HINT: plot using <code>type = "b"</code> to plot both lines and points.</li>
+</ol></li>
+</ol>
 </section>
-<section id="b-what-does-the-by-argument-in-the-times-vector-represent" class="level4">
-<h4 class="anchored" data-anchor-id="b-what-does-the-by-argument-in-the-times-vector-represent">1b) What does the ‘by’ argument in the ‘times’ vector represent?</h4>
+<section id="susceptible-infectious-recovered-model" class="level3">
+<h3 class="anchored" data-anchor-id="susceptible-infectious-recovered-model">Susceptible-Infectious-Recovered model</h3>
+<p>Now, let’s create a Susceptible-Infectious-Recovered (SIR) model. Start by creating a new R script and copying and pasting in your code for the SI model; we will edit this code to create the SIR model. (You can also start from the provided <a href="./04_ODEs_SI_code.html">ODE SI code here</a>.)</p>
+<p>The SIR model has the following diagram:</p>
+<p><img src="images/SIR_diagram.png" class="img-fluid"></p>
+<p>Here, the force of infection is <span class="math inline">\(\beta I/N\)</span> and the recovery rate is <span class="math inline">\(\gamma\)</span> (gamma).</p>
+<p>As before, use <span class="math inline">\(\beta = 0.4\)</span> as the transmission rate, and set <span class="math inline">\(\gamma\)</span> such that the average duration of the infectious period is 5 days. Assume a total population of 100 individuals, one infectious person at time 0, and no recovered people at the start of the outbreak. Solve the model over 100 days.</p>
+<p>Working from your SI model, you will need to: change the name of your model function; add the new parameter <span class="math inline">\(\gamma\)</span> to the model function and the <code>parms</code> vector; add the new state compartment <span class="math inline">\(R\)</span> to the model function and the <code>y</code> vector; and make sure you are using the correct initial conditions, parameter values, and times.</p>
+<ol start="2" type="1">
+<li>Once you have coded the model:
+<ol type="a">
+<li>Plot the output of the SIR model with different colours for Susceptible, Infected and Recovered individuals.</li>
+<li>Change the value of the transmission rate so that the basic reproduction number is less than one, i.e.&nbsp;<span class="math inline">\(R_0 &lt; 1\)</span>. What happens to the output?</li>
+</ol></li>
+</ol>
 </section>
-<section id="c-increase-the-value-of-the-by-argument.-what-happens-to-the-output-hint-plot-using-type-b-to-plot-both-lines-and-points" class="level4">
-<h4 class="anchored" data-anchor-id="c-increase-the-value-of-the-by-argument.-what-happens-to-the-output-hint-plot-using-type-b-to-plot-both-lines-and-points">1c) Increase the value of the “by” argument. What happens to the output? HINT: plot using type = “b” to plot both lines and points</h4>
+<section id="susceptible-exposed-infectious-recovered-model" class="level3">
+<h3 class="anchored" data-anchor-id="susceptible-exposed-infectious-recovered-model">Susceptible-Exposed-Infectious-Recovered model</h3>
+<p>Now, working from your SIR model, let’s create a Susceptible-Exposed-Infectious-Recovered (SEIR) model with the following diagram:</p>
+<p><img src="images/SEIR_diagram.png" class="img-fluid"></p>
+<p>In this model, once infected, susceptible individuals move to the exposed class. Assume that exposed individuals become infectious after five days.</p>
+<ol start="3" type="1">
+<li>Once you have coded the model:
+<ol type="a">
+<li>Plot the output of the SEIR model with different colours for Susceptible, Exposed, Infected and Recovered individuals.</li>
+<li>How does the model output differ from the SIR model you coded previously?</li>
+</ol></li>
+</ol>
 </section>
-</section>
-</section>
-<section id="solving-the-sir-model-using-desolve" class="level2">
-<h2 class="anchored" data-anchor-id="solving-the-sir-model-using-desolve">Solving the SIR model using <code>deSolve</code></h2>
-<p>Now, let’s solve a Susceptible-Infected-Recovered set of ordinary equations. There are now states; Susceptible, Infected, Recovered. Once infected people recover at a rate gamma = 0.1. The code for the model function ONLY is given below.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define model function </span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>SIR_model <span class="ot">&lt;-</span> <span class="cf">function</span>(times, state, parms){</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Define variables</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  S <span class="ot">&lt;-</span> state[<span class="st">"S"</span>]</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  I <span class="ot">&lt;-</span> state[<span class="st">"I"</span>]</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  R <span class="ot">&lt;-</span> state[<span class="st">"R"</span>]</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  N <span class="ot">&lt;-</span> S <span class="sc">+</span> I <span class="sc">+</span> R</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract parameters</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  beta <span class="ot">&lt;-</span> parms[<span class="st">"beta"</span>]</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  gamma <span class="ot">&lt;-</span> parms[<span class="st">"gamma"</span>]</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define differential equations</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  dS <span class="ot">&lt;-</span> <span class="sc">-</span> (beta <span class="sc">*</span> S <span class="sc">*</span> I) <span class="sc">/</span> N</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  dI <span class="ot">&lt;-</span> (beta <span class="sc">*</span> S <span class="sc">*</span> I) <span class="sc">/</span> N <span class="sc">-</span> gamma <span class="sc">*</span> I</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  dR <span class="ot">&lt;-</span> gamma <span class="sc">*</span> I</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(dS, dI, dR ))</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="question-2" class="level3">
-<h3 class="anchored" data-anchor-id="question-2">Question 2:</h3>
-<section id="a-to-solve-this-model-you-need-to-write-a-new-vector-of-parameters-and-of-state-variables.-you-can-assume-that-there-are-no-recovered-individuals-at-time-0-and-1-infected.-plot-the-output-of-the-sir-model-with-different-colours-for-susceptible-infected-and-recovered-individuals." class="level4">
-<h4 class="anchored" data-anchor-id="a-to-solve-this-model-you-need-to-write-a-new-vector-of-parameters-and-of-state-variables.-you-can-assume-that-there-are-no-recovered-individuals-at-time-0-and-1-infected.-plot-the-output-of-the-sir-model-with-different-colours-for-susceptible-infected-and-recovered-individuals.">2a) To solve this model, you need to write a new vector of parameters and of state variables. You can assume that there are no recovered individuals at time 0 and 1 infected. Plot the output of the SIR model with different colours for Susceptible, Infected and Recovered individuals.</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define parameter values</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>parameters <span class="ot">&lt;-</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define initial conditions</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>state <span class="ot">&lt;-</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Solve equations</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>output_raw <span class="ot">&lt;-</span> <span class="fu">ode</span>(<span class="at">y =</span> state, <span class="at">times =</span> times, <span class="at">func =</span> SIR_model, <span class="at">parms =</span> parameters,</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method =</span> <span class="st">"rk4"</span>)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to data frame for easy extraction of columns</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(output_raw)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot output</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(output<span class="sc">$</span>time, output<span class="sc">$</span>S, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, N),</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Time"</span>, <span class="at">ylab =</span> <span class="st">"Number"</span>)</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(output<span class="sc">$</span>time, output<span class="sc">$</span>I, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(output<span class="sc">$</span>time, output<span class="sc">$</span>R, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"green"</span>)</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>( <span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Susceptible"</span>, <span class="st">"Infected"</span>, <span class="st">"Recovered"</span>),</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"green"</span>), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">bty =</span> <span class="st">"n"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="b-change-the-value-of-the-transmission-rate-so-that-the-basic-reproduction-number-is-less-than-one-i.e.-r_0-1-what-happens-to-the-output" class="level4">
-<h4 class="anchored" data-anchor-id="b-change-the-value-of-the-transmission-rate-so-that-the-basic-reproduction-number-is-less-than-one-i.e.-r_0-1-what-happens-to-the-output">2b) Change the value of the transmission rate so that the basic reproduction number is less than one, i.e.&nbsp;R_0 &lt; 1, what happens to the output?</h4>
-<p>Hint: Recall that for an SIR model, the basic reproduction number, R_0 = beta / gamma</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>output_raw <span class="ot">&lt;-</span> <span class="fu">ode</span>(<span class="at">y =</span> state, <span class="at">times =</span> times, <span class="at">func =</span> SIR_model, <span class="at">parms =</span> parameters,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method =</span> <span class="st">"rk4"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to data frame for easy extraction of columns</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(output_raw)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># plot results</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>( output<span class="sc">$</span>time, output<span class="sc">$</span>S, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, N),</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"Time"</span>, <span class="at">ylab =</span> <span class="st">"Number"</span>)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(output<span class="sc">$</span>time, output<span class="sc">$</span>I, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(output<span class="sc">$</span>time, output<span class="sc">$</span>R, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"green"</span>)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Susceptible"</span>, <span class="st">"Infected"</span>, <span class="st">"Recovered"</span>),</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"green"</span>), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">bty =</span> <span class="st">"n"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-</section>
-</section>
-<section id="solving-the-seir-model-using-desolve" class="level2">
-<h2 class="anchored" data-anchor-id="solving-the-seir-model-using-desolve">Solving the SEIR model using <code>deSolve</code></h2>
-<p>The code below has been written to solve a Susceptible-Exposed-Infected-Recovered model. In the model individuals can be in one of four states. Once infected, susceptible individuals move to the exposed class. Exposed individuals become infectious at a rate delta = 0.14.</p>
-<section id="question-3" class="level3">
-<h3 class="anchored" data-anchor-id="question-3">Question 3:</h3>
-<section id="if-you-attempt-to-run-the-code-below-you-will-receive-an-error-when-ode-is-called.-fix-the-seir_model-function-so-that-the-ode-line-runs-without-errors." class="level4">
-<h4 class="anchored" data-anchor-id="if-you-attempt-to-run-the-code-below-you-will-receive-an-error-when-ode-is-called.-fix-the-seir_model-function-so-that-the-ode-line-runs-without-errors.">3) If you attempt to run the code below, you will receive an error when <code>ode()</code> is called. Fix the SEIR_model function so that the ode() line runs without errors.</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define model function </span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>SEIR_model <span class="ot">&lt;-</span> <span class="cf">function</span>(times, state, parms){</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Define variables</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  S <span class="ot">&lt;-</span> state[<span class="dv">1</span>]</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  I <span class="ot">&lt;-</span> state[<span class="dv">2</span>]</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  R <span class="ot">&lt;-</span> state[<span class="dv">3</span>]</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  N <span class="ot">&lt;-</span> S <span class="sc">+</span> E <span class="sc">+</span> I <span class="sc">+</span> R</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract parameters</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  beta <span class="ot">&lt;-</span> parms[<span class="st">"beta"</span>]</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  gamma <span class="ot">&lt;-</span> parms[<span class="st">"gamma"</span>]</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  delta <span class="ot">&lt;-</span> parms[<span class="st">"delta"</span>]</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define differential equations</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  dS <span class="ot">&lt;-</span> <span class="sc">-</span> (beta <span class="sc">*</span> S <span class="sc">*</span> I ) <span class="sc">/</span> N</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  dE <span class="ot">&lt;-</span> (beta <span class="sc">*</span> S <span class="sc">*</span> I) <span class="sc">/</span> N <span class="sc">-</span> delta <span class="sc">*</span> E</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  dI <span class="ot">&lt;-</span> delta <span class="sc">*</span> E <span class="sc">-</span> gamma <span class="sc">*</span> I</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  dR <span class="ot">&lt;-</span> gamma <span class="sc">*</span> I</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(dS, dI, dR))</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Define parameters  </span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="at">beta =</span> <span class="fl">0.4</span>, <span class="at">gamma =</span> <span class="fl">0.1</span>)</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Define time to run model</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>times <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">50</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Define initial conditions</span></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>I_0 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>S_0  <span class="ot">&lt;-</span> N <span class="sc">-</span> I_0</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>R_0 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>state <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">S =</span> S_0, <span class="at">E =</span> <span class="dv">0</span>, <span class="at">I =</span> I_0, <span class="at">R =</span> R_0)</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Solve equations</span></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>output_raw <span class="ot">&lt;-</span> <span class="fu">ode</span>(<span class="at">y =</span> state, <span class="at">times =</span> times, <span class="at">func =</span> SEIR_model, <span class="at">parms =</span> parameters,</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>                  <span class="at">method =</span> <span class="st">"rk4"</span>)</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to data frame for easy extraction of columns</span></span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(output_raw)</span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="co"># plot results</span></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>( output<span class="sc">$</span>time, output<span class="sc">$</span>S, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, N),</span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">"Time"</span>, <span class="at">ylab =</span> <span class="st">"Number"</span>)</span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(output<span class="sc">$</span>time, output<span class="sc">$</span>I, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(output<span class="sc">$</span>time, output<span class="sc">$</span>R, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"green"</span>)</span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(output<span class="sc">$</span>time, output<span class="sc">$</span>E, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"cyan"</span>)</span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span>  <span class="fu">c</span>(<span class="st">"Susceptible"</span>, <span class="st">"Exposed"</span>, <span class="st">"Infected"</span>, <span class="st">"Recovered"</span>),</span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"green"</span>, <span class="st">"cyan"</span>), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">bty =</span> <span class="st">"n"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-</section>
-<section id="optional-questions-adding-vaccination-to-the-sir-model" class="level3">
-<h3 class="anchored" data-anchor-id="optional-questions-adding-vaccination-to-the-sir-model">Optional questions: adding vaccination to the SIR model</h3>
-<section id="extend-the-sir-model-to-include-a-vaccinated-class." class="level4">
-<h4 class="anchored" data-anchor-id="extend-the-sir-model-to-include-a-vaccinated-class.">4) Extend the SIR model to include a vaccinated class.</h4>
-<p>Here we assume that susceptible individuals are vaccinated at a rate v = 0.05. The vaccine is 100% effective, so once vaccinated, individuals cannot become infected. HINT: you will need to create a new class V, you can assume that the initial number of vaccinated individuals is 0.</p>
+<section id="optional-add-vaccination-to-the-seir-model" class="level3">
+<h3 class="anchored" data-anchor-id="optional-add-vaccination-to-the-seir-model">Optional: Add vaccination to the SEIR model</h3>
+<ol start="4" type="1">
+<li>Extend the SEIR model to include a vaccinated class:
+<ol type="a">
+<li>Draw the model diagram.</li>
+<li>Implement the model in R starting from your SEIR code.</li>
+</ol></li>
+</ol>
+<p>We will assume that susceptible individuals are vaccinated at a rate <span class="math inline">\(v = 0.01\)</span>. The vaccine is 100% effective, so once vaccinated, individuals cannot become infected. HINT: you will need to create a new class <span class="math inline">\(V\)</span>, and you can assume that the initial number of vaccinated individuals is 0.</p>
 <p><strong>Solutions to this practical can be accessed <a href="./04_ODEs_solutions.html">here</a>.</strong></p>
 
 
-</section>
-</section>
 </section>
 </section>
 
@@ -481,7 +327,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const onCopySuccess = function(e) {
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -513,29 +370,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
   });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -543,7 +378,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

@@ -2,32 +2,49 @@
 title: "04. Ordinary differential equations (ODEs)"
 ---
 
-# ODEs in R: Practical
+In this practical, we will use the R package `deSolve` to solve ODE models of infectious disease transmission.
 
-## Solving the SI model using `deSolve`
+## Practical 1: Solving ODEs using `deSolve`
 
-The code below will solve the SI model with beta = 0.4 over 50 days with initial conditions S(0) = 99, I(0) = 1. Run the following lines including the plot() line to create a plot of the output
+We will begin by exploring how to use `deSolve` to solve SI, SIR, and SEIR models.
 
-```{r}
-library(deSolve) # Load in the deSolve package. If the package is not installed, install using the install.packages() function
+### Susceptible-Infectious model
+
+We'll start by implementing the Susceptible-Infectious (SI) model from the lecture slides as a series of ordinary differential equations, and solve this model using `deSolve`. The model has the following diagram:
+
+![](images/SI_diagram.png)
+
+Here, the force of infection is $\beta I/N$ ($\beta$ = beta), and once infected, individuals can infect others for life.
+
+See if you can code up an SI model using the material from the lecture slides. Use $\beta = 0.4$ as the transmission rate, and solve the model over 0 to 50 days with initial conditions $S(0) = 99, I(0) = 1$. Then plot the output to visualise your results.
+
+The material from the lecture slides on the ODE SI model is summarized here: [ODE SI code](04_ODEs_SI_code.qmd).
+
+Your model's output should look something like this:
+```{r echo = FALSE, output = TRUE, message = FALSE}
+library(deSolve) # For solving systems of ODEs
+
+# If the deSolve package is not installed, install using:
+# install.packages("deSolve")
+
 # Define model function
-
-SI_model <- function(times, state, parms){
-  ## Define variables
-  S <- state["S"]
-  I <- state["I"]
-  N <- S + I
-  # Extract parameters
-  beta <- parms["beta"]
-  # Define differential equations
-  dS <- - (beta * S * I) / N
-  dI <- (beta * S * I) / N
-  res <- list(c(dS, dI))
-  return(res)
+SI_model <- function(times, state, parms)
+{
+    # Get variables
+    S <- state["S"]
+    I <- state["I"]
+    N <- S + I
+    # Get parameters
+    beta <- parms["beta"]
+    # Define differential equations
+    dS <- -(beta * I / N) * S
+    dI <- (beta * I / N) * S
+    res <- list(c(dS, dI))
+    return (res)
 }
 
 # Define parameter values
-parameters <- c(beta = 0.4)
+parms <- c(beta = 0.4)
 
 # Define time to solve equations
 times <- seq(from = 0, to = 50, by = 1)
@@ -36,172 +53,63 @@ times <- seq(from = 0, to = 50, by = 1)
 N <- 100
 I_0 <- 1
 S_0 <- N - I_0
-state <- c( S = S_0, I = I_0)
+y <- c(S = S_0, I = I_0)
 
 # Solve equations
-output_raw <- ode(y = state, times = times, func = SI_model, parms = parameters,
-                  method = "rk4")
-# Convert to data frame for easy extraction of columns
+output_raw <- ode(y = y, times = times, func = SI_model, parms = parms)
+
+# Convert matrix to data frame for easier manipulation
 output <- as.data.frame(output_raw)
 
-# Plot output
-par( mfrow = c(1, 1))
-plot( output$time, output$S, type = "l", col = "blue", lwd = 2, ylim = c(0, N),
-      xlab = "Time", ylab = "Number")
-lines( output$time, output$I, lwd = 2, col = "red", type = "l")
-legend("topright", legend = c("Susceptible", "Infected"),
-       lty = c(1, 1), col = c("blue", "red"), lwd = 2, bty = "n")
-```
-
-### Question 1:
-
-#### 1a) Increase the initial number of infected individuals, what happens to the output?
-
-#### 1b) What does the 'by' argument in the 'times' vector represent?
-
-#### 1c) Increase the value of the "by" argument. What happens to the output? HINT: plot using type = "b" to plot both lines and points
-
-## Solving the SIR model using `deSolve`
-
-Now, let's solve a Susceptible-Infected-Recovered set of ordinary equations. There are now states; Susceptible, Infected, Recovered. Once infected people recover at a rate gamma = 0.1. The code for the model function ONLY is given below.
-
-```{r}
-# Define model function 
-SIR_model <- function(times, state, parms){
-  ## Define variables
-  S <- state["S"]
-  I <- state["I"]
-  R <- state["R"]
-  N <- S + I + R
-  # Extract parameters
-  beta <- parms["beta"]
-  gamma <- parms["gamma"]
-  # Define differential equations
-  dS <- - (beta * S * I) / N
-  dI <- (beta * S * I) / N - gamma * I
-  dR <- gamma * I
-  res <- list(c(dS, dI, dR ))
-  return(res)
-}
-```
-
-### Question 2:
-
-#### 2a) To solve this model, you need to write a new vector of parameters and of state variables. You can assume that there are no recovered individuals at time 0 and 1 infected. Plot the output of the SIR model with different colours for Susceptible, Infected and Recovered individuals.
-
-```{r eval = F}
-# Define parameter values
-parameters <-
-
-# Define initial conditions
-N <- 100
-
-state <-
-
-# Solve equations
-output_raw <- ode(y = state, times = times, func = SIR_model, parms = parameters,
-                  method = "rk4")
-# Convert to data frame for easy extraction of columns
-output <- as.data.frame(output_raw)
-
-# Plot output
-par(mfrow = c(1, 1))
+# Plot model output
 plot(output$time, output$S, type = "l", col = "blue", lwd = 2, ylim = c(0, N),
-     xlab = "Time", ylab = "Number")
-lines(output$time, output$I, lwd = 2, col = "red")
-lines(output$time, output$R, lwd = 2, col = "green")
-legend( "topright", legend = c("Susceptible", "Infected", "Recovered"),
-        lty = 1, col = c("blue", "red", "green"), lwd = 2, bty = "n")
-
-```
-
-#### 2b) Change the value of the transmission rate so that the basic reproduction number is less than one, i.e. R_0 \< 1, what happens to the output?
-
-Hint: Recall that for an SIR model, the basic reproduction number, R_0 = beta / gamma
-
-```{r eval = F}
-parameters <- 
-
-output_raw <- ode(y = state, times = times, func = SIR_model, parms = parameters,
-                  method = "rk4")
-# Convert to data frame for easy extraction of columns
-output <- as.data.frame(output_raw)
-
-# plot results
-par(mfrow = c(1, 1))
-plot( output$time, output$S, type = "l", col = "blue", lwd = 2, ylim = c(0, N),
       xlab = "Time", ylab = "Number")
-lines(output$time, output$I, lwd = 2, col = "red")
-lines(output$time, output$R, lwd = 2, col = "green")
-legend("topright", legend = c("Susceptible", "Infected", "Recovered"),
-       lty = 1, col = c("blue", "red", "green"), lwd = 2, bty = "n")
-
+lines(output$time, output$I, lwd = 2, col = "red", type = "l")
+legend("topright", legend = c("Susceptible", "Infected"),
+       col = c("blue", "red"), lwd = 2, bty = "n")
 ```
 
-## Solving the SEIR model using `deSolve`
+1.  After you have coded the model, answer the following questions:
+    (a) Increase the initial number of infectious individuals. What happens to the output?
+    (b) What does the `by` argument in the `times` vector represent?
+    (c) Increase the value of the `by` argument. What happens to the output? HINT: plot using `type = "b"` to plot both lines and points.
 
-The code below has been written to solve a Susceptible-Exposed-Infected-Recovered model. In the model individuals can be in one of four states. Once infected, susceptible individuals move to the exposed class. Exposed individuals become infectious at a rate delta = 0.14.
+### Susceptible-Infectious-Recovered model
 
-### Question 3:
+Now, let's create a Susceptible-Infectious-Recovered (SIR) model. Start by creating a new R script and copying and pasting in your code for the SI model; we will edit this code to create the SIR model. (You can also start from the provided [ODE SI code here](04_ODEs_SI_code.qmd).)
 
-#### 3) If you attempt to run the code below, you will receive an error when `ode()` is called. Fix the SEIR_model function so that the ode() line runs without errors.
+The SIR model has the following diagram:
 
-```{r eval = F}
-# Define model function 
-SEIR_model <- function(times, state, parms){
-  ## Define variables
-  S <- state[1]
-  I <- state[2]
-  R <- state[3]
-  N <- S + E + I + R
-  # Extract parameters
-  beta <- parms["beta"]
-  gamma <- parms["gamma"]
-  delta <- parms["delta"]
-  # Define differential equations
-  dS <- - (beta * S * I ) / N
-  dE <- (beta * S * I) / N - delta * E
-  dI <- delta * E - gamma * I
-  dR <- gamma * I
-  res <- list(c(dS, dI, dR))
-  return(res)
-}
+![](images/SIR_diagram.png)
 
-# Define parameters  
-parameters <- c( beta = 0.4, gamma = 0.1)
+Here, the force of infection is $\beta I/N$ and the recovery rate is $\gamma$ (gamma).
 
-# Define time to run model
-times <- seq(from = 0, to = 50, by = 1)
+As before, use $\beta = 0.4$ as the transmission rate, and set $\gamma$ such that the average duration of the infectious period is 5 days. Assume a total population of 100 individuals, one infectious person at time 0, and no recovered people at the start of the outbreak. Solve the model over 100 days.
 
-# Define initial conditions
-N <- 100
-I_0 <- 1
-S_0  <- N - I_0
-R_0 <- 0
-state <- c(S = S_0, E = 0, I = I_0, R = R_0)
+Working from your SI model, you will need to: change the name of your model function; add the new parameter $\gamma$ to the model function and the `parms` vector; add the new state compartment $R$ to the model function and the `y` vector; and make sure you are using the correct initial conditions, parameter values, and times. 
 
-# Solve equations
-output_raw <- ode(y = state, times = times, func = SEIR_model, parms = parameters,
-                  method = "rk4")
-# Convert to data frame for easy extraction of columns
-output <- as.data.frame(output_raw)
+2.  Once you have coded the model:
+    (a) Plot the output of the SIR model with different colours for Susceptible, Infected and Recovered individuals.
+    (b) Change the value of the transmission rate so that the basic reproduction number is less than one, i.e. $R_0 < 1$. What happens to the output?
 
-# plot results
-par(mfrow = c(1, 1))
-plot( output$time, output$S, type = "l", col = "blue", lwd = 2, ylim = c(0, N),
-      xlab = "Time", ylab = "Number")
-lines(output$time, output$I, lwd = 2, col = "red")
-lines(output$time, output$R, lwd = 2, col = "green")
-lines(output$time, output$E, lwd = 2, col = "cyan")
-legend("topright", legend =  c("Susceptible", "Exposed", "Infected", "Recovered"),
-       lty = 1, col = c("blue", "red", "green", "cyan"), lwd = 2, bty = "n")
+### Susceptible-Exposed-Infectious-Recovered model
 
-```
+Now, working from your SIR model, let's create a Susceptible-Exposed-Infectious-Recovered (SEIR) model with the following diagram: 
 
-### Optional questions: adding vaccination to the SIR model
+![](images/SEIR_diagram.png)
 
-#### 4) Extend the SIR model to include a vaccinated class.
+In this model, once infected, susceptible individuals move to the exposed class. Assume that exposed individuals become infectious after five days. 
 
-Here we assume that susceptible individuals are vaccinated at a rate v = 0.05. The vaccine is 100% effective, so once vaccinated, individuals cannot become infected. HINT: you will need to create a new class V, you can assume that the initial number of vaccinated individuals is 0.
+3.  Once you have coded the model:
+    (a) Plot the output of the SEIR model with different colours for Susceptible, Exposed, Infected and Recovered individuals.
+    (b) How does the model output differ from the SIR model you coded previously?
+
+### Optional: Add vaccination to the SEIR model
+
+4.  Extend the SEIR model to include a vaccinated class:
+    (a) Draw the model diagram.
+    (b) Implement the model in R starting from your SEIR code.
+
+We will assume that susceptible individuals are vaccinated at a rate $v = 0.01$. The vaccine is 100% effective, so once vaccinated, individuals cannot become infected. HINT: you will need to create a new class $V$, and you can assume that the initial number of vaccinated individuals is 0.
 
 **Solutions to this practical can be accessed [here](04_ODEs_solutions.qmd).**

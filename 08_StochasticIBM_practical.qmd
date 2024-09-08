@@ -8,7 +8,7 @@ In this practical, we will implement a stochastic individual-based model of SARS
 
 In the first practical for this session, we'll code a stochastic individual-based SEIR model with the following model diagram:
 
-![](images/SEIR_diagram.png)
+![](images/SEIRS_diagram.png)
 
 Here, the force of infection is $\lambda = \beta I/N$, the latent period duration is $1/\delta$, the infectious period is $1/\gamma$ and the waning rate is $\omega$. (Symbol names: $\beta$ = beta, $\delta$ = delta, $\gamma$ = gamma, $\lambda$ = lambda, $\omega$ = omega.)
 
