@@ -54,7 +54,7 @@ for (i in 2:nrow(y_sir))
 plot(x = time_sir, y = y_sir[, 2], type = "s")
 ```
 
-**Answers to questions 1-6**
+**Questions 1-6** ask: - At approximately what time does the peak in infectious population occur and what proportion of the population is infectious? and - Approximately what proportion of the population gets infected? for three different sets of `beta` (transmission rate) and `gamma` (recovery rate) in the model. The solutions are summarized in the table and figure below:
 
 | Parameters                  | Peak in infectious population | Total proportion infected |
 |-----------------------|----------------------------|----------------------|
@@ -62,11 +62,56 @@ plot(x = time_sir, y = y_sir[, 2], type = "s")
 | `beta = 1.3,  gamma = 0.5`  | \(3\) t = 8, I = 0.30         | \(4\) 0.943               |
 | `beta = 0.65, gamma = 0.23` | \(5\) t = 14, I = 0.31        | \(6\) 0.943               |
 
+```{r, echo = FALSE, eval = TRUE, output = TRUE}
+
+do_sir <- function(beta, gamma)
+{
+	parms_sir <- c(beta = beta, gamma = gamma)
+	y_sir <- matrix(data = NA,
+                nrow = length(time_sir),
+                ncol = 3)
+	y_sir[1, ] <- c(0.99, 0.01, 0)
+
+	# Run each step of the model from the second time step onward
+	for (i in 2:nrow(y_sir))
+	{
+		# Assign new value to y_sir[i, ] using the update_sir function
+	    y_sir[i, ] <- y_sir[i - 1, ] +
+	        update_sir(time_sir[i],
+	                   y_sir[i - 1, ],
+	                   parms_sir)
+	}
+	
+	return (y_sir)
+}
+
+y_sir_1 <- do_sir(1.3, 0.23)
+y_sir_2 <- do_sir(1.3, 0.5)
+y_sir_3 <- do_sir(0.65, 0.23)
+
+# Plot all
+plot(x = time_sir, y = y_sir_1[, 2], type = "s", col = "red")
+lines(x = time_sir, y = y_sir_2[, 2], type = "s", col = "orange")
+lines(x = time_sir, y = y_sir_3[, 2], type = "s", col = "blue")
+title(xlab = "Time (days)", ylab = "Infectious people")
+legend("topright", legend = expression(list(beta==1.3, gamma==0.23), list(beta==1.3, gamma==0.5), list(beta==0.65, gamma==0.23)),
+	col = c("red", "orange", "blue"), lty = 1, bty = "n")
+
+```
+
+When we start with $\beta=1.3, \gamma=0.23$ the peak occurs on day 7 with 60% of the population infectious. Almost everyone in the population is infected by the end of the simulation.
+
+When we increase `gamma` from $\gamma=0.23$ to $\gamma=0.5$, this increase in the recovery rate corresponds to a shorter infectious period (2 days instead of 4.35 days). This means people spend less time in the $I$ compartment, which decreases the reproduction number by around $1/2$, and so the peak proportion of the population who are infectious is smaller (by around $1/2$). But since the generation interval is also shorter by around $1/2$, the peak doesn't happen substantially later.
+
+When instead we decrease `beta` from $\beta=1.3$ to $\gamma=0.65$, this decrease in the transmission rate reduces the reproduction number, but does not change the generation interval. The peak proportion of the population who are infectious is smaller relative to when $\beta=1.3, \gamma=0.23$. This time, the peak is also shifted later, because the lower reproduction number is not "compensated" in this regard by a shorter generation interval.
+
+For questions (4) and (6), the reproduction number is lower by around the same amount relative to question (2), so the total proportion infected is lower by a similar amount in both (4) and (6).
+
 ## Practical 2. Extending the SIR model
 
 ### Incorporating births and deaths
 
-```{r, eval = T, output = T}
+```{r, echo = T, eval = T, output = T}
 # Times for evaluating the model
 time_sir <- seq(0, 20, by = 1)
 
@@ -186,7 +231,7 @@ The recovery rate `gamma` represents the recovery rate, such that `1/gamma` is t
 
 The birth rate `delta` captures the rate of new births and also the rate of deaths.
 
-There's an implicit assumption in the model that transmission is not passed to newborns, i.e., only susceptibles are born. This is likely a reasonable assumption to make for many diseases. 
+There's an implicit assumption in the model that transmission is not passed to newborns, i.e., only susceptibles are born. This is likely a reasonable assumption to make for many diseases.
 
 As we are dealing with proportions of the total population, it's reasonable to keep N(t) constant, but the birth and death rates may not be reasonable.
 

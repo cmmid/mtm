@@ -84,7 +84,7 @@ You will need to add a new parameter, `delta = 0.01`, and add the new transition
 
 ### Visualising for the whole population
 
-Calculate $N(t) = S(t) + I(t) + R(t)$ the total number of individuals. 
+Calculate $N(t) = S(t) + I(t) + R(t)$ the total number of individuals.
 
 1.  Make a plot of $S(t)$, $I(t)$, $R(t)$ and $N(t)$. Your function $N(t)$ should be constant at 1 for all values of $t$. If this is not the case, ensure the model contains births of new S proportional to N, and deaths of each of S, I, and R.
 

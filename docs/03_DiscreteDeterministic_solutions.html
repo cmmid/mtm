@@ -307,7 +307,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p><strong>Answers to questions 1-6</strong></p>
+<p><strong>Questions 1-6</strong> ask: - At approximately what time does the peak in infectious population occur and what proportion of the population is infectious? and - Approximately what proportion of the population gets infected? for three different sets of <code>beta</code> (transmission rate) and <code>gamma</code> (recovery rate) in the model. The solutions are summarized in the table and figure below:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 31%">
@@ -339,6 +339,19 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_DiscreteDeterministic_solutions_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>When we start with <span class="math inline">\(\beta=1.3, \gamma=0.23\)</span> the peak occurs on day 7 with 60% of the population infectious. Almost everyone in the population is infected by the end of the simulation.</p>
+<p>When we increase <code>gamma</code> from <span class="math inline">\(\gamma=0.23\)</span> to <span class="math inline">\(\gamma=0.5\)</span>, this increase in the recovery rate corresponds to a shorter infectious period (2 days instead of 4.35 days). This means people spend less time in the <span class="math inline">\(I\)</span> compartment, which decreases the reproduction number by around <span class="math inline">\(1/2\)</span>, and so the peak proportion of the population who are infectious is smaller (by around <span class="math inline">\(1/2\)</span>). But since the generation interval is also shorter by around <span class="math inline">\(1/2\)</span>, the peak doesn’t happen substantially later.</p>
+<p>When instead we decrease <code>beta</code> from <span class="math inline">\(\beta=1.3\)</span> to <span class="math inline">\(\gamma=0.65\)</span>, this decrease in the transmission rate reduces the reproduction number, but does not change the generation interval. The peak proportion of the population who are infectious is smaller relative to when <span class="math inline">\(\beta=1.3, \gamma=0.23\)</span>. This time, the peak is also shifted later, because the lower reproduction number is not “compensated” in this regard by a shorter generation interval.</p>
+<p>For questions (4) and (6), the reproduction number is lower by around the same amount relative to question (2), so the total proportion infected is lower by a similar amount in both (4) and (6).</p>
 </section>
 <section id="practical-2.-extending-the-sir-model" class="level2">
 <h2 class="anchored" data-anchor-id="practical-2.-extending-the-sir-model">Practical 2. Extending the SIR model</h2>
@@ -399,7 +412,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="03_DiscreteDeterministic_solutions_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="03_DiscreteDeterministic_solutions_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -426,7 +439,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="03_DiscreteDeterministic_solutions_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="03_DiscreteDeterministic_solutions_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -444,7 +457,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="03_DiscreteDeterministic_solutions_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="03_DiscreteDeterministic_solutions_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
