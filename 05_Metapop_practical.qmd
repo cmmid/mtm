@@ -61,8 +61,7 @@ state <- c(S1 = S1_0, I1 = I1_0, R1 = R1_0, C1 = C1_0,
 output_raw <- ode(y = state, 
 				  times = times, 
 				  func = SIR_metapop_model, 
-				  parms = parameters,
-                  method = rk4)
+				  parms = parameters)
 
 # Convert to data frame for easy extraction of columns
 output <- as.data.frame(output_raw)
