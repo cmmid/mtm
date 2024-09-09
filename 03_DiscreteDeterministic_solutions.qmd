@@ -54,7 +54,12 @@ for (i in 2:nrow(y_sir))
 plot(x = time_sir, y = y_sir[, 2], type = "s")
 ```
 
-**Questions 1-6** ask: - At approximately what time does the peak in infectious population occur and what proportion of the population is infectious? and - Approximately what proportion of the population gets infected? for three different sets of `beta` (transmission rate) and `gamma` (recovery rate) in the model. The solutions are summarized in the table and figure below:
+**Questions 1-6** ask:
+
+-  At approximately what time does the peak in infectious population occur and what proportion of the population is infectious? and
+-  Approximately what proportion of the population gets infected? 
+
+for three different sets of `beta` (transmission rate) and `gamma` (recovery rate) in the model. The solutions are summarized in the table and figure below:
 
 | Parameters                  | Peak in infectious population | Total proportion infected |
 |-----------------------|----------------------------|----------------------|
@@ -90,10 +95,9 @@ y_sir_2 <- do_sir(1.3, 0.5)
 y_sir_3 <- do_sir(0.65, 0.23)
 
 # Plot all
-plot(x = time_sir, y = y_sir_1[, 2], type = "s", col = "red")
+plot(x = time_sir, y = y_sir_1[, 2], type = "s", col = "red", xlab = "Time (days)", ylab = "Infectious people")
 lines(x = time_sir, y = y_sir_2[, 2], type = "s", col = "orange")
 lines(x = time_sir, y = y_sir_3[, 2], type = "s", col = "blue")
-title(xlab = "Time (days)", ylab = "Infectious people")
 legend("topright", legend = expression(list(beta==1.3, gamma==0.23), list(beta==1.3, gamma==0.5), list(beta==0.65, gamma==0.23)),
 	col = c("red", "orange", "blue"), lty = 1, bty = "n")
 
@@ -103,7 +107,7 @@ When we start with $\beta=1.3, \gamma=0.23$ the peak occurs on day 7 with 60% of
 
 When we increase `gamma` from $\gamma=0.23$ to $\gamma=0.5$, this increase in the recovery rate corresponds to a shorter infectious period (2 days instead of 4.35 days). This means people spend less time in the $I$ compartment, which decreases the reproduction number by around $1/2$, and so the peak proportion of the population who are infectious is smaller (by around $1/2$). But since the generation interval is also shorter by around $1/2$, the peak doesn't happen substantially later.
 
-When instead we decrease `beta` from $\beta=1.3$ to $\gamma=0.65$, this decrease in the transmission rate reduces the reproduction number, but does not change the generation interval. The peak proportion of the population who are infectious is smaller relative to when $\beta=1.3, \gamma=0.23$. This time, the peak is also shifted later, because the lower reproduction number is not "compensated" in this regard by a shorter generation interval.
+When instead we decrease `beta` from $\beta=1.3$ to $\beta=0.65$, this decrease in the transmission rate reduces the reproduction number, but does not change the generation interval. The peak proportion of the population who are infectious is smaller relative to when $\beta=1.3, \gamma=0.23$. This time, the peak is also shifted later, because the lower reproduction number is not "compensated" in this regard by a shorter generation interval.
 
 For questions (4) and (6), the reproduction number is lower by around the same amount relative to question (2), so the total proportion infected is lower by a similar amount in both (4) and (6).
 
