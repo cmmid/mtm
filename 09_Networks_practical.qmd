@@ -399,7 +399,7 @@ But what if only the lowest-risk get people get vaccinated, because people at hi
 
 Try extending the function `vaccinate_network()` that you have written to use the parameter `k` to control the association between risk and vaccination.
 
-For example, when `k = 0` we can vaccinate people at random; when `k = 1` we vaccinate only those people with the highest number of connections in the network; and when `k = -1` we vaccnate only those people with the lowest number of connections in the network.
+For example, when `k = 0` we can vaccinate people at random; when `k = 1` we vaccinate only those people with the highest number of connections in the network; and when `k = -1` we vaccinate only those people with the lowest number of connections in the network.
 
 Recall that our `create_network()` function already makes sure that the vertices are sorted in order from lowest degree to highest degree, so that, for example, `V(network)[1:10]` would select the 10 least connected individuals and `V(network)[(vcount(network) - 9):vcount(network)]` would select the 10 most connected individuals.
 

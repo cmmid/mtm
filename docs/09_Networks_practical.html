@@ -272,9 +272,9 @@ window.Quarto = {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>gr <span class="ot">&lt;-</span> <span class="fu">make_full_graph</span>(<span class="dv">4</span>)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(gr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>IGRAPH 495a8a4 U--- 4 6 -- Full graph
+<pre><code>IGRAPH e3d98ce U--- 4 6 -- Full graph
 + attr: name (g/c), loops (g/l)
-+ edges from 495a8a4:
++ edges from e3d98ce:
 [1] 1--2 1--3 1--4 2--3 2--4 3--4</code></pre>
 </div>
 </div>
@@ -374,10 +374,10 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>IGRAPH 73263e3 U--- 25 40 -- Lattice graph
+<pre><code>IGRAPH 3e3e28a U--- 25 40 -- Lattice graph
 + attr: name (g/c), dimvector (g/n), nei (g/n), mutual (g/l), circular
 | (g/l), layout (g/n), color (v/c), color (e/c)
-+ edges from 73263e3:
++ edges from 3e3e28a:
  [1]  1-- 2  1-- 6  2-- 3  2-- 7  3-- 4  3-- 8  4-- 5  4-- 9  5--10  6-- 7
 [11]  6--11  7-- 8  7--12  8-- 9  8--13  9--10  9--14 10--15 11--12 11--16
 [21] 12--13 12--17 13--14 13--18 14--15 14--19 15--20 16--17 16--21 17--18
@@ -647,7 +647,7 @@ window.Quarto = {
 <p>Usually, as a first step, we might model each person’s propensity for getting vaccinated as being independent of their other characteristics – that is, we make the assumption that people get vaccinated completely at random.</p>
 <p>But what if only the lowest-risk get people get vaccinated, because people at higher risk have less access to vaccines? Or what if we design our vaccination programme to target specifically the people who are at higher risk?</p>
 <p>Try extending the function <code>vaccinate_network()</code> that you have written to use the parameter <code>k</code> to control the association between risk and vaccination.</p>
-<p>For example, when <code>k = 0</code> we can vaccinate people at random; when <code>k = 1</code> we vaccinate only those people with the highest number of connections in the network; and when <code>k = -1</code> we vaccnate only those people with the lowest number of connections in the network.</p>
+<p>For example, when <code>k = 0</code> we can vaccinate people at random; when <code>k = 1</code> we vaccinate only those people with the highest number of connections in the network; and when <code>k = -1</code> we vaccinate only those people with the lowest number of connections in the network.</p>
 <p>Recall that our <code>create_network()</code> function already makes sure that the vertices are sorted in order from lowest degree to highest degree, so that, for example, <code>V(network)[1:10]</code> would select the 10 least connected individuals and <code>V(network)[(vcount(network) - 9):vcount(network)]</code> would select the 10 most connected individuals.</p>
 <p>The version of <code>vaccinate_network()</code> in the solutions for this practical goes a step further by allowing intermediate values for <code>k</code> between -1 and +1, with intermediate values moving from the extreme of vaccinating only the least-connected (<span class="math inline">\(k = -1\)</span>) to vaccinating at random (<span class="math inline">\(k = 0\)</span>) to vaccinating only the most-connected (<span class="math inline">\(k = 1\)</span>). There are lots of different ways of doing this, but the way the practical solution does it is by first vaccinating the <span class="math inline">\(nv\)</span> most connected individuals if <code>k</code> is positive, or the <span class="math inline">\(nv\)</span> least connected individuals if <span class="math inline">\(k\)</span> is negative, then randomly shuffling the vaccination status of a fraction <span class="math inline">\(1 - |k|\)</span> of all individuals. Check the solutions if you like, but you can also try implementing this (or another way) yourself.</p>
 </section>
