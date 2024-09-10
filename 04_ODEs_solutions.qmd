@@ -77,7 +77,7 @@ SI_seasonal_model <- function(t, state, parms)
     dS <- -(beta * S * I) / N
     dI <- (beta * S * I) / N
     res <- list(c(dS, dI))
-    return(res)
+    return (res)
 }
 
 # Define parameter values
@@ -127,6 +127,21 @@ legend("topright", legend = c("Susceptible", "Infected"),
 # 3. Change the period to 50 days and plot the output. What does the model output look like?
 # Can you explain why?
 
+# Change parameters
+parameters["period"] <- 50
+
+# Run ODEs again
+output_raw <- ode(y = state, times = times, func = SI_seasonal_model, parms = parameters)
+output <- as.data.frame(output_raw)
+
+# Plot output
+par(mfrow = c(1, 1))
+plot(output$time, output$S, type = "l", col = "blue", lwd = 2, ylim = c(0, N),
+      xlab = "Time", ylab = "Number")
+lines(output$time, output$I, lwd = 2, col = "red")
+legend("topright", legend = c("Susceptible", "Infected"),
+       lty = 1, col = c("blue", "red"), lwd = 2, bty = "n")
+
 # Answer: 
 # The period is longer than the vector of times, so a full cycle is not completed within
 # our model solution
@@ -158,10 +173,10 @@ SI_open_model <- function(times, state, parms)
     K <- parms["K"]
     b <- parms["b"]
     # Define differential equations
-    dS <- b * N * (K - N) / K - ( beta * S * I) / N
+    dS <- b * N * (K - N) / K - (beta * S * I) / N
     dI <- (beta * S * I) / N 
     res <- list(c(dS, dI))
-    return(res)
+    return (res)
 }
 
 # Define time to solve equations
@@ -171,7 +186,7 @@ times <- seq(from = 0, to = 100, by = 1)
 N <- 100
 I_0 <- 1
 S_0 <- N - I_0
-state <- c( S = S_0, I = I_0)
+state <- c(S = S_0, I = I_0)
 
 # 4. Using beta = 0 (no infection risk), K = 100, b = 0.1, and an entirely susceptible 
 # population (I_0 = 0), investigate how the population grows with S_0 = 1, 50 and 100.
@@ -198,9 +213,10 @@ root <- function(times, state, parms)
     N <- S + I
     # Get parameters
     K <- parms["K"]
-    # Our condition : more than half of the target herd size becomes infected
-    condition <- I <  K * 0.5 # This is a logical condition (TRUE/FALSE)
-    return (as.numeric(condition)) # Make this numeric, event occurs if root == 0
+    # Our condition: more than half of the target herd size becomes infected
+    # We want our indicator to cross zero when this happens
+    indicator <- I - K * 0.5
+    return (indicator)
 }
 
 # The event function describes what happens if the event is triggered
@@ -270,6 +286,20 @@ event_SI_cull <- function(times, state, parms)
 # 7. What happens to the infection dynamics when the infected animals are culled?
 # How is this different to when only infected animals are culled?
 
+# Solve equations
+output_raw <- ode(y = state, times = times, func = SI_open_model, parms = parameters,
+                  events = list(func = event_SI_cull, root = TRUE), rootfun = root)
+# Convert to data frame for easy extraction of columns
+output <- as.data.frame(output_raw)
+
+# Plot output
+par(mfrow = c(1, 1))
+plot(output$time, output$S, type = "l", col = "blue", lwd = 2, ylim = c(0, N),
+     xlab = "Time", ylab = "Number")
+lines(output$time, output$I, lwd = 2, col = "red")
+legend("topright", legend = c("Susceptible", "Infected"),
+       lty = 1, col = c("blue", "red"), lwd = 2, bty = "n")
+
 # Answer: more animals are added to the susceptible state, but the same cycle occurs,
 # infection is never eradicated.
 
@@ -303,7 +333,7 @@ List SIR_cpp_model(NumericVector t, NumericVector state, NumericVector parms)
     double gamma = parms["gamma"];
     
     // Define differential equations
-    double dS = - (beta * S * I) / N;
+    double dS = -(beta * S * I) / N;
     double dI = (beta * S * I) / N - gamma * I;
     double dR = gamma * I;
     
@@ -315,7 +345,29 @@ List SIR_cpp_model(NumericVector t, NumericVector state, NumericVector parms)
 }
 ')
 
+# Let's also implement the same model in R for comparison:
+SIR_R_model <- function(t, state, parms)
+{
+	# Get variables
+	S <- state["S"]
+	I <- state["I"]
+	R <- state["R"]
+	N <- S + I + R
+	# Get parameters
+	beta <- parms["beta"]
+	gamma <- parms["gamma"]
+	# Define differential equations
+	dS <- -(beta * S * I) / N
+	dI <- (beta * S * I) / N - gamma * I
+	dR <- gamma * I
+	res <- list(c(dS, dI, dR))
+	return (res)
+}
+
 # This can be solved in R using deSolve as follows
+
+# Define time to solve equations
+times <- seq(from = 0, to = 100, by = 1)
 
 # Define parameter values
 parameters <- c(beta = 0.4, gamma = 0.1)
