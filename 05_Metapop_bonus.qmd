@@ -180,18 +180,16 @@ We use `matplot` here to quickly plot a large number of different lines, each st
 par(mfrow = c(2, 2))
 # Plot S, I, R on separate plots
 matplot(output$time, output[, (0 * n_groups + 2):(1 * n_groups + 1)], type = "l", 
-	xlab = "Time (years)", ylab = "Susceptible", col = hcl.colors(n_groups), lty = 1)
+	xlab = "Time (years)", ylab = "Susceptible", col = rainbow(n_groups), lty = 1)
 matplot(output$time, output[, (1 * n_groups + 2):(2 * n_groups + 1)], type = "l", 
-	xlab = "Time (years)", ylab = "Infectious", col = hcl.colors(n_groups), lty = 1)
+	xlab = "Time (years)", ylab = "Infectious", col = rainbow(n_groups), lty = 1)
 matplot(output$time, output[, (2 * n_groups + 2):(3 * n_groups + 1)], type = "l", 
-	xlab = "Time (years)", ylab = "Recovered", col = hcl.colors(n_groups), lty = 1)
+	xlab = "Time (years)", ylab = "Recovered", col = rainbow(n_groups), lty = 1)
 # Put a legend in the bottom right of the grid
 plot.new()
-legend("center", legend = rownames(mat), col = hcl.colors(n_groups), lty = 1)
+legend("center", legend = rownames(mat), col = rainbow(n_groups), lty = 1)
 
 # Put plot grid back to 1x1
 par(mfrow = c(1, 1))
 
 ```
-
-And there you have it.
