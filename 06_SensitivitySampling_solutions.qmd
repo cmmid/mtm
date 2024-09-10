@@ -47,11 +47,11 @@ for (gamma.val in gamma.vec){
                                          plot.all.results = FALSE)
   max.prevalence = c(max.prevalence, mp)
 }
+```
 
-# Now we have our max.prevalence, we need to plot this against our 
-# infectiousness duration - plot max.prevalence as a function of the 
-# \*infectiousness duration\*
+Now we have our max.prevalence, we need to plot this against our infectiousness duration - plot max.prevalence as a function of the infectious duration.
 
+```{r}
 par(new=FALSE)
 par(mfrow=c(1,1))
 
@@ -118,11 +118,11 @@ head(max.prevalence)
 
 ### (e) How have we saved the output?
 
-Answer: using 'long' formatting -- see the ggplot pre-course material
+Answer: using '*wide*' formatting -- see the ggplot pre-course material
 
-```{r echo = F, quietly = T}
+
+```{r}
 # Now plot this output using the R function MCplot() in SIRmodel_R0.R
-plot.new()
 MCplot(max.prevalence)
 ```
 
@@ -210,18 +210,9 @@ ex_latin <- randomLHS(10, 1)
 # which X values are given by using these as the Y value (denoted by "X"s)?
 abline(h = ex_latin, col = "red")
 points(qnorm(ex_latin, mean = 0, sd = 1), y=rep(0,10), pc = "x")
-
-# You can see that the samples are clustered around the middle: in areas of X 
-# with higher density, the gradient of the cumluative distribution (F(X)) will 
-# be very steep, causing more values between 0 and 1 to map to this range of X 
-# with high density That is, F\^{-1}(R) = X where R is a uniform random number 
-# between 0 and 1.
-
-# So, you can sample from any distribution whose cumluative function is 
-# 'invertable' by plugging in uniform random numbers to the inverse cumulative 
-# function of your new distribution. For more information check out: 
-# https://en.wikipedia.org/wiki/Inverse_transform_sampling
-
-# Likewise, to perform LHS on a uni- or mulitvariate non-uniform distribution, 
-# we can transform our LHS samples from a uniform distribution as above.
 ```
+You can see that the samples are clustered around the middle: in areas of X with higher density, the gradient of the cumluative distribution (F(X)) will be very steep, causing more values between 0 and 1 to map to this range of X with high density That is, $F^{-1}(R) = X$ where R is a uniform random number between 0 and 1.
+
+So, you can sample from any distribution whose cumluative function is 'invertable' by plugging in uniform random numbers to the inverse cumulative function of your new distribution. For more information check out: https://en.wikipedia.org/wiki/Inverse_transform_sampling
+
+Likewise, to perform LHS on a uni- or mulitvariate non-uniform distribution, we can transform our LHS samples from a uniform distribution as above.
