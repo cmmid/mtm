@@ -312,15 +312,8 @@ legend("topright", legend = c("Susceptible", "Infected"),
 library(Rcpp)
 
 ## The SIR Rcpp version can be compiled as follows:
-cppFunction('
-#include <Rcpp.h>
-using namespace Rcpp;
-
-// This is a the SIR model coded in C++
-// Note that in Rcpp, you must declare all variables 
-
-// [[Rcpp::export]]
-List SIR_cpp_model(NumericVector t, NumericVector state, NumericVector parms)
+cppFunction(
+'List SIR_cpp_model(NumericVector t, NumericVector state, NumericVector parms)
 {
     // Get variables
     double S = state["S"];
