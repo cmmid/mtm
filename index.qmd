@@ -22,6 +22,8 @@ The course sessions are:
 
 **Session 5** - Metapopulations with ODEs: [Slides](slides/Lecture_05_ODEsMetapopulation.pdf), [Practical](05_Metapop_practical.qmd), [Solutions](05_Metapop_solutions.qmd)
 
+**Session 5 bonus** - [How to use a contact matrix](05_Metapop_bonus.qmd)
+
 **Session 6** - Sensitivity analysis & sampling: [Slides](slides/Lecture_06_SensitivitySampling.pdf), [Practical](06_SensitivitySampling_practical.qmd), [Solutions](06_SensitivitySampling_solutions.qmd)
 
 **Session 7** - Modelling problem: [Slides](slides/Lecture_07_ModellingProblem.pdf), [Problems](problems.qmd)
