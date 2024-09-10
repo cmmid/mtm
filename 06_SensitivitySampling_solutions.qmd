@@ -20,15 +20,15 @@ Answer: (1) the parameter values lists, (2) Argument to plot everything, (3) num
 
 Answer: maximum prevalence through the epidemic
 
-``` r
+```{r}
 # First let's clear our workspace, remove plots and load the libraries we need
 rm(list=ls())
-dev.off()
+# dev.off()
 library(deSolve)
 library(ggplot2)
 
 # Let's read in these functions so we have them to hand
-source("SIRmodel.R")
+source("code/SIRmodel.R")
 
 # Let's choose a beta value of 0.4 and a gamma value of 0.2
 max.prevalence <- solveODE(parameters <- c(beta = 0.4, gamma = 0.2))
@@ -78,9 +78,9 @@ Answer: There is no epidemic until the infectiousness duration is \> 2 days (R0 
 
 Now suppose that we have a previous epidemiological study that suggested that R0 has a mean value of 5, but uncertainty within the range of \[-1, +1\]. However, we still don't know whether the infectiousness period is 1 day or 10 days. We will now use the functions in [SIRmodel_R0.R](code/SIRmodel_R0.R) to make a similar plot as above, but this time, incorporate the uncertainty of R0 for each discrete value of gamma. We're going to first use a direct Monte Carlo Sampling method.
 
-``` r
+```{r}
 # Read in our set of functions in SIRmodel_R0.R
-source("SIRmodel_R0.R")
+source("code/SIRmodel_R0.R")
 
 # First, let's set a fixed seed for the random number generator
 # this will allow us to run the code again and retrieve the same 'simulation'
@@ -120,8 +120,9 @@ head(max.prevalence)
 
 Answer: using 'long' formatting -- see the ggplot pre-course material
 
-``` r
-Now plot this output using the R function MCplot() in SIRmodel_R0.R
+```{r echo = F, quietly = T}
+# Now plot this output using the R function MCplot() in SIRmodel_R0.R
+plot.new()
 MCplot(max.prevalence)
 ```
 
@@ -131,7 +132,7 @@ Answer: Increasing the rate of recovery reduces the max prevalence. However, the
 
 ## (3) Latin hypercube sampling (LHS) vs Monte Carlo Sampling
 
-``` r
+```{r}
 # First let's load in the library we'll need for later
 library(lhs)
 
@@ -168,7 +169,7 @@ mc_unif <- runif(n)
 latin_unif <- randomLHS(n, 1)
 
 # plot these two distribution
-dev.off()
+# dev.off()
 par(mfrow=c(3,2))
 hist(mc_unif)
 hist(latin_unif)
