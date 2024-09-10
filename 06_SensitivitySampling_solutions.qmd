@@ -20,15 +20,15 @@ Answer: (1) the parameter values lists, (2) Argument to plot everything, (3) num
 
 Answer: maximum prevalence through the epidemic
 
-``` r
+```{r}
 # First let's clear our workspace, remove plots and load the libraries we need
 rm(list=ls())
-dev.off()
+# dev.off()
 library(deSolve)
 library(ggplot2)
 
 # Let's read in these functions so we have them to hand
-source("SIRmodel.R")
+source("code/SIRmodel.R")
 
 # Let's choose a beta value of 0.4 and a gamma value of 0.2
 max.prevalence <- solveODE(parameters <- c(beta = 0.4, gamma = 0.2))
@@ -47,11 +47,11 @@ for (gamma.val in gamma.vec){
                                          plot.all.results = FALSE)
   max.prevalence = c(max.prevalence, mp)
 }
+```
 
-# Now we have our max.prevalence, we need to plot this against our 
-# infectiousness duration - plot max.prevalence as a function of the 
-# \*infectiousness duration\*
+Now we have our max.prevalence, we need to plot this against our infectiousness duration - plot max.prevalence as a function of the infectious duration.
 
+```{r}
 par(new=FALSE)
 par(mfrow=c(1,1))
 
@@ -78,9 +78,9 @@ Answer: There is no epidemic until the infectiousness duration is \> 2 days (R0 
 
 Now suppose that we have a previous epidemiological study that suggested that R0 has a mean value of 5, but uncertainty within the range of \[-1, +1\]. However, we still don't know whether the infectiousness period is 1 day or 10 days. We will now use the functions in [SIRmodel_R0.R](code/SIRmodel_R0.R) to make a similar plot as above, but this time, incorporate the uncertainty of R0 for each discrete value of gamma. We're going to first use a direct Monte Carlo Sampling method.
 
-``` r
+```{r}
 # Read in our set of functions in SIRmodel_R0.R
-source("SIRmodel_R0.R")
+source("code/SIRmodel_R0.R")
 
 # First, let's set a fixed seed for the random number generator
 # this will allow us to run the code again and retrieve the same 'simulation'
@@ -118,10 +118,11 @@ head(max.prevalence)
 
 ### (e) How have we saved the output?
 
-Answer: using 'long' formatting -- see the ggplot pre-course material
+Answer: using '*wide*' formatting -- see the ggplot pre-course material
 
-``` r
-Now plot this output using the R function MCplot() in SIRmodel_R0.R
+
+```{r}
+# Now plot this output using the R function MCplot() in SIRmodel_R0.R
 MCplot(max.prevalence)
 ```
 
@@ -131,7 +132,7 @@ Answer: Increasing the rate of recovery reduces the max prevalence. However, the
 
 ## (3) Latin hypercube sampling (LHS) vs Monte Carlo Sampling
 
-``` r
+```{r}
 # First let's load in the library we'll need for later
 library(lhs)
 
@@ -168,7 +169,7 @@ mc_unif <- runif(n)
 latin_unif <- randomLHS(n, 1)
 
 # plot these two distribution
-dev.off()
+# dev.off()
 par(mfrow=c(3,2))
 hist(mc_unif)
 hist(latin_unif)
@@ -209,18 +210,9 @@ ex_latin <- randomLHS(10, 1)
 # which X values are given by using these as the Y value (denoted by "X"s)?
 abline(h = ex_latin, col = "red")
 points(qnorm(ex_latin, mean = 0, sd = 1), y=rep(0,10), pc = "x")
-
-# You can see that the samples are clustered around the middle: in areas of X 
-# with higher density, the gradient of the cumluative distribution (F(X)) will 
-# be very steep, causing more values between 0 and 1 to map to this range of X 
-# with high density That is, F\^{-1}(R) = X where R is a uniform random number 
-# between 0 and 1.
-
-# So, you can sample from any distribution whose cumluative function is 
-# 'invertable' by plugging in uniform random numbers to the inverse cumulative 
-# function of your new distribution. For more information check out: 
-# https://en.wikipedia.org/wiki/Inverse_transform_sampling
-
-# Likewise, to perform LHS on a uni- or mulitvariate non-uniform distribution, 
-# we can transform our LHS samples from a uniform distribution as above.
 ```
+You can see that the samples are clustered around the middle: in areas of X with higher density, the gradient of the cumluative distribution (F(X)) will be very steep, causing more values between 0 and 1 to map to this range of X with high density That is, $F^{-1}(R) = X$ where R is a uniform random number between 0 and 1.
+
+So, you can sample from any distribution whose cumluative function is 'invertable' by plugging in uniform random numbers to the inverse cumulative function of your new distribution. For more information check out: https://en.wikipedia.org/wiki/Inverse_transform_sampling
+
+Likewise, to perform LHS on a uni- or mulitvariate non-uniform distribution, we can transform our LHS samples from a uniform distribution as above.
