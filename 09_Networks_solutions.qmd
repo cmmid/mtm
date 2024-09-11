@@ -146,7 +146,7 @@ for (t in 1:t_max)
 	plot(network, 
 		vertex.color = colours[V(network)$state], 
 		layout = layout_on_grid,
-		main = paste("t = ,", t))
+		main = paste("t = ", t))
 	
 	# Pause so we can see animation
 	Sys.sleep(1.0)
@@ -170,7 +170,7 @@ library(data.table)
 library(ggplot2)
 ```
 
-### Setting up the network
+### 1. Setting up the network
 
 Set up a transmission network of n nodes by preferential attachment with 
 affinity proportional to degree^m.
@@ -178,14 +178,15 @@ affinity proportional to degree^m.
 ```{r}
 create_network <- function(n, d, layout = layout_nicely)
 {
-	# Create the network by preferential attachment, passing on the parameters 
-	# n and power
+	# Create the network by preferential attachment, 
+	# passing on the parameters n and power
 	network <- sample_pa(n, d, directed = FALSE)
 
-    # Add the "state" attribute to the vertices of the network, which can be
-	# "S", "I", "R", or "V". 
+    # Add the "state" attribute to the vertices of 
+	#the network, which can be "S", "I", "R", or "V". 
 	# Start out everyone as susceptible ...
     V(network)$state <- "S"
+    
     # ... except make 5 random individuals infectious.
     V(network)$state[sample(vcount(network), 5, prob = degree(network))] <- "I"
 
@@ -210,7 +211,8 @@ net <- create_network(40, 2)
 plot(net)
 ```
 
-# Plot a network, highlighting the degree of each node by different colours.
+Plot a network, highlighting the degree of each node by different colours.
+```{r}
 plot_degree <- function(network)
 {
 	# Set up palette
@@ -239,8 +241,9 @@ plot_degree(net)
 
 net <- create_network(500, 2)
 plot_degree(net)
-
-# Plot a network, colouring by state (S/I/R/V).
+```
+Plot a network, colouring by state (S/I/R/V).
+```{r}
 plot_state <- function(network)
 {
 	# Set up palette
@@ -257,12 +260,12 @@ plot_state <- function(network)
 ## Test the plot_state function
 net <- create_network(500, 1)
 plot_state(net)
+```
 
+### 2. Running the model
 
-### Running the model
-
-# Enact one step of the network model: infectious individuals infect 
-# susceptible neighbours with probability p, and recover after one time step.
+Enact one step of the network model: infectious individuals infect susceptible neighbours with probability $p$, and recover after one time step.
+```{r}
 network_step <- function(net, p)
 {
     # Identify all susceptible neighbours of infectious individuals, 
@@ -281,15 +284,19 @@ network_step <- function(net, p)
 
     return (net)
 }
+```
 
-# Run the transmission model on the network with maximum simulation time t_max
-# and transmission probability p; plot the network as the model is running if
-# animate = TRUE.
+Run the transmission model on the network with maximum simulation time t_max  
+and transmission probability p; plot the network as the model is running if  
+`animate = TRUE`.
+
+```{r}
 run_model <- function(net, t_max, p, animate = FALSE)
 {
 	# Plot network degree
     if (animate) {
     	plot_degree(net)
+    	mtext("Network created")
     	Sys.sleep(2.0)
     }
 
@@ -311,6 +318,7 @@ run_model <- function(net, t_max, p, animate = FALSE)
         if (animate) {
         	Sys.sleep(0.5)
         	plot_state(net)
+        	mtext(paste0("t = ", t))
         }
         
         # Stop early if no infectious individuals are left
@@ -327,17 +335,20 @@ run_model <- function(net, t_max, p, animate = FALSE)
     results$Rt <- results$I / shift(results$I, 1) # new infections per new infection last time step
     return (results)
 }
+```
 
-
-## Run an example simulation
+Run an example simulation
+```{r}
 net <- create_network(500, 1)
 run_model(net, 100, 0.8, TRUE)
+```
 
+### Bonus: vaccination and multiple runs
 
-### Bonus material: vaccination and multiple runs
+Vaccinate a fraction v of the nodes in the network. The parameter k, between 
+-1 and 1, determines the association between network degree and vaccination.
 
-# Vaccinate a fraction v of the nodes in the network. The parameter k, between
-# -1 and 1, determines the association between network degree and vaccination.
+```{r}
 vaccinate_network <- function(network, v, k)
 {
 	# Count total population (n) and number to vaccinate (nv)
@@ -359,10 +370,12 @@ vaccinate_network <- function(network, v, k)
 
 	return (network)
 }
+```
 
-# Run the model nsim times with parameters in params (n, d, v, k, t_max, p),
-# showing the animated network the first nanim times, and returning a data.table
-# with the results of each simulation.
+Run the model `nsim` times with parameters in params (n, d, v, k, t_max, p), 
+showing the animated network the first `nanim` times, and returning a `data.table` with the results of each simulation.
+
+```{r}
 run_scenario <- function(params, nsim, nanim = 1)
 {
 	results <- list()
@@ -381,8 +394,10 @@ run_scenario <- function(params, nsim, nanim = 1)
 	results <- rbindlist(results, idcol = "run")
 	return (results)
 }
+```
 
-## Test multiple runs
+Test multiple runs
+```{r}
 params <- list(
 	n = 500,
 	d = 0,

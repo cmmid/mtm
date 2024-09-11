@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.47">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Modern Techniques in Modelling - 09. Networks</title>
+<title>09. Networks – Modern Techniques in Modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -101,7 +101,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -146,7 +146,7 @@ window.Quarto = {
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -164,7 +164,7 @@ window.Quarto = {
 <span class="menu-text">Timetable</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-practicals" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-practicals" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Practicals</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-practicals">    
@@ -204,7 +204,7 @@ window.Quarto = {
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -264,17 +264,20 @@ window.Quarto = {
 <p>igraph has a number of functions that are designed to create graphs according to certain rules or designs. One of the simplest graphs, conceptually, is the “complete” or “full” graph, in which each vertex is connected to every other vertex. This is made using the igraph function <code>make_full_graph(n)</code>, where <code>n</code> is the number of nodes or vertices.</p>
 <p>Let’s make a complete graph with 4 nodes. Run the following code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph) <span class="co"># For network functionality</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Complete graph with 4 nodes</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>gr <span class="ot">&lt;-</span> <span class="fu">make_full_graph</span>(<span class="dv">4</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(gr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph) <span class="co"># For network functionality</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'igraph' was built under R version 4.2.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Complete graph with 4 nodes</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>gr <span class="ot">&lt;-</span> <span class="fu">make_full_graph</span>(<span class="dv">4</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(gr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>IGRAPH fe8605d U--- 4 6 -- Full graph
+<pre><code>IGRAPH 1abdca4 U--- 4 6 -- Full graph
 + attr: name (g/c), loops (g/l)
-+ edges from fe8605d:
++ edges from 1abdca4:
 [1] 1--2 1--3 1--4 2--3 2--4 3--4</code></pre>
 </div>
 </div>
@@ -282,7 +285,7 @@ window.Quarto = {
 <p>The most important parts here are probably “4 6” at the top (this means the graph has 4 vertices and 6 edges) and the list of edges at the bottom, showing which nodes are connected to which other nodes.</p>
 <p>This information is easier to take in if we plot the graph. Run the following:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol type="1">
 <li>Run the <code>plot(gr)</code> line multiple times. The plot changes. Does the graph change?</li>
@@ -290,20 +293,20 @@ window.Quarto = {
 <p>igraph has lots of different functions for making different kinds of graphs. <code>make_full_graph</code> is one that we’ve already seen, but there are several others.</p>
 <p>Here are some examples, all of which create graphs with a different number of nodes. Try plotting each of them and think about the implications of each network for infectious disease transmission, if each node represents a person and each edge means that the two people connected by the edge can potentially infect each other.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_full_graph</span>(<span class="dv">16</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">make_ring</span>(<span class="dv">16</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">make_ring</span>(<span class="dv">16</span>, <span class="at">circular =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">make_lattice</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make_full_graph</span>(<span class="dv">16</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">make_ring</span>(<span class="dv">16</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">make_ring</span>(<span class="dv">16</span>, <span class="at">circular =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">make_lattice</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Remember, to read more about a specific function, you can look up the help on that function, e.g.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>?make_lattice</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>?make_lattice</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Any igraph function that starts with <code>make_</code> is deterministic, i.e.&nbsp;gives you the same graph every time you run it. There are also igraph functions that give you random graphs, i.e.&nbsp;the function uses some random model to build a new graph each time. These functions start with <code>sample_</code>.</p>
 <p>One of the simplest random graphs is called a Bernoulli random graph, or an Erdős-Rényi <span class="math inline">\(G(n,p)\)</span> graph. This just means that there are <code>n</code> nodes in the graph, and every possible pair of nodes is connected with probability <code>p</code>. This graph is created using the function <code>sample_gnp(n, p)</code>.</p>
 <p>Let’s start by looking again at our complete graph with 16 vertices:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">make_full_graph</span>(<span class="dv">16</span>), <span class="at">layout =</span> layout_in_circle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">make_full_graph</span>(<span class="dv">16</span>), <span class="at">layout =</span> layout_in_circle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -315,7 +318,7 @@ window.Quarto = {
 <p>Above, <code>layout = layout_in_circle</code> puts all the nodes evenly around a circle, so that the position of the nodes is the same each time the graph is plotted. This will make the next graph easier to compare.</p>
 <p>Now, let’s make a <span class="math inline">\(G(n,p)\)</span> graph with <span class="math inline">\(p = 0.2\)</span> and plot that.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">sample_gnp</span>(<span class="dv">16</span>, <span class="fl">0.2</span>), <span class="at">layout =</span> layout_in_circle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">sample_gnp</span>(<span class="dv">16</span>, <span class="fl">0.2</span>), <span class="at">layout =</span> layout_in_circle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -328,11 +331,11 @@ window.Quarto = {
 <p>Try changing the number of nodes and the connection probability and see what happens. If you set <span class="math inline">\(p\)</span> to a lower value, like 0.1, you are more likely to see individual nodes with no connections to other nodes, or several separated parts of the overall graph - try it.</p>
 <p>There are lots of other well-known models for generating random graphs. Some of the most famous are the “small-world” model by Watts and Strogatz, where there are initially connections between neighbours, some of which are randomly rewired:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">sample_smallworld</span>(<span class="dv">1</span>, <span class="dv">16</span>, <span class="dv">2</span>, <span class="fl">0.1</span>), <span class="at">layout =</span> layout_in_circle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">sample_smallworld</span>(<span class="dv">1</span>, <span class="dv">16</span>, <span class="dv">2</span>, <span class="fl">0.1</span>), <span class="at">layout =</span> layout_in_circle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Or the “preferential attachment” model by Barabási and Albert, which is built by adding nodes one at a time, and each time a node is added, it is connected to other nodes, where the connection is more likely to be made to a node that already has more connections (a “rich get richer” dynamic).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">sample_pa</span>(<span class="dv">16</span>, <span class="at">directed =</span> <span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">sample_pa</span>(<span class="dv">16</span>, <span class="at">directed =</span> <span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>One reason these two models are so well known is that they were both introduced in high-impact papers claiming that the underlying models were widely applicable to a variety of real-world networks. Worth reading if you are interested:</p>
 <p>Watts DJ, Strogatz SH (1998) Collective dynamics of ‘small world’ networks. <em>Nature</em> 393, 440-442. <a href="https://snap.stanford.edu/class/cs224w-readings/watts98smallworld.pdf" class="uri">https://snap.stanford.edu/class/cs224w-readings/watts98smallworld.pdf</a></p>
@@ -342,42 +345,42 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="getting-and-setting-properties-of-the-graph">Getting and setting properties of the graph</h3>
 <p>Let’s start by making a new ‘lattice’ graph:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>network <span class="ot">&lt;-</span> <span class="fu">make_lattice</span>(<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">5</span>)) </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(network) </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>network <span class="ot">&lt;-</span> <span class="fu">make_lattice</span>(<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">5</span>)) </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(network) </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Some simple calculations: <code>vcount()</code> or <code>ecount()</code> give the number of vertices or edges in the graph; <code>degree()</code> gives the number of neighbours of each vertex. Try running each of these.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vcount</span>(network) </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ecount</span>(network) </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">degree</span>(network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vcount</span>(network) </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ecount</span>(network) </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">degree</span>(network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>With igraph, you can get and set attributes of the entire graph using the <code>$</code> operator. For example, let’s set the graph’s layout to a grid:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>network<span class="sc">$</span>layout <span class="ot">&lt;-</span> <span class="fu">layout_on_grid</span>(network)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(network)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>network<span class="sc">$</span>layout <span class="ot">&lt;-</span> <span class="fu">layout_on_grid</span>(network)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(network)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Notice that this has done two things. First, it added the attribute <code>layout (g/n)</code> to the graph and this is now shown as being present when you run <code>print(network)</code>. Second, it has permanently fixed the layout of the graph so that it always plots the same way.</p>
 <p>You can also modify properties of the vertices and of the edges, using <code>V()</code> and <code>E()</code> respectively. Let’s change the color of the vertices and edges:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(network)<span class="sc">$</span>color <span class="ot">&lt;-</span> <span class="st">"azure"</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(network)<span class="sc">$</span>color <span class="ot">&lt;-</span> <span class="st">"pink"</span> </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(network) <span class="co"># lovely</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(network)<span class="sc">$</span>color <span class="ot">&lt;-</span> <span class="st">"azure"</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(network)<span class="sc">$</span>color <span class="ot">&lt;-</span> <span class="st">"pink"</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(network) <span class="co"># lovely</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can use <code>V(network)[[]]</code> or <code>E(network)[[]]</code> to see the properties of the vertices/edges laid out as a data frame. Try it:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(network)[[]]</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(network)[[]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(network)[[]]</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(network)[[]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Notice that both have a “color” attribute now. This also appears in the list of attributes when we print the network:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>IGRAPH de68083 U--- 25 40 -- Lattice graph
+<pre><code>IGRAPH ad28790 U--- 25 40 -- Lattice graph
 + attr: name (g/c), dimvector (g/n), nei (g/n), mutual (g/l), circular
 | (g/l), layout (g/n), color (v/c), color (e/c)
-+ edges from de68083:
++ edges from ad28790:
  [1]  1-- 2  1-- 6  2-- 3  2-- 7  3-- 4  3-- 8  4-- 5  4-- 9  5--10  6-- 7
 [11]  6--11  7-- 8  7--12  8-- 9  8--13  9--10  9--14 10--15 11--12 11--16
 [21] 12--13 12--17 13--14 13--18 14--15 14--19 15--20 16--17 16--21 17--18
@@ -387,21 +390,21 @@ window.Quarto = {
 <p>Among the attributes here, you can now see <code>layout (g/n)</code>, <code>color (v/c)</code>, and <code>color (e/c)</code>. Here, the ‘g’ in <code>(g/n)</code> means the property is attached to the entire graph, while the ‘v’ and ‘e’ means the respective properties are attached to vertices and edges respectively. See <code>?print.igraph</code> for more explanation of the codes.</p>
 <p>Finally, we can also use brackets <code>[]</code> to change properties of only certain vertices/edges. Here are some examples:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(network)[<span class="dv">12</span>]<span class="sc">$</span>color <span class="ot">&lt;-</span> <span class="st">"orange"</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(network)[<span class="dv">12</span>]<span class="sc">$</span>color <span class="ot">&lt;-</span> <span class="st">"orange"</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(network)[color <span class="sc">==</span> <span class="st">"orange"</span>]<span class="sc">$</span>color <span class="ot">&lt;-</span> <span class="st">"pink"</span> </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(network)[color <span class="sc">==</span> <span class="st">"orange"</span>]<span class="sc">$</span>color <span class="ot">&lt;-</span> <span class="st">"pink"</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
 <li>What do the above lines do?</li>
 </ol>
 <p>The <code>.nei()</code> function, when used inside <code>V(some_network)[ ]</code>, selects all <strong>nei</strong>ghbours of the specified vertices. This is very useful for transmission models on networks, because it is the neighbours of infected vertices that are at risk of getting exposed to the pathogen. Try running the code below and see what it does.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pink is contagious:</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(network)[<span class="fu">.nei</span>(color <span class="sc">==</span> <span class="st">"pink"</span>)]<span class="sc">$</span>color <span class="ot">&lt;-</span> <span class="st">"pink"</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pink is contagious:</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(network)[<span class="fu">.nei</span>(color <span class="sc">==</span> <span class="st">"pink"</span>)]<span class="sc">$</span>color <span class="ot">&lt;-</span> <span class="st">"pink"</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="3" type="1">
 <li>What is the code above doing? What happens if you re-run the two lines above several times?</li>
@@ -412,9 +415,9 @@ window.Quarto = {
 <li><strong><code>size</code></strong> size of the markers when plotted</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(network)<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(network)<span class="sc">$</span>shape <span class="ot">&lt;-</span> <span class="st">"square"</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(network)<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(network)<span class="sc">$</span>shape <span class="ot">&lt;-</span> <span class="st">"square"</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -441,38 +444,38 @@ window.Quarto = {
 <p>There are variations to the preferential attachment model – for example, some variants add <span class="math inline">\(m\)</span> connections to existing nodes instead of 1 each time a node is added, and some variants make the probability of attaching to node <span class="math inline">\(i\)</span> proportional to <span class="math inline">\(\mathrm{deg}(i)^d\)</span>, with <span class="math inline">\(d\)</span> some constant.</p>
 <p>Let’s begin by making a function <code>create_network()</code> that uses the <code>sample_pa()</code> function of igraph to create a new network; then set a property “state” for each node to “S” for susceptible; and then give 5 random individuals the state “I” for infectious.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up a transmission network of n nodes by preferential attachment with </span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># affinity proportional to degree^m.</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>create_network <span class="ot">&lt;-</span> <span class="cf">function</span>(n, d, <span class="at">layout =</span> layout_nicely)</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create the network by preferential attachment, passing on the parameters </span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># n and power</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    network <span class="ot">&lt;-</span> <span class="fu">sample_pa</span>(n, d, <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add the "state" attribute to the vertices of the network, which can be</span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># "S", "I", "R", or "V". </span></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Start out everyone as susceptible ...</span></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">V</span>(network)<span class="sc">$</span>state <span class="ot">&lt;-</span> <span class="st">"S"</span></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ... except make 5 random individuals infectious.</span></span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">V</span>(network)<span class="sc">$</span>state[<span class="fu">sample</span>(<span class="fu">vcount</span>(network), <span class="dv">5</span>, <span class="at">prob =</span> <span class="fu">degree</span>(network))] <span class="ot">&lt;-</span> <span class="st">"I"</span></span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Reorder vertices so they go in order from least to most connected. This</span></span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># is to help with degree-targeted vaccination, and also to make the </span></span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># most connected vertices plot on top so they don't get hidden. </span></span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>    network <span class="ot">&lt;-</span> <span class="fu">permute</span>(network, <span class="fu">rank</span>(<span class="fu">degree</span>(network), <span class="at">ties.method =</span> <span class="st">"first"</span>))</span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set the network layout so it doesn't change every time it's plotted.</span></span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>    network<span class="sc">$</span>layout <span class="ot">&lt;-</span> <span class="fu">layout</span>(network)</span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span> (network)</span>
-<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up a transmission network of n nodes by preferential attachment with </span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># affinity proportional to degree^m.</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>create_network <span class="ot">&lt;-</span> <span class="cf">function</span>(n, d, <span class="at">layout =</span> layout_nicely)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create the network by preferential attachment, passing on the parameters </span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># n and power</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    network <span class="ot">&lt;-</span> <span class="fu">sample_pa</span>(n, d, <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add the "state" attribute to the vertices of the network, which can be</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># "S", "I", "R", or "V". </span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Start out everyone as susceptible ...</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">V</span>(network)<span class="sc">$</span>state <span class="ot">&lt;-</span> <span class="st">"S"</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ... except make 5 random individuals infectious.</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">V</span>(network)<span class="sc">$</span>state[<span class="fu">sample</span>(<span class="fu">vcount</span>(network), <span class="dv">5</span>, <span class="at">prob =</span> <span class="fu">degree</span>(network))] <span class="ot">&lt;-</span> <span class="st">"I"</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Reorder vertices so they go in order from least to most connected. This</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># is to help with degree-targeted vaccination, and also to make the </span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># most connected vertices plot on top so they don't get hidden. </span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    network <span class="ot">&lt;-</span> <span class="fu">permute</span>(network, <span class="fu">rank</span>(<span class="fu">degree</span>(network), <span class="at">ties.method =</span> <span class="st">"first"</span>))</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set the network layout so it doesn't change every time it's plotted.</span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>    network<span class="sc">$</span>layout <span class="ot">&lt;-</span> <span class="fu">layout</span>(network)</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span> (network)</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, let’s try using the function and looking at the results.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>net <span class="ot">&lt;-</span> <span class="fu">create_network</span>(<span class="at">n =</span> <span class="dv">40</span>, <span class="at">d =</span> <span class="dv">1</span>)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(net)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>net <span class="ot">&lt;-</span> <span class="fu">create_network</span>(<span class="at">n =</span> <span class="dv">40</span>, <span class="at">d =</span> <span class="dv">1</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(net)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -486,30 +489,30 @@ window.Quarto = {
 </ol>
 <p>The above plot looks a little cluttered, so we’ll create a function <code>plot_degree</code> that tidies up the plot a little so that we can focus on the important features, and colours the nodes according to how well connected they are.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a network, highlighting the degree of each node by different colours.</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>plot_degree <span class="ot">&lt;-</span> <span class="cf">function</span>(network)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set up palette</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    colors <span class="ot">&lt;-</span> <span class="fu">hcl.colors</span>(<span class="dv">5</span>, <span class="st">"Zissou 1"</span>)</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Classify nodes by degree</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    deg <span class="ot">&lt;-</span> <span class="fu">cut</span>(<span class="fu">degree</span>(network), </span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="cn">Inf</span>),</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2-4"</span>, <span class="st">"5-9"</span>, <span class="st">"10-19"</span>, <span class="st">"20+"</span>),</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">include.lowest =</span> <span class="cn">TRUE</span>, <span class="at">right =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot network</span></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(network, </span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">vertex.color =</span> colors[deg],</span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">vertex.size =</span> <span class="dv">4</span>)</span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="fu">levels</span>(deg), <span class="at">fill =</span> colors, <span class="at">title =</span> <span class="st">"Degree"</span>)</span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a network, highlighting the degree of each node by different colours.</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>plot_degree <span class="ot">&lt;-</span> <span class="cf">function</span>(network)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set up palette</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    colors <span class="ot">&lt;-</span> <span class="fu">hcl.colors</span>(<span class="dv">5</span>, <span class="st">"Zissou 1"</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Classify nodes by degree</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    deg <span class="ot">&lt;-</span> <span class="fu">cut</span>(<span class="fu">degree</span>(network), </span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="cn">Inf</span>),</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2-4"</span>, <span class="st">"5-9"</span>, <span class="st">"10-19"</span>, <span class="st">"20+"</span>),</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">include.lowest =</span> <span class="cn">TRUE</span>, <span class="at">right =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot network</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(network, </span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">vertex.color =</span> colors[deg],</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">vertex.size =</span> <span class="dv">4</span>)</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="fu">levels</span>(deg), <span class="at">fill =</span> colors, <span class="at">title =</span> <span class="st">"Degree"</span>)</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s try using <code>plot_degree</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>net <span class="ot">&lt;-</span> <span class="fu">create_network</span>(<span class="dv">500</span>, <span class="fl">1.5</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_degree</span>(net)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>net <span class="ot">&lt;-</span> <span class="fu">create_network</span>(<span class="dv">500</span>, <span class="fl">1.5</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_degree</span>(net)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -523,22 +526,22 @@ window.Quarto = {
 </ol>
 <p>Now let’s create and test a similar function that will plot the state of each node:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a network, colouring by state (S/I/R/V).</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>plot_state <span class="ot">&lt;-</span> <span class="cf">function</span>(network)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set up palette</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">S =</span> <span class="st">"lightblue"</span>, <span class="at">I =</span> <span class="st">"red"</span>, <span class="at">R =</span> <span class="st">"darkblue"</span>, <span class="at">V =</span> <span class="st">"white"</span>)</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot network</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(network, </span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">vertex.color =</span> colors[<span class="fu">V</span>(network)<span class="sc">$</span>state], </span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">vertex.size =</span> <span class="dv">4</span>)</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="fu">names</span>(colors), <span class="at">fill =</span> colors, <span class="at">title =</span> <span class="st">"State"</span>)</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>net <span class="ot">&lt;-</span> <span class="fu">create_network</span>(<span class="dv">500</span>, <span class="dv">1</span>)</span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_state</span>(net)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot a network, colouring by state (S/I/R/V).</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>plot_state <span class="ot">&lt;-</span> <span class="cf">function</span>(network)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set up palette</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">S =</span> <span class="st">"lightblue"</span>, <span class="at">I =</span> <span class="st">"red"</span>, <span class="at">R =</span> <span class="st">"darkblue"</span>, <span class="at">V =</span> <span class="st">"white"</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot network</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(network, </span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">vertex.color =</span> colors[<span class="fu">V</span>(network)<span class="sc">$</span>state], </span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">vertex.size =</span> <span class="dv">4</span>)</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="fu">names</span>(colors), <span class="at">fill =</span> colors, <span class="at">title =</span> <span class="st">"State"</span>)</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>net <span class="ot">&lt;-</span> <span class="fu">create_network</span>(<span class="dv">500</span>, <span class="dv">1</span>)</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_state</span>(net)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -552,33 +555,33 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="running-the-model">Running the model</h3>
 <p>Now we’ll create a function <code>network_step()</code> that runs a single generation (step) of the model. It will find all the susceptible neighbours of infectious individuals in the network, infect each of them with probability <span class="math inline">\(p\)</span>, and then change the state of all the individuals who were infectious at the beginning of the time step to “R” for recovered.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Enact one step of the network model: infectious individuals infect </span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># susceptible neighbours with probability p, and recover after one time step.</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>network_step <span class="ot">&lt;-</span> <span class="cf">function</span>(net, p)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Identify all susceptible neighbours of infectious individuals, </span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># who are "at risk" of infection</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    at_risk <span class="ot">&lt;-</span> <span class="fu">V</span>(net)[state <span class="sc">==</span> <span class="st">"S"</span> <span class="sc">&amp;</span> <span class="fu">.nei</span>(state <span class="sc">==</span> <span class="st">"I"</span>)]</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Use the transmission probability to select who gets exposed from</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># among those at risk</span></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    exposed <span class="ot">&lt;-</span> at_risk[<span class="fu">runif</span>(<span class="fu">length</span>(at_risk)) <span class="sc">&lt;</span> p]</span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># All currently infectious individuals will recover</span></span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">V</span>(net)[state <span class="sc">==</span> <span class="st">"I"</span>]<span class="sc">$</span>state <span class="ot">&lt;-</span> <span class="st">"R"</span></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># All exposed individuals become infectious</span></span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">V</span>(net)[exposed]<span class="sc">$</span>state <span class="ot">&lt;-</span> <span class="st">"I"</span></span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span> (net)</span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Enact one step of the network model: infectious individuals infect </span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># susceptible neighbours with probability p, and recover after one time step.</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>network_step <span class="ot">&lt;-</span> <span class="cf">function</span>(net, p)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Identify all susceptible neighbours of infectious individuals, </span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># who are "at risk" of infection</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    at_risk <span class="ot">&lt;-</span> <span class="fu">V</span>(net)[state <span class="sc">==</span> <span class="st">"S"</span> <span class="sc">&amp;</span> <span class="fu">.nei</span>(state <span class="sc">==</span> <span class="st">"I"</span>)]</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Use the transmission probability to select who gets exposed from</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># among those at risk</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    exposed <span class="ot">&lt;-</span> at_risk[<span class="fu">runif</span>(<span class="fu">length</span>(at_risk)) <span class="sc">&lt;</span> p]</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># All currently infectious individuals will recover</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">V</span>(net)[state <span class="sc">==</span> <span class="st">"I"</span>]<span class="sc">$</span>state <span class="ot">&lt;-</span> <span class="st">"R"</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># All exposed individuals become infectious</span></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">V</span>(net)[exposed]<span class="sc">$</span>state <span class="ot">&lt;-</span> <span class="st">"I"</span></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span> (net)</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s see if this works so far:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>net <span class="ot">&lt;-</span> <span class="fu">create_network</span>(<span class="dv">500</span>, <span class="dv">1</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>net <span class="ot">&lt;-</span> <span class="fu">network_step</span>(net, <span class="at">p =</span> <span class="fl">0.8</span>)</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_state</span>(net)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>net <span class="ot">&lt;-</span> <span class="fu">create_network</span>(<span class="dv">500</span>, <span class="dv">1</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>net <span class="ot">&lt;-</span> <span class="fu">network_step</span>(net, <span class="at">p =</span> <span class="fl">0.8</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_state</span>(net)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -592,38 +595,38 @@ window.Quarto = {
 </ol>
 <p>Finally, let’s create and test a function that will run the model on a given network from time 0 to time <code>t_max</code> with a given secondary attack rate <code>p</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the transmission model on the network with maximum simulation time t_max</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and transmission probability p.</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>run_model <span class="ot">&lt;-</span> <span class="cf">function</span>(net, t_max, p)</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot network degree</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot_degree</span>(net)</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Sys.sleep</span>(<span class="fl">2.0</span>)</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Iterate over each time step</span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">0</span><span class="sc">:</span>t_max)</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Plot current state</span></span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">Sys.sleep</span>(<span class="fl">0.5</span>)</span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">plot_state</span>(net)</span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Stop early if no infectious individuals are left</span></span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (<span class="sc">!</span><span class="fu">any</span>(<span class="fu">V</span>(net)<span class="sc">$</span>state <span class="sc">==</span> <span class="st">"I"</span>)) {</span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span>;</span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Run one step of the network model</span></span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>        net <span class="ot">&lt;-</span> <span class="fu">network_step</span>(net, p)</span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return final outbreak size</span></span>
-<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span> (<span class="fu">sum</span>(<span class="fu">V</span>(net)<span class="sc">$</span>state <span class="sc">==</span> <span class="st">"R"</span>))</span>
-<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the transmission model on the network with maximum simulation time t_max</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and transmission probability p.</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>run_model <span class="ot">&lt;-</span> <span class="cf">function</span>(net, t_max, p)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot network degree</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot_degree</span>(net)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Sys.sleep</span>(<span class="fl">2.0</span>)</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Iterate over each time step</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">0</span><span class="sc">:</span>t_max)</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Plot current state</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">Sys.sleep</span>(<span class="fl">0.5</span>)</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">plot_state</span>(net)</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Stop early if no infectious individuals are left</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (<span class="sc">!</span><span class="fu">any</span>(<span class="fu">V</span>(net)<span class="sc">$</span>state <span class="sc">==</span> <span class="st">"I"</span>)) {</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span>;</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Run one step of the network model</span></span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>        net <span class="ot">&lt;-</span> <span class="fu">network_step</span>(net, p)</span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return final outbreak size</span></span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span> (<span class="fu">sum</span>(<span class="fu">V</span>(net)<span class="sc">$</span>state <span class="sc">==</span> <span class="st">"R"</span>))</span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The code above uses <code>Sys.sleep()</code> to pause for short time between “frames” of the network model animation, so that it doesn’t zip by too quickly to watch. Now let’s try it out:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>net <span class="ot">&lt;-</span> <span class="fu">create_network</span>(<span class="dv">500</span>, <span class="dv">1</span>)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">run_model</span>(net, <span class="dv">100</span>, <span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>net <span class="ot">&lt;-</span> <span class="fu">create_network</span>(<span class="dv">500</span>, <span class="dv">1</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">run_model</span>(net, <span class="dv">100</span>, <span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="4" type="1">
 <li>How does the preferential attachment parameter (<code>create_network</code> parameter <code>d</code>) affect the final outbreak size?</li>
@@ -636,11 +639,11 @@ window.Quarto = {
 <h4 class="anchored" data-anchor-id="vaccination">Vaccination</h4>
 <p>For vaccination, fill in this function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>vaccinate_network <span class="ot">&lt;-</span> <span class="cf">function</span>(network, v, k)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>{ </span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ... do vaccination here ... </span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span> (network)</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>vaccinate_network <span class="ot">&lt;-</span> <span class="cf">function</span>(network, v, k)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>{ </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ... do vaccination here ... </span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span> (network)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>so that it sets a randomly-selected fraction <code>v</code> of nodes in the network to state “V”? (Don’t worry about the parameter <code>k</code> for now.)</p>
 <p>Once you’ve done that, and tested that it works by watching the results of <code>run_model()</code>, let’s move on to something trickier.</p>
@@ -655,89 +658,89 @@ window.Quarto = {
 <h4 class="anchored" data-anchor-id="summarize-results-from-multiple-runs">Summarize results from multiple runs</h4>
 <p>Since the results of a network model can vary a lot from run to run, it is helpful to be able to easily run the model many times for the same starting conditions and summarize the results. Here is one way you might extend the <code>run_model()</code> function to generate epidemic curves for each model run, and create a new function <code>run_scenario()</code> to run the model multiple times with the same parameters:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the transmission model on the network with maximum simulation time t_max</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and transmission probability p; plot the network as the model is running if</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># animate = TRUE.</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>run_model <span class="ot">&lt;-</span> <span class="cf">function</span>(net, t_max, p, <span class="at">animate =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot network degree</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (animate) {</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">plot_degree</span>(net)</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">Sys.sleep</span>(<span class="fl">2.0</span>)</span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set up results</span></span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    dt <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Iterate over each time step</span></span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">0</span><span class="sc">:</span>t_max)</span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Store results</span></span>
-<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>        dt[[<span class="fu">length</span>(dt) <span class="sc">+</span> <span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">S =</span> <span class="fu">sum</span>(<span class="fu">V</span>(net)<span class="sc">$</span>state <span class="sc">==</span> <span class="st">"S"</span>),</span>
-<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">I =</span> <span class="fu">sum</span>(<span class="fu">V</span>(net)<span class="sc">$</span>state <span class="sc">==</span> <span class="st">"I"</span>),</span>
-<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>            <span class="at">R =</span> <span class="fu">sum</span>(<span class="fu">V</span>(net)<span class="sc">$</span>state <span class="sc">==</span> <span class="st">"R"</span>),</span>
-<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">V =</span> <span class="fu">sum</span>(<span class="fu">V</span>(net)<span class="sc">$</span>state <span class="sc">==</span> <span class="st">"V"</span>)</span>
-<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Plot current state</span></span>
-<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (animate) {</span>
-<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>            <span class="fu">Sys.sleep</span>(<span class="fl">0.5</span>)</span>
-<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>            <span class="fu">plot_state</span>(net)</span>
-<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Stop early if no infectious individuals are left</span></span>
-<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (<span class="sc">!</span><span class="fu">any</span>(<span class="fu">V</span>(net)<span class="sc">$</span>state <span class="sc">==</span> <span class="st">"I"</span>)) {</span>
-<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span>;</span>
-<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Run one step of the network model</span></span>
-<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a>        net <span class="ot">&lt;-</span> <span class="fu">network_step</span>(net, p)</span>
-<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return the epi curve, including empirical calculation of Rt</span></span>
-<span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a>    results <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(dt, <span class="at">idcol =</span> <span class="st">"t"</span>)</span>
-<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a>    results<span class="sc">$</span>Rt <span class="ot">&lt;-</span> results<span class="sc">$</span>I <span class="sc">/</span> <span class="fu">shift</span>(results<span class="sc">$</span>I, <span class="dv">1</span>) <span class="co"># new infections per new infection last time step</span></span>
-<span id="cb31-44"><a href="#cb31-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span> (results)</span>
-<span id="cb31-45"><a href="#cb31-45" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb31-46"><a href="#cb31-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-47"><a href="#cb31-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the model nsim times with parameters in params (n, d, v, k, t_max, p),</span></span>
-<span id="cb31-48"><a href="#cb31-48" aria-hidden="true" tabindex="-1"></a><span class="co"># showing the animated network the first nanim times, and returning a data.table</span></span>
-<span id="cb31-49"><a href="#cb31-49" aria-hidden="true" tabindex="-1"></a><span class="co"># with the results of each simulation.</span></span>
-<span id="cb31-50"><a href="#cb31-50" aria-hidden="true" tabindex="-1"></a>run_scenario <span class="ot">&lt;-</span> <span class="cf">function</span>(params, nsim, <span class="at">nanim =</span> <span class="dv">1</span>)</span>
-<span id="cb31-51"><a href="#cb31-51" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb31-52"><a href="#cb31-52" aria-hidden="true" tabindex="-1"></a>    results <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb31-53"><a href="#cb31-53" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb31-54"><a href="#cb31-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (sim <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim)</span>
-<span id="cb31-55"><a href="#cb31-55" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb31-56"><a href="#cb31-56" aria-hidden="true" tabindex="-1"></a>        net <span class="ot">&lt;-</span> <span class="fu">create_network</span>(params<span class="sc">$</span>n, params<span class="sc">$</span>power)</span>
-<span id="cb31-57"><a href="#cb31-57" aria-hidden="true" tabindex="-1"></a>        net <span class="ot">&lt;-</span> <span class="fu">vaccinate_network</span>(net, params<span class="sc">$</span>v, params<span class="sc">$</span>k)</span>
-<span id="cb31-58"><a href="#cb31-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-59"><a href="#cb31-59" aria-hidden="true" tabindex="-1"></a>        results[[sim]] <span class="ot">&lt;-</span> <span class="fu">run_model</span>(net, params<span class="sc">$</span>t_max, params<span class="sc">$</span>p, <span class="at">animate =</span> sim <span class="sc">&lt;=</span> nanim)</span>
-<span id="cb31-60"><a href="#cb31-60" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb31-61"><a href="#cb31-61" aria-hidden="true" tabindex="-1"></a>        <span class="fu">cat</span>(<span class="st">"."</span>)</span>
-<span id="cb31-62"><a href="#cb31-62" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb31-63"><a href="#cb31-63" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>);</span>
-<span id="cb31-64"><a href="#cb31-64" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb31-65"><a href="#cb31-65" aria-hidden="true" tabindex="-1"></a>    results <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(results, <span class="at">idcol =</span> <span class="st">"run"</span>)</span>
-<span id="cb31-66"><a href="#cb31-66" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span> (results)</span>
-<span id="cb31-67"><a href="#cb31-67" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb31-68"><a href="#cb31-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-69"><a href="#cb31-69" aria-hidden="true" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb31-70"><a href="#cb31-70" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="dv">500</span>,</span>
-<span id="cb31-71"><a href="#cb31-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">d =</span> <span class="dv">0</span>,</span>
-<span id="cb31-72"><a href="#cb31-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">p =</span> <span class="fl">0.8</span>,</span>
-<span id="cb31-73"><a href="#cb31-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">v =</span> <span class="fl">0.3</span>,</span>
-<span id="cb31-74"><a href="#cb31-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">k =</span> <span class="dv">0</span>,</span>
-<span id="cb31-75"><a href="#cb31-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_max =</span> <span class="dv">100</span></span>
-<span id="cb31-76"><a href="#cb31-76" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb31-77"><a href="#cb31-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-78"><a href="#cb31-78" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">run_scenario</span>(params, <span class="at">nsim =</span> <span class="dv">5</span>, <span class="at">nanim =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the transmission model on the network with maximum simulation time t_max</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and transmission probability p; plot the network as the model is running if</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># animate = TRUE.</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>run_model <span class="ot">&lt;-</span> <span class="cf">function</span>(net, t_max, p, <span class="at">animate =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot network degree</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (animate) {</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">plot_degree</span>(net)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">Sys.sleep</span>(<span class="fl">2.0</span>)</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set up results</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    dt <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Iterate over each time step</span></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">0</span><span class="sc">:</span>t_max)</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Store results</span></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>        dt[[<span class="fu">length</span>(dt) <span class="sc">+</span> <span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">S =</span> <span class="fu">sum</span>(<span class="fu">V</span>(net)<span class="sc">$</span>state <span class="sc">==</span> <span class="st">"S"</span>),</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">I =</span> <span class="fu">sum</span>(<span class="fu">V</span>(net)<span class="sc">$</span>state <span class="sc">==</span> <span class="st">"I"</span>),</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>            <span class="at">R =</span> <span class="fu">sum</span>(<span class="fu">V</span>(net)<span class="sc">$</span>state <span class="sc">==</span> <span class="st">"R"</span>),</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">V =</span> <span class="fu">sum</span>(<span class="fu">V</span>(net)<span class="sc">$</span>state <span class="sc">==</span> <span class="st">"V"</span>)</span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Plot current state</span></span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (animate) {</span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>            <span class="fu">Sys.sleep</span>(<span class="fl">0.5</span>)</span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>            <span class="fu">plot_state</span>(net)</span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Stop early if no infectious individuals are left</span></span>
+<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (<span class="sc">!</span><span class="fu">any</span>(<span class="fu">V</span>(net)<span class="sc">$</span>state <span class="sc">==</span> <span class="st">"I"</span>)) {</span>
+<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span>;</span>
+<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Run one step of the network model</span></span>
+<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a>        net <span class="ot">&lt;-</span> <span class="fu">network_step</span>(net, p)</span>
+<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return the epi curve, including empirical calculation of Rt</span></span>
+<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a>    results <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(dt, <span class="at">idcol =</span> <span class="st">"t"</span>)</span>
+<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>    results<span class="sc">$</span>Rt <span class="ot">&lt;-</span> results<span class="sc">$</span>I <span class="sc">/</span> <span class="fu">shift</span>(results<span class="sc">$</span>I, <span class="dv">1</span>) <span class="co"># new infections per new infection last time step</span></span>
+<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span> (results)</span>
+<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the model nsim times with parameters in params (n, d, v, k, t_max, p),</span></span>
+<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a><span class="co"># showing the animated network the first nanim times, and returning a data.table</span></span>
+<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a><span class="co"># with the results of each simulation.</span></span>
+<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a>run_scenario <span class="ot">&lt;-</span> <span class="cf">function</span>(params, nsim, <span class="at">nanim =</span> <span class="dv">1</span>)</span>
+<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a>    results <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (sim <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim)</span>
+<span id="cb33-55"><a href="#cb33-55" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb33-56"><a href="#cb33-56" aria-hidden="true" tabindex="-1"></a>        net <span class="ot">&lt;-</span> <span class="fu">create_network</span>(params<span class="sc">$</span>n, params<span class="sc">$</span>power)</span>
+<span id="cb33-57"><a href="#cb33-57" aria-hidden="true" tabindex="-1"></a>        net <span class="ot">&lt;-</span> <span class="fu">vaccinate_network</span>(net, params<span class="sc">$</span>v, params<span class="sc">$</span>k)</span>
+<span id="cb33-58"><a href="#cb33-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-59"><a href="#cb33-59" aria-hidden="true" tabindex="-1"></a>        results[[sim]] <span class="ot">&lt;-</span> <span class="fu">run_model</span>(net, params<span class="sc">$</span>t_max, params<span class="sc">$</span>p, <span class="at">animate =</span> sim <span class="sc">&lt;=</span> nanim)</span>
+<span id="cb33-60"><a href="#cb33-60" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb33-61"><a href="#cb33-61" aria-hidden="true" tabindex="-1"></a>        <span class="fu">cat</span>(<span class="st">"."</span>)</span>
+<span id="cb33-62"><a href="#cb33-62" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb33-63"><a href="#cb33-63" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>);</span>
+<span id="cb33-64"><a href="#cb33-64" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb33-65"><a href="#cb33-65" aria-hidden="true" tabindex="-1"></a>    results <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(results, <span class="at">idcol =</span> <span class="st">"run"</span>)</span>
+<span id="cb33-66"><a href="#cb33-66" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span> (results)</span>
+<span id="cb33-67"><a href="#cb33-67" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-68"><a href="#cb33-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-69"><a href="#cb33-69" aria-hidden="true" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb33-70"><a href="#cb33-70" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="dv">500</span>,</span>
+<span id="cb33-71"><a href="#cb33-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">d =</span> <span class="dv">0</span>,</span>
+<span id="cb33-72"><a href="#cb33-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">p =</span> <span class="fl">0.8</span>,</span>
+<span id="cb33-73"><a href="#cb33-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">v =</span> <span class="fl">0.3</span>,</span>
+<span id="cb33-74"><a href="#cb33-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">k =</span> <span class="dv">0</span>,</span>
+<span id="cb33-75"><a href="#cb33-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_max =</span> <span class="dv">100</span></span>
+<span id="cb33-76"><a href="#cb33-76" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-77"><a href="#cb33-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-78"><a href="#cb33-78" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">run_scenario</span>(params, <span class="at">nsim =</span> <span class="dv">5</span>, <span class="at">nanim =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>.....</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(x) <span class="sc">+</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> t, <span class="at">y =</span> R, <span class="at">group =</span> run))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(x) <span class="sc">+</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> t, <span class="at">y =</span> R, <span class="at">group =</span> run))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -792,18 +795,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -835,7 +827,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -843,7 +857,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
