@@ -14,8 +14,8 @@ The first bit of code below is a function that simulates an SIR model using the 
 
 ```{r, output = FALSE}
 library(ggplot2) ## for plotting
-library(tidyverse) ## for manipulation of results
-
+library(dplyr) ## for manipulation of results
+library(tidyr) ## for storing multiple simulation runs in a data frame
 
 ## Function SIR_gillespie.
 ## This takes three arguments:
@@ -29,35 +29,36 @@ SIR_gillespie <- function(init_state, parms, tf) {
   time <- 0 ## initialise time to 0
 
   ## assign parameters to easy-access variables
-  beta <- parms["beta"]
-  gamma <- parms["gamma"]
+  beta <- parms[["beta"]]
+  gamma <- parms[["gamma"]]
 
   ## assign states to easy-access variables
-  S <- init_state["S"]
-  I <- init_state["I"]
-  R <- init_state["R"]
+  S <- init_state[["S"]]
+  I <- init_state[["I"]]
+  R <- init_state[["R"]]
   N <- S + I + R
 
   ## create results data frame
-  results_df <- data.frame(time=0, t(init_state))
+  results_df <- data.frame(time = 0, t(init_state))
 
   ## loop until end time is reached
   while (time < tf) {
     ## update current rates
-    rates <- c()
-    rates["infection"] <- beta * S * I / N
-    rates["recovery"] <- gamma * I
+    rates <- c(
+      infection = beta * S * I / N, 
+      recovery = gamma * I
+    )
 
     if (sum(rates) > 0) { ## check if any event can happen
       ## time of next event
-      time <- time + rexp(n=1, rate=sum(rates))
+      time <- time + rexp(n = 1, rate = sum(rates))
       ## check if next event is supposed to happen before end time
       if (time <= tf) {
         ## generate cumulative sum of rates, to determine the type of the next
         ## event
         cumulative_rates <- cumsum(rates)
         ## determine type of next event
-        type <- runif(n=1, min=0, max=sum(rates))
+        type <- runif(n = 1, min = 0, max = sum(rates))
         if (type < cumulative_rates["infection"]) {
           ## infection
           S <- S - 1
@@ -74,7 +75,7 @@ SIR_gillespie <- function(init_state, parms, tf) {
       time <- tf
     }
     ## add new row to results data frame
-    results_df <- rbind(results_df, c(time=time, S=S, I=I, R=R))
+    results_df <- rbind(results_df, c(time = time, S = S, I = I, R = R))
   }
   ## return results data frame
   return(results_df)
@@ -86,17 +87,20 @@ Take 10 minutes to familiarise yourself with the `SIR_gillespie()` function and 
 Now, run the `SIR_gillespie()` function using the commands below.
 
 ```{r, output = FALSE}
-init.values <- c(S=249, I=1, R=0) ## initial state
-parms <- c(beta=1, gamma=0.5) ## parameter vector
+init.values <- c(S = 249, I = 1, R = 0) ## initial state
+parms <- c(beta = 1, gamma = 0.5) ## parameter vector
 tmax <- 20 ## end time
 
 ## run Gillespie simulation
-r <- SIR_gillespie(init_state=init.values, parms=parms, tf=tmax)
+r <- SIR_gillespie(init_state = init.values, parms = parms, tf = tmax)
 ```
 
 The data frame `r` now contains the results of the simulation.
 
-1.  Inspect the contents of the data frame and write some code to plot the results; you can use `plot` or `ggplot` for this. Run the simulation and plot the results multiple times to convince yourself the output is different every time.
+::: {.callout-tip}
+#### Exercise 1
+Inspect the contents of the data frame and write some code to plot the results; you can use `plot` or `ggplot` for this. Run the simulation and plot the results multiple times to convince yourself the output is different every time.
+:::
 
 ### Summarising multiple stochastic runs
 
@@ -106,9 +110,9 @@ Next, we'll run multiple simulations at once.
 ## Run multiple simulation runs and plot a few of them
 nsim <- 100 ## number of trial simulations
 
-traj <- tibble(i=1:nsim) %>%
+traj <- tibble(i = 1:nsim) %>%
   rowwise() %>%
-  mutate(trajectory=list(as.data.frame(
+  mutate(trajectory = list(as.data.frame(
            SIR_gillespie(init.values, parms, tmax)))) %>%
   unnest(trajectory)
 
@@ -119,11 +123,17 @@ mlr <- traj %>%
 
 The code above runs the simulation 100 times and stores the resulting model trajectories in a data frame, `traj`, which contains the results from multiple simulation runs and an additional column that represents the simulation index.
 
-2.  Write some code to plot the multiple simulation runs on the same plot.
+::: {.callout-tip}
+#### Exercise 2
+Write some code to plot the multiple simulation runs on the same plot.
+:::
 
 You'll notice that some outbreaks die out very quickly, while some others grow to affect large parts of the population.
 
-3.  Plot the distribution of overall outbreak sizes. What proportion of outbreaks dies out quickly?
+::: {.callout-tip}
+#### Exercise 3
+Plot the distribution of overall outbreak sizes. What proportion of outbreaks dies out quickly?
+:::
 
 Next, we calculate the mean and standard deviation of each state across the multiple runs. To do that, we need the value of the different states at pre-defined time steps, whereas SIR_gillespie only returns the times at which certain events happened. In order to, for example, extract the values of the trajectory at integer time points, we can use the following:
 
@@ -131,9 +141,9 @@ Next, we calculate the mean and standard deviation of each state across the mult
 ## Extract the values of the trajectory at integer time points
 timeTraj <- mlr %>%
   group_by(i, compartment) %>%
-  summarise(traj=list(data.frame(
-              time=seq(0, tmax, by=0.1),
-              value=approx(x=time, y=value, xout=seq(0, tmax, by=0.1),
+  summarise(traj = list(data.frame(
+              time = seq(0, tmax, by = 0.1),
+              value = approx(x = time, y = value, xout = seq(0, tmax, by = 0.1),
                            method="constant")$y))) %>%
   unnest(traj)
 ```
@@ -143,15 +153,15 @@ Now, we calculate a summary trajectory containing the mean and standard deviatio
 ```{r, output = TRUE}
 ## Calculate summary trajectory with mean & sd of infectious people over time
 sumTraj <- timeTraj %>%
-  filter(compartment=="I") %>%
+  filter(compartment == "I") %>%
   group_by(time) %>%
-  summarise(mean=mean(value),
-            sd=sd(value))
+  summarise(mean = mean(value),
+            sd = sd(value))
 
 ## plot
-ggplot(sumTraj, aes(x=time, y=mean, ymin=pmax(0, mean-sd), ymax=mean+sd)) +
+ggplot(sumTraj, aes(x = time, y = mean, ymin = pmax(0, mean-sd), ymax = mean+sd)) +
   geom_line() +
-  geom_ribbon(alpha=0.3)
+  geom_ribbon(alpha = 0.3)
 ```
 
 Your plot should look something like the above.
@@ -164,29 +174,35 @@ sumTrajAll <- sumTraj %>%
   mutate(trajectories="all")
 
 sumTrajGr0 <- timeTraj %>%
-  filter(compartment=="I", value > 0) %>%
+  filter(compartment == "I", value > 0) %>%
   group_by(time) %>%
-  summarise(mean=mean(value),
-            sd=sd(value)) %>%
+  summarise(mean = mean(value),
+            sd = sd(value)) %>%
   mutate(trajectories="greater_than_zero")
 
 iTraj <- bind_rows(sumTrajAll, sumTrajGr0)
 
 ## plot
-ggplot(iTraj, aes(x=time, y=mean, ymin=pmax(0, mean-sd), ymax=mean+sd,
-                  colour=trajectories, fill=trajectories)) +
+ggplot(iTraj, aes(x = time, y = mean, ymin = pmax(0, mean-sd), ymax = mean+sd,
+                  colour = trajectories, fill = trajectories)) +
   geom_line() +
-  geom_ribbon(alpha=0.3) +
+  geom_ribbon(alpha = 0.3) +
   scale_color_brewer(palette="Set1")
 ```
 
-4.  **Exercise**: We have plotted the mean $\pm$ standard deviation; is this a reasonable summary statistic? What else could one plot? Implement your own plot of trajectory plus uncertainty.
+::: {.callout-tip}
+#### Exercise 4
+We have plotted the mean $\pm$ standard deviation; is this a reasonable summary statistic? What else could one plot? Implement your own plot of trajectory plus uncertainty.
+:::
 
 ### Comparing the stochastic model to the equivalent deterministic ODE model
 
 We will now compare the stochastic model runs and their averages to the equivalent deterministic ODE model trajectory.
 
-5.  Using code from the ODE practical, load the **deSolve** package, define the model function (e.g. `SIR_model` from the ODE practical), run the model with the same parameters as the Gillespie model, and store the output in a data frame called `ode_output` (remember, you need to convert the matrix returned by **deSolve**'s `ode()` to a data frame using `as.data.frame()`).
+::: {.callout-tip}
+#### Exercise 5
+Using code from the ODE practical, load the **deSolve** package, define the model function (e.g. `SIR_model` from the ODE practical), run the model with the same parameters as the Gillespie model, and store the output in a data frame called `ode_output` (remember, you need to convert the matrix returned by **deSolve**'s `ode()` to a data frame using `as.data.frame()`).
+:::
 
 You can then plot both the stochastic and deterministic model runs using the following code:
 
@@ -194,30 +210,39 @@ You can then plot both the stochastic and deterministic model runs using the fol
 ## Combine into one big data frame
 allTraj <- ode_output %>%
   gather(compartment, value, 2:ncol(.)) %>% ## convert to long format
-  filter(compartment=="I") %>%
-  rename(mean=value) %>% ## in deterministic, mean=value
+  filter(compartment == "I") %>%
+  rename(mean = value) %>% ## in deterministic, mean = value
   mutate(trajectories="deterministic", ## label trajectories
-         sd=0) %>% ## in deterministic, sd=0
+         sd = 0) %>% ## in deterministic, sd = 0
   bind_rows(iTraj)
 
 ## plot
-ggplot(allTraj, aes(x=time, y=mean, colour=trajectories)) +
+ggplot(allTraj, aes(x = time, y = mean, colour = trajectories)) +
   geom_line() +
   scale_color_brewer(palette="Set1")
 ```
 
-6.  Compare the deterministic trajectory to some of the individual stochastic trajectories and to their mean. Does the deterministic trajectory capture "typical" behaviour of the stochastic trajectories?
-7.  Repeat the experiment with different values of the parameters. When does deterministic vs stochastic make more or less of a difference?
-8.  Rewrite the model code to be an SEIR model. How do the results differ?
+::: {.callout-tip}
+#### Exercise 6
+Compare the deterministic trajectory to some of the individual stochastic trajectories and to their mean. Does the deterministic trajectory capture “typical” behaviour of the stochastic trajectories?
+:::
+
+::: {.callout-tip}
+#### Exercise 7
+Repeat the experiment with different values of the parameters. When does deterministic vs stochastic make more or less of a difference?
+:::
+
+::: {.callout-tip}
+#### Exercise 8
+Rewrite the model code to be an SEIR model. How do the results differ?
+:::
 
 ## Practical 2. The `adaptivetau` package
 
-In this practical session, we will use the "adaptivetau" package to run simulations. Start in a new file by loading the required packages:
+In this practical session, we will use the `adaptivetau` package to run simulations. Start in a new file by loading the required packages:
 
 ```{r, output = FALSE, message = FALSE}
-library(ggplot2) ## for plotting
 library(adaptivetau) ## for stochastic simulations
-library(tidyverse) ## for manipulation of results
 ```
 
 For adaptivetau, we first need to define the "transitions", or events that can happen in the model. In the SIR model, these are:
@@ -291,10 +316,10 @@ contains multiple simulation runs and an additional column `i` that represents t
 ## Run the simulation multiple times
 nsim <- 100 ## number of trial simulations
 
-traj <- tibble(i=1:nsim) %>%
+traj <- tibble(i = 1:nsim) %>%
   rowwise() %>%
-  mutate(trajectory=list(as.data.frame(
-           ssa.adaptivetau(init.values, transitions, SIRrateF, parms, tf=tmax)))) %>%
+  mutate(trajectory = list(as.data.frame(
+           ssa.adaptivetau(init.values, transitions, SIRrateF, parms, tf = tmax)))) %>%
   unnest(trajectory)
 
 ## Plot the resulting trajectories
@@ -302,8 +327,9 @@ ggplot(traj) +
 	geom_line(aes(x = time, y = I, group = i, colour = i))
 ```
 
-1. **Exercise**: Compare the run time of the command above to running 100 simulations using our Gillespie algorithm from Practical 1. How much is the speed gain?
-
-2. **Exercise**: Re-write the code above to simulate from the SEITL model introduced in the slides for this session. Analyse the outputs using the same routines you used with the SIR model.
+::: {.callout-tip}
+#### Exercise 1
+Compare the run time of the command above to running 100 simulations using our Gillespie algorithm from Practical 1. How much is the speed gain?
+:::
 
 **Solutions to this practical can be accessed [here](10_StochasticContinuous_solutions.qmd).**
