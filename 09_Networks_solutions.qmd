@@ -262,7 +262,7 @@ net <- create_network(500, 2)
 plot_degree(net)
 ```
 
-Question (2): This time we\'ve created a network with 500 nodes. Try varying the `d` parameter again and plotting the generated networks. Are the results similar to what you saw before with 40 nodes?
+Question (2): This time we've created a network with 500 nodes. Try varying the `d` parameter again and plotting the generated networks. Are the results similar to what you saw before with 40 nodes?
 
 **Answer:** Yes.
 
