@@ -4,22 +4,23 @@ title: "09. Networks (solutions)"
 
 ## Practical 1. Introduction to the igraph package
 
-```{r, eval = FALSE, message = FALSE}
-# Network modelling, practical 1: Introduction to the igraph package
-
+```{r, message = FALSE}
 library(igraph) # For network functionality
 library(data.table)
 library(ggplot2)
+```
 
-## 1. Building and plotting graphs
-
+### 1. Building and plotting graphs
+```{r}
 # Complete graph with 4 nodes
 gr <- make_full_graph(4)
 print(gr)
 plot(gr)
+```
 
-# Plot different graphs each with 16 vertices, but different connections 
-# between vertices:
+
+Plot different graphs each with 16 vertices, but different connections between vertices:
+```{r}
 gr <- make_full_graph(16)
 plot(gr)
 gr <- make_ring(16)
@@ -28,84 +29,109 @@ gr <- make_ring(16, circular = FALSE)
 plot(gr)
 gr <- make_lattice(c(4, 4))
 plot(gr)
+```
 
-# Compare a connected graph with 16 vertices to an Erdős-Rényi G(n, p) graph
-# with 16 vertices:
+Compare a connected graph with 16 vertices to an Erdős-Rényi G(n, p) graph with 16 vertices:
+```{r}
 plot(make_full_graph(16), layout = layout_in_circle)
 plot(sample_gnp(16, 0.2), layout = layout_in_circle)
-
-# Other random graphs: The "small-world" model by Watts and Strogatz, where 
-# there are connections between neighbours, some of which are randomly rewired:
+```
+Other random graphs: The "small-world" model by Watts and Strogatz, where there are connections between neighbours, some of which are randomly rewired:
+```{r}
 plot(sample_smallworld(1, 16, 2, 0.1), layout = layout_in_circle)
+```
 
-# The "preferential attachment" model by Barabási and Albert, which is built
-# by adding nodes one at a time, and each time a node is added, it is connected
-# to other nodes, where the connection is more likely to be made to a node that
-# already has more connections (a "rich get richer" dynamic).
+The "preferential attachment" model by Barabási and Albert, which is built by 
+adding nodes one at a time, and each time a node is added, it is connected 
+to other nodes, where the connection is more likely to be made to a node that 
+already has more connections (a "rich get richer" dynamic).
+```{r}
 plot(sample_pa(16, directed = FALSE))
+```
 
-
-## 2. Getting and setting properties of the graph
-
-# Start by making a new 'lattice' graph:
+### 2. Getting and setting properties of the graph
+Start by making a new 'lattice' graph:
+```{r}
 network <- make_lattice(c(5, 5))
 print(network)
 plot(network)
+```
 
-# Some simple calculations: vcount() or ecount() give the number of vertices or 
-# edges in the graph; degree() gives the number of neighbours of each vertex. 
+Some simple calculations: `vcount()` or `ecount()` give the number of vertices or 
+edges in the graph; `degree()` gives the number of neighbours of each vertex. 
+
+```{r}
 vcount(network)
 ecount(network)
 degree(network)
+```
 
-# With igraph, you can get and set attributes of the entire graph using the
-# `$` operator. For example, let's set the graph's layout to a grid:
+With `igraph`, you can get and set attributes of the entire graph using the `$` 
+operator. For example, let's set the graph's layout to a grid:
+```{r}
 network$layout <- layout_on_grid(network)
 print(network)
 plot(network)
+```
 
-# You can also modify properties of the vertices and of the edges, using
-# V() and E() respectively.
+You can also modify properties of the vertices and of the edges, using `V()` 
+and `E()` respectively.
+
+```{r}
 V(network)$color <- "azure"
 E(network)$color <- "pink"
 plot(network) # lovely
+```
 
-# You can use V(network)[[]] or E(network)[[]] to see the properties of the
-# vertices/edges laid out as a data frame:
+You can use `V(network)[[]]` or `E(network)[[]]` to see the properties of the 
+vertices/edges laid out as a data frame:
+```{r}
 V(network)[[]]
 E(network)[[]]
+```
 
-# The "color" attribute is now also listed when we print the network:
+The "color" attribute is now also listed when we print the network:
+```{r}
 network
+```
 
-# Finally, we can also use brackets [] to change properties of only certain
-# vertices/edges. 
+Finally, we can also use brackets [] to change properties of only certain 
+vertices/edges. 
 
+```{r}
 V(network)[12]$color <- "orange"
 plot(network)
 
 V(network)[color == "orange"]$color <- "pink"
 plot(network)
+```
 
-# Pink is contagious:
+Pink is contagious:
+```{r}
 V(network)[.nei(color == "pink")]$color <- "pink"
 plot(network)
+```
 
-# What happens if you re-run the last two lines above several times?
+What happens if you re-run the last two lines above several times?  
+**Answer:** The number of pink points in this network gradually increase.
 
-# Other interesting attributes for vertices include:
+Other interesting attributes for vertices include:
+```{r}
 V(network)$label <- NA        # text label for the vertices (set to NA for no labels)
 V(network)$size <- 5          # size of vertex markers
 V(network)$shape <- "square"  # shape of markers
 plot(network)
 # See ?igraph.plotting for more.
+```
 
-
-## Bonus: Code a network model
-# Here is one possible way of doing it...
+### Bonus: Code a network model
+Here is one possible way of doing it...
+```{r}
 network <- make_lattice(c(5, 5))
+```
 
-# Set all vertices to "susceptible" except for one "infected"
+Set all vertices to "susceptible" except for one "infected"
+```{r}
 V(network)$state <- "S"
 V(network)[1]$state <- "I"
 
@@ -119,7 +145,8 @@ for (t in 1:t_max)
 	# Plot network
 	plot(network, 
 		vertex.color = colours[V(network)$state], 
-		layout = layout_on_grid)
+		layout = layout_on_grid,
+		main = paste("t = ,", t))
 	
 	# Pause so we can see animation
 	Sys.sleep(1.0)
@@ -133,23 +160,22 @@ for (t in 1:t_max)
 	# Recover infectors
 	V(network)[infectors]$state <- "R"
 }
-
 ```
 
+
 ## Practical 2. A network model of mpox transmission
-
-```{r, eval = FALSE, output = FALSE}
-# Network modelling, practical 2: A network model of mpox transmission
-
+```{r}
 library(igraph)
 library(data.table)
 library(ggplot2)
-
+```
 
 ### Setting up the network
 
-# Set up a transmission network of n nodes by preferential attachment with 
-# affinity proportional to degree^m.
+Set up a transmission network of n nodes by preferential attachment with 
+affinity proportional to degree^m.
+
+```{r}
 create_network <- function(n, d, layout = layout_nicely)
 {
 	# Create the network by preferential attachment, passing on the parameters 
@@ -182,6 +208,7 @@ plot(net)
 
 net <- create_network(40, 2)
 plot(net)
+```
 
 # Plot a network, highlighting the degree of each node by different colours.
 plot_degree <- function(network)
