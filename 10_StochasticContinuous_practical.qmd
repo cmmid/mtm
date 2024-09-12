@@ -54,16 +54,16 @@ SIR_gillespie <- function(init_state, parms, tf) {
       time <- time + rexp(n = 1, rate = sum(rates))
       ## check if next event is supposed to happen before end time
       if (time <= tf) {
-        ## generate cumulative sum of rates, to determine the type of the next
-        ## event
-        cumulative_rates <- cumsum(rates)
+        ## determine the type of the next
+        next_event <- sample(x = length(rates), size = 1, prob = rates)
+        ## change to name
+        next_event <- names(rates)[next_event]
         ## determine type of next event
-        type <- runif(n = 1, min = 0, max = sum(rates))
-        if (type < cumulative_rates["infection"]) {
+        if (next_event == "infection") {
           ## infection
           S <- S - 1
           I <- I + 1
-        } else if (type < cumulative_rates["recovery"]) {
+        } else if (next_event == "recovery") {
           ## recovery
           I <- I - 1
           R <- R + 1
