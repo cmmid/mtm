@@ -54,7 +54,7 @@ SIR_gillespie <- function(init_state, parms, tf) {
       time <- time + rexp(n = 1, rate = sum(rates))
       ## check if next event is supposed to happen before end time
       if (time <= tf) {
-        ## determine the type of the next
+        ## determine the type of the next event
         next_event <- sample(x = length(rates), size = 1, prob = rates)
         ## change to name
         next_event <- names(rates)[next_event]
