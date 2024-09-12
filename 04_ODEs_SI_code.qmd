@@ -13,9 +13,11 @@ library(deSolve)
 ```
 
 If the `deSolve` package is not installed, first install it using:
+
 ```{r, eval = FALSE}
 install.packages("deSolve")
 ```
+
 and then re-run the `library(deSolve)` line.
 
 Now, we need to put together our initial conditions as a named numeric vector. The names in the vector should correspond to the names of each compartment in our ODE system, i.e. S and I.
@@ -40,6 +42,7 @@ times <- seq(from = 0, to = 50, by = 1)
 ```
 
 Now we should define the parameters. There is just one parameter, the transmission rate `beta`:
+
 ```{r, eval = FALSE}
 parms <- c(beta = 0.4)
 ```

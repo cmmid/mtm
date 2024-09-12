@@ -4,22 +4,28 @@ title: "09. Networks (solutions)"
 
 ## Practical 1. Introduction to the igraph package
 
-```{r, eval = FALSE, message = FALSE}
-# Network modelling, practical 1: Introduction to the igraph package
-
+```{r, message = FALSE}
 library(igraph) # For network functionality
 library(data.table)
 library(ggplot2)
+```
 
-## 1. Building and plotting graphs
+### 1. Building and plotting graphs
 
+```{r}
 # Complete graph with 4 nodes
 gr <- make_full_graph(4)
 print(gr)
 plot(gr)
+```
 
-# Plot different graphs each with 16 vertices, but different connections 
-# between vertices:
+Question (1): Run the plot(gr) line multiple times. The plot changes. Does the graph change?
+
+**Answer:** The locations of the numbered nodes may change, but the network itself is not changing.
+
+Plot different graphs each with 16 vertices, but different connections between vertices:
+
+```{r}
 gr <- make_full_graph(16)
 plot(gr)
 gr <- make_ring(16)
@@ -28,84 +34,119 @@ gr <- make_ring(16, circular = FALSE)
 plot(gr)
 gr <- make_lattice(c(4, 4))
 plot(gr)
+```
 
-# Compare a connected graph with 16 vertices to an Erdős-Rényi G(n, p) graph
-# with 16 vertices:
+Compare a connected graph with 16 vertices to an Erdős-Rényi G(n, p) graph with 16 vertices:
+
+```{r}
 plot(make_full_graph(16), layout = layout_in_circle)
 plot(sample_gnp(16, 0.2), layout = layout_in_circle)
+```
 
-# Other random graphs: The "small-world" model by Watts and Strogatz, where 
-# there are connections between neighbours, some of which are randomly rewired:
+Other random graphs: The "small-world" model by Watts and Strogatz, where there are connections between neighbours, some of which are randomly rewired:
+
+```{r}
 plot(sample_smallworld(1, 16, 2, 0.1), layout = layout_in_circle)
+```
 
-# The "preferential attachment" model by Barabási and Albert, which is built
-# by adding nodes one at a time, and each time a node is added, it is connected
-# to other nodes, where the connection is more likely to be made to a node that
-# already has more connections (a "rich get richer" dynamic).
+The "preferential attachment" model by Barabási and Albert, which is built by adding nodes one at a time, and each time a node is added, it is connected to other nodes, where the connection is more likely to be made to a node that already has more connections (a "rich get richer" dynamic).
+
+```{r}
 plot(sample_pa(16, directed = FALSE))
+```
 
+### 2. Getting and setting properties of the graph
 
-## 2. Getting and setting properties of the graph
+Start by making a new 'lattice' graph:
 
-# Start by making a new 'lattice' graph:
+```{r}
 network <- make_lattice(c(5, 5))
 print(network)
 plot(network)
+```
 
-# Some simple calculations: vcount() or ecount() give the number of vertices or 
-# edges in the graph; degree() gives the number of neighbours of each vertex. 
+Some simple calculations: `vcount()` or `ecount()` give the number of vertices or edges in the graph; `degree()` gives the number of neighbours of each vertex.
+
+```{r}
 vcount(network)
 ecount(network)
 degree(network)
+```
 
-# With igraph, you can get and set attributes of the entire graph using the
-# `$` operator. For example, let's set the graph's layout to a grid:
+With `igraph`, you can get and set attributes of the entire graph using the `$` operator. For example, let's set the graph's layout to a grid:
+
+```{r}
 network$layout <- layout_on_grid(network)
 print(network)
 plot(network)
+```
 
-# You can also modify properties of the vertices and of the edges, using
-# V() and E() respectively.
+You can also modify properties of the vertices and of the edges, using `V()` and `E()` respectively.
+
+```{r}
 V(network)$color <- "azure"
 E(network)$color <- "pink"
 plot(network) # lovely
+```
 
-# You can use V(network)[[]] or E(network)[[]] to see the properties of the
-# vertices/edges laid out as a data frame:
+You can use `V(network)[[]]` or `E(network)[[]]` to see the properties of the vertices/edges laid out as a data frame:
+
+```{r}
 V(network)[[]]
 E(network)[[]]
+```
 
-# The "color" attribute is now also listed when we print the network:
+The "color" attribute is now also listed when we print the network:
+
+```{r}
 network
+```
 
-# Finally, we can also use brackets [] to change properties of only certain
-# vertices/edges. 
+Finally, we can also use brackets \[\] to change properties of only certain vertices/edges.
 
+```{r}
 V(network)[12]$color <- "orange"
 plot(network)
 
 V(network)[color == "orange"]$color <- "pink"
 plot(network)
+```
 
-# Pink is contagious:
+Question (2): What do the above lines do?
+
+**Answer:** Change the vertex with index 12 into orange. Then change all orange vertices from orange to pink.
+
+Pink is contagious:
+
+```{r}
 V(network)[.nei(color == "pink")]$color <- "pink"
 plot(network)
+```
 
-# What happens if you re-run the last two lines above several times?
+Question (3): What is the code above? What happens if you re-run the last two lines above several times?\
+**Answer:** Change the colors of vertices neighboring a pink vertex to pink. The number of pink points in this network gradually increase.
 
-# Other interesting attributes for vertices include:
+Other interesting attributes for vertices include:
+
+```{r}
 V(network)$label <- NA        # text label for the vertices (set to NA for no labels)
 V(network)$size <- 5          # size of vertex markers
 V(network)$shape <- "square"  # shape of markers
 plot(network)
 # See ?igraph.plotting for more.
+```
 
+### Bonus: Code a network model
 
-## Bonus: Code a network model
-# Here is one possible way of doing it...
+Here is one possible way of doing it...
+
+```{r}
 network <- make_lattice(c(5, 5))
+```
 
-# Set all vertices to "susceptible" except for one "infected"
+Set all vertices to "susceptible" except for one "infected"
+
+```{r}
 V(network)$state <- "S"
 V(network)[1]$state <- "I"
 
@@ -119,7 +160,8 @@ for (t in 1:t_max)
 	# Plot network
 	plot(network, 
 		vertex.color = colours[V(network)$state], 
-		layout = layout_on_grid)
+		layout = layout_on_grid,
+		main = paste("t = ", t))
 	
 	# Pause so we can see animation
 	Sys.sleep(1.0)
@@ -133,33 +175,32 @@ for (t in 1:t_max)
 	# Recover infectors
 	V(network)[infectors]$state <- "R"
 }
-
 ```
 
 ## Practical 2. A network model of mpox transmission
 
-```{r, eval = FALSE, output = FALSE}
-# Network modelling, practical 2: A network model of mpox transmission
-
+```{r}
 library(igraph)
 library(data.table)
 library(ggplot2)
+```
 
+### 1. Setting up the network
 
-### Setting up the network
+Set up a transmission network of n nodes by preferential attachment with affinity proportional to degree\^m.
 
-# Set up a transmission network of n nodes by preferential attachment with 
-# affinity proportional to degree^m.
+```{r}
 create_network <- function(n, d, layout = layout_nicely)
 {
-	# Create the network by preferential attachment, passing on the parameters 
-	# n and power
+	# Create the network by preferential attachment, 
+	# passing on the parameters n and power
 	network <- sample_pa(n, d, directed = FALSE)
 
-    # Add the "state" attribute to the vertices of the network, which can be
-	# "S", "I", "R", or "V". 
+    # Add the "state" attribute to the vertices of 
+	#the network, which can be "S", "I", "R", or "V". 
 	# Start out everyone as susceptible ...
     V(network)$state <- "S"
+    
     # ... except make 5 random individuals infectious.
     V(network)$state[sample(vcount(network), 5, prob = degree(network))] <- "I"
 
@@ -182,8 +223,15 @@ plot(net)
 
 net <- create_network(40, 2)
 plot(net)
+```
 
-# Plot a network, highlighting the degree of each node by different colours.
+Question (1): Try varying the `d` parameter for `create_network` between 0 and 2. What changes about the network?
+
+**Answer:** All vertices are increasingly connected through the same vertex.
+
+Plot a network, highlighting the degree of each node by different colours.
+
+```{r}
 plot_degree <- function(network)
 {
 	# Set up palette
@@ -212,8 +260,15 @@ plot_degree(net)
 
 net <- create_network(500, 2)
 plot_degree(net)
+```
 
-# Plot a network, colouring by state (S/I/R/V).
+Question (2): This time we've created a network with 500 nodes. Try varying the `d` parameter again and plotting the generated networks. Are the results similar to what you saw before with 40 nodes?
+
+**Answer:** Yes.
+
+Plot a network, colouring by state (S/I/R/V).
+
+```{r}
 plot_state <- function(network)
 {
 	# Set up palette
@@ -230,12 +285,13 @@ plot_state <- function(network)
 ## Test the plot_state function
 net <- create_network(500, 1)
 plot_state(net)
+```
 
+### 2. Running the model
 
-### Running the model
+Enact one step of the network model: infectious individuals infect susceptible neighbours with probability $p$, and recover after one time step.
 
-# Enact one step of the network model: infectious individuals infect 
-# susceptible neighbours with probability p, and recover after one time step.
+```{r}
 network_step <- function(net, p)
 {
     # Identify all susceptible neighbours of infectious individuals, 
@@ -255,14 +311,24 @@ network_step <- function(net, p)
     return (net)
 }
 
-# Run the transmission model on the network with maximum simulation time t_max
-# and transmission probability p; plot the network as the model is running if
-# animate = TRUE.
+net <- create_network(500, 1)
+net <- network_step(net, p = 0.8)
+plot_state(net)
+```
+
+Question (3): After creating your network with the first line above, run the last two lines repeatedly to watch the network model evolve.
+
+Run the transmission model on the network with maximum simulation time t_max\
+and transmission probability p; plot the network as the model is running if\
+`animate = TRUE`.
+
+```{r}
 run_model <- function(net, t_max, p, animate = FALSE)
 {
 	# Plot network degree
     if (animate) {
     	plot_degree(net)
+    	mtext("Network created")
     	Sys.sleep(2.0)
     }
 
@@ -284,6 +350,7 @@ run_model <- function(net, t_max, p, animate = FALSE)
         if (animate) {
         	Sys.sleep(0.5)
         	plot_state(net)
+        	mtext(paste0("t = ", t))
         }
         
         # Stop early if no infectious individuals are left
@@ -300,17 +367,26 @@ run_model <- function(net, t_max, p, animate = FALSE)
     results$Rt <- results$I / shift(results$I, 1) # new infections per new infection last time step
     return (results)
 }
+```
 
+Run an example simulation
 
-## Run an example simulation
-net <- create_network(500, 1)
-run_model(net, 100, 0.8, TRUE)
+```{r}
+net <- create_network(500, 2)
+res <- run_model(net, 100, 0.8, TRUE)
+outbreak_size <- head(res$S,1) - tail(res$S,1)
+print(outbreak_size)
+```
 
+Question (4): How does the preferential attachment parameter (`create_network` parameter `d`) affect the final outbreak size?
 
-### Bonus material: vaccination and multiple runs
+**Answer:** changing d from 1 to 2 increase the outbreak size, changing d from 2 to 4 doesn't change the outbreak sizes by much.
 
-# Vaccinate a fraction v of the nodes in the network. The parameter k, between
-# -1 and 1, determines the association between network degree and vaccination.
+### Bonus: vaccination and multiple runs
+
+Vaccinate a fraction v of the nodes in the network. The parameter k, between -1 and 1, determines the association between network degree and vaccination.
+
+```{r}
 vaccinate_network <- function(network, v, k)
 {
 	# Count total population (n) and number to vaccinate (nv)
@@ -332,10 +408,11 @@ vaccinate_network <- function(network, v, k)
 
 	return (network)
 }
+```
 
-# Run the model nsim times with parameters in params (n, d, v, k, t_max, p),
-# showing the animated network the first nanim times, and returning a data.table
-# with the results of each simulation.
+Run the model `nsim` times with parameters in params (n, d, v, k, t_max, p), showing the animated network the first `nanim` times, and returning a `data.table` with the results of each simulation.
+
+```{r}
 run_scenario <- function(params, nsim, nanim = 1)
 {
 	results <- list()
@@ -354,8 +431,11 @@ run_scenario <- function(params, nsim, nanim = 1)
 	results <- rbindlist(results, idcol = "run")
 	return (results)
 }
+```
 
-## Test multiple runs
+Test multiple runs
+
+```{r}
 params <- list(
 	n = 500,
 	d = 0,

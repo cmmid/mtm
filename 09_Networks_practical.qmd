@@ -91,7 +91,7 @@ One reason these two models are so well known is that they were both introduced 
 
 Watts DJ, Strogatz SH (1998) Collective dynamics of 'small world' networks. *Nature* 393, 440-442. <https://snap.stanford.edu/class/cs224w-readings/watts98smallworld.pdf>
 
-Barabási AL, Albert R (1999) Emergence of scaling in random networks. *Science* 286, 509–512. <https://barabasi.com/f/67.pdf>
+Barabási AL, Albert R (1999) Emergence of scaling in random networks. *Science* 286, 509--512. <https://barabasi.com/f/67.pdf>
 
 ### Getting and setting properties of the graph
 
@@ -494,5 +494,11 @@ ggplot(x) +
 ```
 
 5.  How does the vaccine-risk association parameter `k` affect the final size of the epidemic when averaged over 50 different model runs?
+
+## Additional Reading
+
+-   [Keeling Matt J and Eames Ken T.D 2005Networks and epidemic modelsJ. R. Soc. Interface.**2**295307](http://doi.org/10.1098/rsif.2005.0051)
+
+-   [Pellis, Lorenzo, et al. "Eight challenges for network epidemic models." *Epidemics* 10 (2015): 58-62.](https://www.sciencedirect.com/science/article/pii/S1755436514000334)
 
 **Solutions to this practical can be accessed [here](09_Networks_solutions.qmd).**
