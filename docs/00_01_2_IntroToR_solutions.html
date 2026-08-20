@@ -285,20 +285,20 @@ $row.names
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(myTBdata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   Country          HIV_neg_TB_mortality HIV_pos_TB_mortality
- Length:30          Min.   :   780       Min.   :   40       
- Class :character   1st Qu.:  3725       1st Qu.:  935       
- Mode  :character   Median : 14500       Median : 3300       
-                    Mean   : 40543       Mean   :11269       
-                    3rd Qu.: 29250       3rd Qu.:10800       
-                    Max.   :480000       Max.   :73000       
- Total_TB_mortality HIV_pos_TB_incidence   Population       
- Min.   :  12000    Min.   :   450       Min.   :2.140e+06  
- 1st Qu.:  43250    1st Qu.:  5050       1st Qu.:1.560e+07  
- Median : 122500    Median : 14000       Median :5.370e+07  
- Mean   : 301600    Mean   : 33376       Mean   :1.546e+08  
- 3rd Qu.: 305500    3rd Qu.: 37500       3rd Qu.:1.325e+08  
- Max.   :2840000    Max.   :258000       Max.   :1.380e+09  </code></pre>
+<pre><code>      Country   HIV_neg_TB_mortality HIV_pos_TB_mortality Total_TB_mortality
+ Length   :30   Min.   :   780       Min.   :   40        Min.   :  12000   
+ N.unique :30   1st Qu.:  3725       1st Qu.:  935        1st Qu.:  43250   
+ N.blank  : 0   Median : 14500       Median : 3300        Median : 122500   
+ Min.nchar: 5   Mean   : 40543       Mean   :11269        Mean   : 301600   
+ Max.nchar:24   3rd Qu.: 29250       3rd Qu.:10800        3rd Qu.: 305500   
+                Max.   :480000       Max.   :73000        Max.   :2840000   
+ HIV_pos_TB_incidence   Population       
+ Min.   :   450       Min.   :2.140e+06  
+ 1st Qu.:  5050       1st Qu.:1.560e+07  
+ Median : 14000       Median :5.370e+07  
+ Mean   : 33376       Mean   :1.546e+08  
+ 3rd Qu.: 37500       3rd Qu.:1.325e+08  
+ Max.   :258000       Max.   :1.380e+09  </code></pre>
 </div>
 </div>
 <p>Let’s extract some information from our data</p>
