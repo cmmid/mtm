@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: docs
+  resources:
+    - timetable.pdf
 
 website:
   title: "Modern Techniques in Modelling"
@@ -11,7 +13,8 @@ website:
       - text: Pre-course
         href: 00_PreCourseMaterial.qmd
       - text: Timetable
-        href: timetable.qmd
+        href: timetable.pdf
+        target: _blank
       - text: Practicals
         menu:
           - 03_DiscreteDeterministic_practical.qmd
