@@ -465,7 +465,7 @@ run_scenario <- function(params, nsim, nanim = 1)
 	
 	for (sim in 1:nsim)
 	{
-		net <- create_network(params$n, params$power)
+		net <- create_network(params$n, params$d)
 		net <- vaccinate_network(net, params$v, params$k)
 
 		results[[sim]] <- run_model(net, params$t_max, params$p, animate = sim <= nanim)
