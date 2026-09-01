@@ -8,13 +8,13 @@ When you are faced with a research question, and think that modelling might be u
 
 As a modeler, you will have to choose the type of model you want to use, build the model and choose the parameters.
 
-In this course, we have 3 sessions (Tuesday and Friday) to enable you to think constructively about the type of model you might need for a research problem that we provide you with.
+In this course, we have 3 sessions (Wednesday and Friday) to enable you to think constructively about the type of model you might need for a research problem that we provide you with.
 
 We are aiming for a "sketch" of a model or a few ideas of what a model would look like (e.g. compartment diagram). You are not required to code anything.
 
 ## Instructions
 
-Tuesday's session (30 mins):
+Wednesday's session (30 mins):
 
 1.  Identify which group you are in and which modelling problem you should tackle (below)
 2.  Consult your group's Modelling Problem (see below!)
