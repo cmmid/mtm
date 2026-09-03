@@ -320,8 +320,8 @@ for (ts in 1:steps) {
     # Update non-state variables (for all individuals simultaneously)
     # Time remaining in latent/infectious periods
     delay <- delay - dt
-    # Antibody waning
-    antib <- antib - wane * dt
+    # Antibody waning -- Ab levels can't go below 0
+    antib <- max(0, antib - wane * dt)
     # Vaccination at time step 300 for over-40s
     if (ts == 300) {
         vacc[age >= 40] <- TRUE
