@@ -35,7 +35,7 @@ You are welcome to listen to any of the recorded lectures and complete any of th
 **Optional Further Reading and Exercises**\
 If you would like additional practice with R, we recommend the following online resources:
 
--   <http://tryr.codeschool.com/>
+-   <https://coddy.tech/landing/r>
 
 -   <https://monashdatafluency.github.io/r-intro-2/>
 
